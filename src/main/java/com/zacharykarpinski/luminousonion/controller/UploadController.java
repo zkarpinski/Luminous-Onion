@@ -1,7 +1,6 @@
 package com.zacharykarpinski.luminousonion.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zacharykarpinski.luminousonion.service.TrivyService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,17 +8,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Map;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/upload")
 public class UploadController {
 
+    private TrivyService trivyService;
+
+    public UploadController(TrivyService trivyService) {this.trivyService = trivyService;}
+
     @PostMapping("/trivy/json")
-    public ResponseEntity<String> uploadTrivyJsonFile(@RequestParam("file")MultipartFile f) throws JsonProcessingException {
-        // TODO: Read the trivy jsvon.
-        ObjectMapper objM = new ObjectMapper();
+    public ResponseEntity<String> uploadTrivyJsonFile(@RequestParam("file")MultipartFile f) throws IOException {
+        try {
+
+
+        trivyService.ParseTrivyFile(f);
 
         return ResponseEntity.ok("Parsed");
+        } catch (Exception e) {
+            return ResponseEntity.ok("Failed");
+        }
     }
 }

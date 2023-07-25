@@ -15,5 +15,7 @@ public class Source {
     @Id
     @GeneratedValue
     private Long id;
+    private  String tool;
+
 
 }
