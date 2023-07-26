@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.util.Date;
 
 @Entity
 @Data
@@ -25,14 +29,20 @@ public class Finding {
     @Column(nullable = true, length = 1024)
     private String description;
 
+    // Package Data Members
     private String packageName;
     private String packagePath;
     private String packageVersionFound;
     private String packageVersionFixed;
 
     private String sourceText;
-
     private String sourceTool;
+
+    // Date and times
+    @CreationTimestamp
+    private Date createTimestamp;
+    @UpdateTimestamp
+    private Date lastUpdateTimestamp;
 
     private FindingTypes findingType;
 
@@ -41,7 +51,6 @@ public class Finding {
         os,
         packages,
         snippet
-
     }
 
     public void setDescription(String s) {

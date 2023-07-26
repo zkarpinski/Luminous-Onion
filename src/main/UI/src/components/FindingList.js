@@ -19,10 +19,7 @@ const FindingList = () => {
 
     const columns= [
         { field: 'VulnerabilityID', headerName: 'Vul ID', width: 150 },
-        {
-            field: 'fullPackage',
-            headerName: 'Package',
-            description: 'Package and version.',
+        { field: 'fullPackage', headerName: 'Package', description: 'Package and version.',
             sortable: true,
             width: 160,
             valueGetter: (params) =>
@@ -32,6 +29,7 @@ const FindingList = () => {
         { field: 'FixedVersion', headerName: 'Fixed Version', width: 100 },
         { field: 'age', headerName: 'Age', type: 'number', width: 90 },
         { field: 'sourceTool', headerName: 'Source', width: 100 },
+        { field: 'createTimestamp', headerName: 'Created', width: 150} //TODO: Change to readable datetime format
 
     ];
 
