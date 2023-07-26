@@ -51,10 +51,10 @@ public class Finding {
     private FindingTypes findingType;
 
     private enum FindingTypes{
-        other,
-        os,
-        packages,
-        snippet
+        OTHER,
+        OS,
+        PACKAGES,
+        SNIPPET
     }
 
     public void setDescription(String s) {
