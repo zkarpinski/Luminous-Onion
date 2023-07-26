@@ -4,6 +4,7 @@ const FindingList = () => {
 
     const [findings, setFindings] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [findingsCount, setFindingsCount] = useState(0);
 
     useEffect(() => {
         setLoading(true);
@@ -13,20 +14,21 @@ const FindingList = () => {
             .then(response => response.json())
             .then(data => {
                 setFindings(data);
+                setFindingsCount(data.length)
                 setLoading(false);
             })
     },[]);
 
     const columns= [
-        { field: 'VulnerabilityID', headerName: 'Vul ID', width: 150 },
+        { field: 'findingIdentifier', headerName: 'Vul ID', width: 150 },
         { field: 'fullPackage', headerName: 'Package', description: 'Package and version.',
             sortable: true,
             width: 160,
             valueGetter: (params) =>
-                `${params.row.PkgName || ''}:${params.row.InstalledVersion || ''}`,
+                `${params.row.packageName || ''}:${params.row.packageVersionFound || ''}`,
         },
-        { field: 'Title', headerName: 'Title', width: 300 },
-        { field: 'FixedVersion', headerName: 'Fixed Version', width: 100 },
+        { field: 'title', headerName: 'Title', width: 300 },
+        { field: 'packageVersionFixed', headerName: 'Fixed Version', width: 100 },
         { field: 'age', headerName: 'Age', type: 'number', width: 90 },
         { field: 'sourceTool', headerName: 'Source', width: 100 },
         { field: 'createTimestamp', headerName: 'Created', width: 150} //TODO: Change to readable datetime format
@@ -39,6 +41,10 @@ const FindingList = () => {
     }
 
     return (
+        <>
+        <div>
+            <h1>{findingsCount} Findings</h1>
+        </div>
         <div style={{ height: '100%', width: '100%' }}>
             <DataGrid
                 density="compact"
@@ -53,6 +59,7 @@ const FindingList = () => {
                 checkboxSelection
             />
         </div>
+        </>
     );
 };
 

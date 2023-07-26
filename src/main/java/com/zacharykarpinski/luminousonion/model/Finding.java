@@ -19,8 +19,6 @@ public class Finding {
     @GeneratedValue
     private Long id;
 
-    private String findingIdentifier;
-
     @ManyToOne
     @JoinColumn(name="sourceId")//,nullable = false)
     private Source source;
@@ -34,6 +32,12 @@ public class Finding {
     private String packagePath;
     private String packageVersionFound;
     private String packageVersionFixed;
+    private String purl;
+
+    // Vulnerability Details
+    private String findingIdentifier;
+    private String severity;
+    private String primaryUrl;
 
     private String sourceText;
     private String sourceTool;
@@ -54,9 +58,12 @@ public class Finding {
     }
 
     public void setDescription(String s) {
-        // Truncate the description if it's too large
-        // TODO Fix this
-        this.description = s.length() > 1024 ? s.substring(0,1024) : s;
+        int maxSize = 1024;
+        if (s != null) {
+            // Truncate the description if it's too large
+            // TODO Fix this
+            this.description = s.length() > maxSize ? s.substring(0, maxSize) : s;
+        }
 
     }
 
