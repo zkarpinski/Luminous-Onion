@@ -1,8 +1,6 @@
 package com.zacharykarpinski.luminousonion.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Data
@@ -17,13 +16,12 @@ import java.util.Date;
 @Setter
 public class Source {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String tool;
     private String toolVersion;
     private String target;
     private String targetType;
-
 
     // Date and times
     @CreationTimestamp
@@ -31,6 +29,7 @@ public class Source {
     @UpdateTimestamp
     private Date lastUpdateTimestamp;
 
-
+    @OneToMany(mappedBy = "source", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Finding> findings;
 
 }

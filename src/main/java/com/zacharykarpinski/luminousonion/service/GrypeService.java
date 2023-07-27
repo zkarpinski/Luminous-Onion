@@ -25,21 +25,12 @@ public class GrypeService {
     @Autowired
     private SourceRepository sourceRepository;
 
-    public Boolean ParseGrypeFile(MultipartFile f) throws IOException {
+    public Boolean parseGrypeFile(MultipartFile mpf) throws IOException {
 
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode n = objectMapper.readTree(f.getInputStream());
+            JsonNode n = objectMapper.readTree(mpf.getInputStream());
             GrypeJsonFile grype = objectMapper.readValue(n.toString(), new TypeReference<GrypeJsonFile>() {});
-
-            // Loop through each match and cascade parent attributes down
-            /*grype.matches.forEach(m -> {
-                //TODO: Cascade parent attributes
-            });*/
-
-            // Write array of matches to string then convert to a list of findings
-            String parsedGrypeJson = objectMapper.writeValueAsString(grype.matches);
-            List<Finding> grypeFindingList =  objectMapper.readValue(parsedGrypeJson, new TypeReference<List<Finding>>() {});
 
             // Create a new source record
             Source s = new Source();
@@ -47,7 +38,23 @@ public class GrypeService {
             s.setTargetType(grype.targetType);
             s.setTarget(grype.targetName);
             s.setToolVersion(grype.toolVersion);
-            sourceRepository.save(s);
+            Source savedSource = sourceRepository.save(s);
+
+            // Loop through each match and cascade parent attributes down
+            //TODO: Cascade parent attributes
+            //grype.matches.forEach(m -> {
+
+            //});
+
+            // Write array of matches to string then convert to a list of findings
+            String parsedGrypeJson = objectMapper.writeValueAsString(grype.matches);
+            List<Finding> grypeFindingList =  objectMapper.readValue(parsedGrypeJson, new TypeReference<List<Finding>>() {});
+
+            // Loop through each finding and add the source to it
+            for (Finding f:grypeFindingList) {
+                f.setSource(savedSource);
+            }
+
 
             //Save the new findings
             findingRepository.saveAll(grypeFindingList);

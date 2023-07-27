@@ -36,7 +36,7 @@ public class UploadController {
     @PostMapping("/grype/json")
     public ResponseEntity<String> uploadGrypeJsonFile(@RequestParam("file")MultipartFile f) throws IOException {
         try {
-            grypeService.ParseGrypeFile(f);
+            grypeService.parseGrypeFile(f);
             return ResponseEntity.ok("Parsed");
         } catch (Exception e) {
             return ResponseEntity.ok("Failed");

@@ -1,37 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-const FindingList = () => {
+const SourceList = () => {
 
-    const [findings, setFindings] = useState([]);
+    const [sources, setSources] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [findingsCount, setFindingsCount] = useState(0);
+    const [sourcesCount, setSourcesCount] = useState(0);
 
     useEffect(() => {
         setLoading(true);
 
         // Fetch the findings
-        fetch('/api/findings')
+        fetch('/api/sources')
             .catch(console.log)
             .then(response => response.json())
             .then(data => {
-                setFindings(data);
-                setFindingsCount(data.length)
+                setSources(data);
+                setSourcesCount(data.length)
                 setLoading(false);
             })
     },[]);
 
     const columns= [
-        { field: 'findingIdentifier', headerName: 'Vul ID', width: 150 },
-        { field: 'fullPackage', headerName: 'Package', description: 'Package and version.',
-            sortable: true,
-            width: 160,
-            valueGetter: (params) =>
-                `${params.row.packageName || ''}:${params.row.packageVersionFound || ''}`,
-        },
-        { field: 'title', headerName: 'Title', width: 300 },
-        { field: 'packageVersionFixed', headerName: 'Fixed Version', width: 100 },
-        { field: 'age', headerName: 'Age', type: 'number', width: 90 },
-        { field: 'sourceTool', headerName: 'Source', width: 100 },
+        { field: 'tool', headerName: 'Tool', width: 150 },
+        { field: 'toolVersion', headerName: 'Version', width: 160},
+        { field: 'target', headerName: 'Target', width: 300 },
+        { field: 'targetType', headerName: 'Target Type', width: 100 },
         { field: 'createTimestamp', headerName: 'Created', width: 150} //TODO: Change to readable datetime format
 
     ];
@@ -44,12 +37,12 @@ const FindingList = () => {
     return (
         <>
         <div>
-            <h1>{findingsCount} Findings</h1>
+            <h1>{sourcesCount} Sources</h1>
         </div>
         <div style={{ height: '100%', width: '100%' }}>
             <DataGrid
                 density="compact"
-                rows={findings}
+                rows={sources}
                 columns={columns}
                 initialState={{
                     pagination: {
@@ -64,4 +57,4 @@ const FindingList = () => {
     );
 };
 
-export default FindingList;
+export default SourceList;

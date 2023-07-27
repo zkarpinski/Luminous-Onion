@@ -16,11 +16,11 @@ import java.util.Date;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Finding {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="sourceId")//,nullable = false)
+    @JoinColumn(name="sourceId")
     private Source source;
 
     private String title;
