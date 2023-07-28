@@ -14,18 +14,21 @@ import java.util.Set;
 @Data
 @Getter
 @Setter
-public class Source {
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String tool;
-    private String toolVersion;
-    private String target;
-    private String targetType;
+    private long id;
+    private String name;
+    private String productOwner;
+    private String productTeam;
 
-    @ManyToOne
-    @JoinColumn(name="productId")
-    private Product product;
+
+    // External Identifiers
+    private String jiraProjectKey;
+    private String pegaProductId;
+    private String externalIdentifierExtra1;
+    private String externalIdentifierExtra2;
+
 
     // Date and times
     @CreationTimestamp
@@ -33,7 +36,7 @@ public class Source {
     @UpdateTimestamp
     private Date lastUpdateTimestamp;
 
-    @OneToMany(mappedBy = "source", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Finding> findings;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Source> sources;
 
 }

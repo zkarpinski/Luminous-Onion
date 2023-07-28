@@ -1,6 +1,7 @@
 import React from 'react';
 import HomeIcon from '@mui/icons-material/Home';
 import FactoryIcon from '@mui/icons-material/Factory';
+import CategoryIcon from '@mui/icons-material/Category';
 import {Assessment, BugReport} from "@mui/icons-material";
 import Tooltip from '@mui/material/Tooltip';
 import { Link } from "react-router-dom";
@@ -13,6 +14,11 @@ const SideNavbar = () => {
             <Link to="/">
                 <Tooltip title="Home">
                     <HomeIcon color="secondary"/>
+                </Tooltip>
+            </Link>
+            <Link to="/products">
+                <Tooltip title="Products">
+                    <CategoryIcon color="secondary"/>
                 </Tooltip>
             </Link>
             <Link to="/findings">
