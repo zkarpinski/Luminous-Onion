@@ -15,14 +15,14 @@ public class ProductController {
     ProductRepository productRepository;
 
     @CrossOrigin
-    @GetMapping("/api/products")
-    public ResponseEntity<List<Product>> getSources() {
+    @GetMapping("/api/product")
+    public ResponseEntity<List<Product>> getProducts() {
         return ResponseEntity.ok(productRepository.findAll());
     }
 
     @CrossOrigin
-    @PostMapping("/api/products/new")
-    public ResponseEntity<Product> putNewSource(@RequestBody Product product) {
+    @PostMapping("/api/product")
+    public ResponseEntity<Product> putNewProduct(@RequestBody Product product) {
         return new ResponseEntity<Product>( productRepository.save(product), HttpStatus.CREATED);
     }
 }

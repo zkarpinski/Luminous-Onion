@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
+import api from "../shared/api";
 const SourceList = () => {
 
     const [sources, setSources] = useState([]);
-    const [loading, setLoading] = useState(false);
     const [sourcesCount, setSourcesCount] = useState(0);
 
     useEffect(() => {
-        setLoading(true);
 
         // Fetch the findings
-        fetch('/api/sources')
+        api.get('/api/sources')
             .catch(console.log)
-            .then(response => response.json())
             .then(data => {
                 setSources(data);
                 setSourcesCount(data.length)
-                setLoading(false);
             })
     },[]);
 
@@ -28,11 +25,6 @@ const SourceList = () => {
         { field: 'createTimestamp', headerName: 'Created', width: 150} //TODO: Change to readable datetime format
 
     ];
-
-
-    if (loading) {
-        return <p>...</p>;
-    }
 
     return (
         <>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
+import api from '../../shared/api'
 const ProductList = () => {
 
     const [products, setProducts] = useState([]);
@@ -9,15 +10,14 @@ const ProductList = () => {
     useEffect(() => {
         setLoading(true);
 
-        // Fetch the findings
-        fetch('/api/products')
-            .catch(console.log)
-            .then(response => response.json())
+        // Get the product list
+        api.get('/api/product')
             .then(data => {
                 setProducts(data);
-                setProductCount(data.length)
-                setLoading(false);
-            })
+                setProductCount(data.length);
+                setLoading(false)
+            });
+
     },[]);
 
     const columns= [

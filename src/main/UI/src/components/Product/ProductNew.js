@@ -1,5 +1,6 @@
 import {Box, Button, FormControl, Grid, Modal, TextField, Typography} from "@mui/material";
 import React from "react";
+import api from "../../shared/api";
 
 const style = {
     width: 500,
@@ -18,27 +19,21 @@ const ProductNew = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const [name, setName] = React.useState("");
-    const [productOwner, setProductOwner] = React.useState("");
+    const [formData, setFormData] = React.useState({"name":"", productOwner:"",productTeam:""});
+
+    // When values change, save them to the formData state
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+    };
 
     const handleSubmit = event => {
         event.preventDefault();
 
-        fetch("/api/products/new", {
-            method: "POST",
-            body: JSON.stringify({
-                name: name,
-                productOwner: productOwner
-            }),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-            .then((response) => response.json())
+        // Create new product
+        api.post('/api/product',formData)
             .then((response) => console.log("Success:", JSON.stringify(response)))
             .catch((error) => console.error("Error:", error));
-
-        alert('You have submitted the form.');
         handleClose();
     }
 
@@ -61,18 +56,27 @@ const ProductNew = () => {
                         <form onSubmit={handleSubmit}>
                             <TextField
                                 required
-                                id="productName"
+                                id="name"
+                                name="name"
                                 label="Product Name"
                                 helperText="Enter product name"
                                 autoComplete="off"
+                                value={formData.name}
+                                onChange={handleChange}
                             />
                             <TextField
                                 id="productOwner"
+                                name="productOwner"
                                 label="Product Owner"
+                                value={formData.productOwner}
+                                onChange={handleChange}
                             />
                             <TextField
                                 id="productTeam"
+                                name="productTeam"
                                 label="Product Team"
+                                value={formData.productTeam}
+                                onChange={handleChange}
                             />
                             <Button type="submit">Create</Button>
                         </form>

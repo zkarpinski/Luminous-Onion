@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
+import api from "../shared/api";
 const FindingList = () => {
 
     const [findings, setFindings] = useState([]);
@@ -10,9 +11,8 @@ const FindingList = () => {
         setLoading(true);
 
         // Fetch the findings
-        fetch('/api/findings')
+        api.get('/api/findings')
             .catch(console.log)
-            .then(response => response.json())
             .then(data => {
                 setFindings(data);
                 setFindingsCount(data.length)
