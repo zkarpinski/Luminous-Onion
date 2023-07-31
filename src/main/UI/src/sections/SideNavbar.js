@@ -5,38 +5,39 @@ import CategoryIcon from '@mui/icons-material/Category';
 import {Assessment, BugReport} from "@mui/icons-material";
 import Tooltip from '@mui/material/Tooltip';
 import { Link } from "react-router-dom";
+import {Box} from "@mui/material";
 
 // Refer to icons here: https://mui.com/material-ui/material-icons/
 const SideNavbar = () => {
 
     return (
-        <div className="sidenavbar">
+        <Box component="nav" className="sidenavbar">
             <Link to="/">
                 <Tooltip title="Home">
                     <HomeIcon color="secondary"/>
                 </Tooltip>
             </Link>
-            <Link to="/products">
+            <Link to="/product">
                 <Tooltip title="Products">
                     <CategoryIcon color="secondary"/>
                 </Tooltip>
             </Link>
-            <Link to="/findings">
+            <Link to="/finding">
                 <Tooltip title="Findings">
                     <BugReport color="secondary"/>
                 </Tooltip>
             </Link>
-            <Link to="/sources">
+            <Link to="/source">
                 <Tooltip title="Sources">
                     <FactoryIcon color="secondary"/>
                 </Tooltip>
             </Link>
-            <Link to="/reports">
+            <Link to="/report">
                 <Tooltip title="Reports">
                     <Assessment color="secondary"/>
                 </Tooltip>
             </Link>
-        </div>
+        </Box>
     );
 };
 

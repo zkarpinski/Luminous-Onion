@@ -4,7 +4,7 @@ import {Container, Toolbar, Typography} from "@mui/material";
 
 const Header = () => {
     return (
-        <AppBar position="static">
+        <AppBar position="fixed">
             <Container maxWidth="xl">
                 <Toolbar disableGutters variant="dense">
                     <Typography

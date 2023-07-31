@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import api from '../../shared/api'
+import {Link} from "react-router-dom";
 const ProductList = () => {
 
     const [products, setProducts] = useState([]);
@@ -21,7 +22,12 @@ const ProductList = () => {
     },[]);
 
     const columns= [
-        { field: 'id', headerName: 'ID', width: 150 },
+        { field: 'id', headerName: 'ID', width: 50,
+            renderCell: (params) => (
+            <Link to={`${params.value}`}>{params.value}</Link>
+            )
+
+            },
         { field: 'name', headerName: 'Product Name', width: 160},
         { field: 'productOwner', headerName: 'Product Owner', width: 300 },
         { field: 'productTeam', headerName: 'Product Team', width: 100 },

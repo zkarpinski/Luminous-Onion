@@ -23,6 +23,13 @@ public class ProductController {
     @CrossOrigin
     @PostMapping("/api/product")
     public ResponseEntity<Product> putNewProduct(@RequestBody Product product) {
-        return new ResponseEntity<Product>( productRepository.save(product), HttpStatus.CREATED);
+        return new ResponseEntity<>( productRepository.save(product), HttpStatus.CREATED);
     }
+
+    @CrossOrigin
+    @GetMapping("/api/product/{id}")
+    public ResponseEntity<Product> getProduct(@PathVariable Long id) {
+        return ResponseEntity.ok(productRepository.findById(id).orElse(null));
+    }
+
 }
