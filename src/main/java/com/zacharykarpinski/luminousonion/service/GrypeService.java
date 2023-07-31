@@ -25,7 +25,8 @@ public class GrypeService {
     @Autowired
     private SourceRepository sourceRepository;
 
-    public Boolean parseGrypeFile(MultipartFile mpf) throws IOException {
+    public Source parseGrypeFile(MultipartFile mpf) throws IOException {
+        Source newSource;
 
         try {
             ObjectMapper objectMapper = new ObjectMapper();
@@ -38,7 +39,7 @@ public class GrypeService {
             s.setTargetType(grype.targetType);
             s.setTarget(grype.targetName);
             s.setToolVersion(grype.toolVersion);
-            Source savedSource = sourceRepository.save(s);
+            newSource = sourceRepository.save(s);
 
             // Loop through each match and cascade parent attributes down
             //TODO: Cascade parent attributes
@@ -52,7 +53,7 @@ public class GrypeService {
 
             // Loop through each finding and add the source to it
             for (Finding f:grypeFindingList) {
-                f.setSource(savedSource);
+                f.setSource(newSource);
             }
 
 
@@ -61,10 +62,10 @@ public class GrypeService {
 
         } catch (Exception e) {
             System.out.println(e.toString());
-            return false;
+            return null;
         }
 
-        return true;
+        return newSource;
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)

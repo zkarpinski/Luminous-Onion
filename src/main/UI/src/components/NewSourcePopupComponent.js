@@ -1,5 +1,6 @@
-import {Box, Button, FormControl, Grid, Modal, Typography} from "@mui/material";
+import {Box, Button, Grid, Modal, Typography} from "@mui/material";
 import React from "react";
+import api from "../shared/api";
 
 const style = {
     width: 500,
@@ -18,6 +19,27 @@ const NewSourcePopupComponent = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    const [uploadFile, setUploadFile] = React.useState();
+
+
+    const handleChange = (event) => {
+        console.log("File changed!")
+        setUploadFile(event.target.files[0])
+    };
+
+    const handleSubmit = event => {
+        event.preventDefault();
+
+        const formData = new FormData();
+        formData.append('file',uploadFile);
+
+
+        api.postFile('/upload/grype/json',formData)
+            .then((response) => console.log("Success:", JSON.stringify(response)))
+            .catch((error) => console.error("Error:", error));
+        handleClose();
+    }
+
     return (
         <>
         <Grid>
@@ -33,18 +55,19 @@ const NewSourcePopupComponent = () => {
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                     New Source
                 </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                     <div>
-                        <FormControl>
+                        <form onSubmit={handleSubmit}>
                             <input
                                 accept="application/JSON"
                                 id="upload-json-button"
-                                single
+                                name="file"
+                                single="single"
                                 type="file"
+                                onChange={handleChange}
                             />
-                        </FormControl>
+                            <Button type="submit">Upload</Button>
+                        </form>
                     </div>
-                </Typography>
             </Box>
         </Modal>
         </>

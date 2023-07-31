@@ -1,15 +1,21 @@
 import React from 'react'
 
-const api = (method, url, params) =>
+const defaultHeaders = {
+    "Content-Type":"application/json"
+};
+
+const fileUploadHeaders = {
+    "Context-Type":"multipart/form-data;"
+}
+
+const api = (method,headers, url, params) =>
     new Promise((resolve,reject) => {
-        console.log(params);
+        console.log('Params are: ' + params);
         fetch(`${url}`, {
             method,
-            body: method !=='get' ? JSON.stringify(params) : null,
+            body: method !=='get' ? params : null,
             params: method === 'get' ? params: null,
-            headers: {
-                "Content-Type": "application/json"
-            }
+            headers: headers
         })
             .catch(console.log)
             .then(response => response.json())
@@ -20,9 +26,10 @@ const api = (method, url, params) =>
 
 // Extend API to
 export default {
-    get: (...args) => api('get',...args),
-    post: (...args) => api('post', ...args),
-    put: (...args) => api('put', ...args),
-    delete: (...args) => api('delete', ...args),
-    patch: (...args) => api('patch', ...args)
+    get: (...args) => api('get',defaultHeaders, ...args),
+    post: (...args) => api('post',defaultHeaders, ...args),
+    postFile: (...args) => api('post',fileUploadHeaders, ...args),
+    put: (...args) => api('put',defaultHeaders, ...args),
+    delete: (...args) => api('delete',defaultHeaders, ...args),
+    patch: (...args) => api('patch',defaultHeaders, ...args)
 };

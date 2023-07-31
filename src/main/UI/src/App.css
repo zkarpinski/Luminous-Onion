@@ -31,3 +31,9 @@
 .vulCard {
   margin: 5px;
 }
+
+
+/* Findings Summary Styles */
+p.findingCount {
+  font-weight: bold;
+}
