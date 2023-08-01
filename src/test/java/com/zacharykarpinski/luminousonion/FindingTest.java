@@ -1,14 +1,14 @@
 package com.zacharykarpinski.luminousonion;
 
-import com.zacharykarpinski.luminousonion.integration.SnykIntegration;
 import com.zacharykarpinski.luminousonion.model.Finding;
 import com.zacharykarpinski.luminousonion.model.Source;
 import com.zacharykarpinski.luminousonion.repository.FindingRepository;
 import com.zacharykarpinski.luminousonion.repository.SourceRepository;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import static org.springframework.test.util.AssertionErrors.assertEquals;
 
 @SpringBootTest
 public class FindingTest {
@@ -19,19 +19,22 @@ public class FindingTest {
     SourceRepository sourceRepository;
 
     @Test
-    @Disabled
     public void testCreateNewFinding() {
+        String toolName = "Test Tool";
+        String findingDescription = "Test Description";
         Source source = new Source();
-        source.setTool("Test Tool");
+        source.setTool(toolName);
         sourceRepository.save(source);
 
 
         Finding finding = new Finding();
-        finding.setDescription("Test finding");
-        finding.setSourceTool("Test Tool");
+        finding.setDescription(findingDescription);
+        finding.setSourceTool(toolName);
         finding.setSource(source);
 
-        Finding s = findingRepository.save(finding);
-        assert findingRepository.findById(s.getId()).isPresent();
+        Long findingId = findingRepository.save(finding).getId();
+        assert findingRepository.findById(findingId).isPresent();
+        assertEquals("Finding description don't match.",
+                findingRepository.findById(findingId).get().getDescription(),findingDescription);
     }
 }

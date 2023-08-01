@@ -3,6 +3,7 @@ package com.zacharykarpinski.luminousonion.controller;
 import com.zacharykarpinski.luminousonion.model.Source;
 import com.zacharykarpinski.luminousonion.service.GrypeService;
 import com.zacharykarpinski.luminousonion.service.TrivyService;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,17 +25,17 @@ public class UploadController {
             this.grypeService = grypeService;
     }
 
-    @PostMapping("/trivy/json")
+    @PostMapping(value = "/trivy/json", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> uploadTrivyJsonFile(@RequestParam("file")MultipartFile f) throws IOException {
         try {
             trivyService.ParseTrivyFile(f);
             return ResponseEntity.ok("Parsed");
         } catch (Exception e) {
-            return ResponseEntity.ok("Failed");
+            return ResponseEntity.badRequest().build();
         }
     }
 
-    @PostMapping("/grype/json")
+    @PostMapping(value="/grype/json", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Source> uploadGrypeJsonFile(@RequestParam("file")MultipartFile f) throws IOException {
         try {
 

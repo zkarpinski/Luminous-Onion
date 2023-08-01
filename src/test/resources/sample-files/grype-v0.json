@@ -1,0 +1,606 @@
+{
+ "matches": [
+  {
+   "vulnerability": {
+    "id": "CVE-2007-2379",
+    "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2007-2379",
+    "namespace": "nvd:cpe",
+    "severity": "Medium",
+    "urls": [
+     "http://www.fortifysoftware.com/servlet/downloads/public/JavaScript_Hijacking.pdf",
+     "https://security.netapp.com/advisory/ntap-20190416-0007/"
+    ],
+    "description": "The jQuery framework exchanges data using JavaScript Object Notation (JSON) without an associated protection scheme, which allows remote attackers to obtain the data via a web page that retrieves the data through a URL in the SRC attribute of a SCRIPT element and captures the data using other JavaScript code, aka \"JavaScript Hijacking.\"",
+    "cvss": [
+     {
+      "source": "nvd@nist.gov",
+      "type": "Primary",
+      "version": "2.0",
+      "vector": "AV:N/AC:L/Au:N/C:P/I:N/A:N",
+      "metrics": {
+       "baseScore": 5,
+       "exploitabilityScore": 10,
+       "impactScore": 2.9
+      },
+      "vendorMetadata": {}
+     }
+    ],
+    "fix": {
+     "versions": [],
+     "state": "unknown"
+    },
+    "advisories": []
+   },
+   "relatedVulnerabilities": [],
+   "matchDetails": [
+    {
+     "type": "cpe-match",
+     "matcher": "java-matcher",
+     "searchedBy": {
+      "namespace": "nvd:cpe",
+      "cpes": [
+       "cpe:2.3:a:jquery:jquery:3.5.1:*:*:*:*:*:*:*"
+      ],
+      "Package": {
+       "name": "jquery",
+       "version": "3.5.1"
+      }
+     },
+     "found": {
+      "vulnerabilityID": "CVE-2007-2379",
+      "versionConstraint": "none (unknown)",
+      "cpes": [
+       "cpe:2.3:a:jquery:jquery:-:*:*:*:*:*:*:*"
+      ]
+     }
+    }
+   ],
+   "artifact": {
+    "id": "f6762fbc3de29ce6",
+    "name": "jquery",
+    "version": "3.5.1",
+    "type": "java-archive",
+    "locations": [
+     {
+      "path": "/home/webgoat/webgoat.jar",
+      "layerID": "sha256:63e09457f5ed4f0bafdd6f2428ce9cb85e915be7c9566a0971026bfea85887f3"
+     }
+    ],
+    "language": "java",
+    "licenses": [],
+    "cpes": [
+     "cpe:2.3:a:webjars:jquery:3.5.1:*:*:*:*:*:*:*",
+     "cpe:2.3:a:jquery:jquery:3.5.1:*:*:*:*:*:*:*"
+    ],
+    "purl": "pkg:maven/org.webjars/jquery@3.5.1",
+    "upstreams": [],
+    "metadataType": "JavaMetadata",
+    "metadata": {
+     "virtualPath": "/home/webgoat/webgoat.jar:BOOT-INF/lib/jquery-3.5.1.jar",
+     "pomArtifactID": "jquery",
+     "pomGroupID": "org.webjars",
+     "manifestName": "",
+     "archiveDigests": [
+      {
+       "algorithm": "sha1",
+       "value": "2392938e374f561c27c53872bdc9b6b351b6ba34"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "vulnerability": {
+    "id": "CVE-2012-5370",
+    "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2012-5370",
+    "namespace": "nvd:cpe",
+    "severity": "Medium",
+    "urls": [
+     "http://2012.appsec-forum.ch/conferences/#c17",
+     "http://asfws12.files.wordpress.com/2012/11/asfws2012-jean_philippe_aumasson-martin_bosslet-hash_flooding_dos_reloaded.pdf",
+     "http://rhn.redhat.com/errata/RHSA-2013-0533.html",
+     "http://www.ocert.org/advisories/ocert-2012-001.html",
+     "https://bugzilla.redhat.com/show_bug.cgi?id=880671",
+     "https://www.131002.net/data/talks/appsec12_slides.pdf"
+    ],
+    "description": "JRuby computes hash values without properly restricting the ability to trigger hash collisions predictably, which allows context-dependent attackers to cause a denial of service (CPU consumption) via crafted input to an application that maintains a hash table, as demonstrated by a universal multicollision attack against the MurmurHash2 algorithm, a different vulnerability than CVE-2011-4838.",
+    "cvss": [
+     {
+      "source": "nvd@nist.gov",
+      "type": "Primary",
+      "version": "2.0",
+      "vector": "AV:N/AC:L/Au:N/C:N/I:N/A:P",
+      "metrics": {
+       "baseScore": 5,
+       "exploitabilityScore": 10,
+       "impactScore": 2.9
+      },
+      "vendorMetadata": {}
+     }
+    ],
+    "fix": {
+     "versions": [],
+     "state": "unknown"
+    },
+    "advisories": []
+   },
+   "relatedVulnerabilities": [],
+   "matchDetails": [
+    {
+     "type": "cpe-match",
+     "matcher": "java-matcher",
+     "searchedBy": {
+      "namespace": "nvd:cpe",
+      "cpes": [
+       "cpe:2.3:a:jruby:jruby:9.3.6.0:*:*:*:*:*:*:*"
+      ],
+      "Package": {
+       "name": "jruby",
+       "version": "9.3.6.0"
+      }
+     },
+     "found": {
+      "vulnerabilityID": "CVE-2012-5370",
+      "versionConstraint": "none (unknown)",
+      "cpes": [
+       "cpe:2.3:a:jruby:jruby:-:*:*:*:*:*:*:*"
+      ]
+     }
+    }
+   ],
+   "artifact": {
+    "id": "9c7eb45723d60176",
+    "name": "jruby",
+    "version": "9.3.6.0",
+    "type": "java-archive",
+    "locations": [
+     {
+      "path": "/home/webgoat/webgoat.jar",
+      "layerID": "sha256:63e09457f5ed4f0bafdd6f2428ce9cb85e915be7c9566a0971026bfea85887f3"
+     }
+    ],
+    "language": "java",
+    "licenses": [],
+    "cpes": [
+     "cpe:2.3:a:jruby:jruby:9.3.6.0:*:*:*:*:*:*:*"
+    ],
+    "purl": "pkg:maven/org.jruby/jruby@9.3.6.0",
+    "upstreams": [],
+    "metadataType": "JavaMetadata",
+    "metadata": {
+     "virtualPath": "/home/webgoat/webgoat.jar:BOOT-INF/lib/jruby-9.3.6.0.jar",
+     "pomArtifactID": "jruby",
+     "pomGroupID": "org.jruby",
+     "manifestName": "",
+     "archiveDigests": [
+      {
+       "algorithm": "sha1",
+       "value": "7934767ba2df50ff1aa5021669474093c05d002f"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "vulnerability": {
+    "id": "CVE-2013-4235",
+    "dataSource": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2013-4235",
+    "namespace": "ubuntu:distro:ubuntu:20.04",
+    "severity": "Low",
+    "urls": [
+     "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2013-4235"
+    ],
+    "cvss": [],
+    "fix": {
+     "versions": [],
+     "state": "not-fixed"
+    },
+    "advisories": []
+   },
+   "relatedVulnerabilities": [
+    {
+     "id": "CVE-2013-4235",
+     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2013-4235",
+     "namespace": "nvd:cpe",
+     "severity": "Medium",
+     "urls": [
+      "https://access.redhat.com/security/cve/cve-2013-4235",
+      "https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2013-4235",
+      "https://lists.apache.org/thread.html/rf9fa47ab66495c78bb4120b0754dd9531ca2ff0430f6685ac9b07772%40%3Cdev.mina.apache.org%3E",
+      "https://security-tracker.debian.org/tracker/CVE-2013-4235",
+      "https://security.gentoo.org/glsa/202210-26"
+     ],
+     "description": "shadow: TOCTOU (time-of-check time-of-use) race condition when copying and removing directory trees",
+     "cvss": [
+      {
+       "source": "nvd@nist.gov",
+       "type": "Primary",
+       "version": "2.0",
+       "vector": "AV:L/AC:M/Au:N/C:N/I:P/A:P",
+       "metrics": {
+        "baseScore": 3.3,
+        "exploitabilityScore": 3.4,
+        "impactScore": 4.9
+       },
+       "vendorMetadata": {}
+      },
+      {
+       "source": "nvd@nist.gov",
+       "type": "Primary",
+       "version": "3.1",
+       "vector": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:N/I:H/A:N",
+       "metrics": {
+        "baseScore": 4.7,
+        "exploitabilityScore": 1,
+        "impactScore": 3.6
+       },
+       "vendorMetadata": {}
+      }
+     ]
+    }
+   ],
+   "matchDetails": [
+    {
+     "type": "exact-indirect-match",
+     "matcher": "dpkg-matcher",
+     "searchedBy": {
+      "distro": {
+       "type": "ubuntu",
+       "version": "20.04"
+      },
+      "namespace": "ubuntu:distro:ubuntu:20.04",
+      "package": {
+       "name": "shadow",
+       "version": "1:4.8.1-1ubuntu5.20.04.4"
+      }
+     },
+     "found": {
+      "versionConstraint": "none (deb)",
+      "vulnerabilityID": "CVE-2013-4235"
+     }
+    }
+   ],
+   "artifact": {
+    "id": "9e5fc7058aafd121",
+    "name": "login",
+    "version": "1:4.8.1-1ubuntu5.20.04.4",
+    "type": "deb",
+    "locations": [
+     {
+      "path": "/usr/share/doc/login/copyright",
+      "layerID": "sha256:d543b8cad89e3428ac8852a13cb2dbfaf55b1e10fd95a9753e51faf393d60e81"
+     },
+     {
+      "path": "/var/lib/dpkg/info/login.conffiles",
+      "layerID": "sha256:d543b8cad89e3428ac8852a13cb2dbfaf55b1e10fd95a9753e51faf393d60e81"
+     },
+     {
+      "path": "/var/lib/dpkg/info/login.md5sums",
+      "layerID": "sha256:d543b8cad89e3428ac8852a13cb2dbfaf55b1e10fd95a9753e51faf393d60e81"
+     },
+     {
+      "path": "/var/lib/dpkg/status",
+      "layerID": "sha256:27533ca99bc01db5d9330c0684c86876ed20681f889be30b9db0c26899433296"
+     }
+    ],
+    "language": "",
+    "licenses": [
+     "GPL-2"
+    ],
+    "cpes": [
+     "cpe:2.3:a:login:login:1:4.8.1-1ubuntu5.20.04.4:*:*:*:*:*:*:*"
+    ],
+    "purl": "pkg:deb/ubuntu/login@1:4.8.1-1ubuntu5.20.04.4?arch=amd64&upstream=shadow&distro=ubuntu-20.04",
+    "upstreams": [
+     {
+      "name": "shadow"
+     }
+    ]
+   }
+  },
+  {
+   "vulnerability": {
+    "id": "GHSA-xw4p-crpj-vjx2",
+    "dataSource": "https://github.com/advisories/GHSA-xw4p-crpj-vjx2",
+    "namespace": "github:language:java",
+    "severity": "High",
+    "urls": [
+     "https://github.com/advisories/GHSA-xw4p-crpj-vjx2"
+    ],
+    "description": "A Server-Side Forgery Request can be activated unmarshalling with XStream to access data streams from an arbitrary URL referencing a resource in an intranet or the local host",
+    "cvss": [
+     {
+      "version": "3.1",
+      "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:C/C:H/I:H/A:H",
+      "metrics": {
+       "baseScore": 8.5,
+       "exploitabilityScore": 1.8,
+       "impactScore": 6
+      },
+      "vendorMetadata": {
+       "base_severity": "High",
+       "status": "N/A"
+      }
+     }
+    ],
+    "fix": {
+     "versions": [
+      "1.4.18"
+     ],
+     "state": "fixed"
+    },
+    "advisories": []
+   },
+   "relatedVulnerabilities": [
+    {
+     "id": "CVE-2021-39152",
+     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2021-39152",
+     "namespace": "nvd:cpe",
+     "severity": "High",
+     "urls": [
+      "https://github.com/x-stream/xstream/security/advisories/GHSA-xw4p-crpj-vjx2",
+      "https://lists.debian.org/debian-lts-announce/2021/09/msg00017.html",
+      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/22KVR6B5IZP3BGQ3HPWIO2FWWCKT3DHP/",
+      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/PVPHZA7VW2RRSDCOIPP2W6O5ND254TU7/",
+      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/QGXIU3YDPG6OGTDHMBLAFN7BPBERXREB/",
+      "https://security.netapp.com/advisory/ntap-20210923-0003/",
+      "https://www.debian.org/security/2021/dsa-5004",
+      "https://www.oracle.com/security-alerts/cpuapr2022.html",
+      "https://www.oracle.com/security-alerts/cpujan2022.html",
+      "https://www.oracle.com/security-alerts/cpujul2022.html",
+      "https://x-stream.github.io/CVE-2021-39152.html"
+     ],
+     "description": "XStream is a simple library to serialize objects to XML and back again. In affected versions this vulnerability may allow a remote attacker to request data from internal resources that are not publicly available only by manipulating the processed input stream with a Java runtime version 14 to 8. No user is affected, who followed the recommendation to setup XStream's security framework with a whitelist limited to the minimal required types. If you rely on XStream's default blacklist of the [Security Framework](https://x-stream.github.io/security.html#framework), you will have to use at least version 1.4.18.",
+     "cvss": [
+      {
+       "source": "nvd@nist.gov",
+       "type": "Primary",
+       "version": "2.0",
+       "vector": "AV:N/AC:M/Au:S/C:P/I:P/A:P",
+       "metrics": {
+        "baseScore": 6,
+        "exploitabilityScore": 6.8,
+        "impactScore": 6.4
+       },
+       "vendorMetadata": {}
+      },
+      {
+       "source": "nvd@nist.gov",
+       "type": "Primary",
+       "version": "3.1",
+       "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:C/C:H/I:H/A:H",
+       "metrics": {
+        "baseScore": 8.5,
+        "exploitabilityScore": 1.8,
+        "impactScore": 6
+       },
+       "vendorMetadata": {}
+      },
+      {
+       "source": "security-advisories@github.com",
+       "type": "Secondary",
+       "version": "3.1",
+       "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:C/C:H/I:H/A:H",
+       "metrics": {
+        "baseScore": 8.5,
+        "exploitabilityScore": 1.8,
+        "impactScore": 6
+       },
+       "vendorMetadata": {}
+      }
+     ]
+    }
+   ],
+   "matchDetails": [
+    {
+     "type": "exact-direct-match",
+     "matcher": "java-matcher",
+     "searchedBy": {
+      "language": "java",
+      "namespace": "github:language:java",
+      "package": {
+       "name": "xstream",
+       "version": "1.4.5"
+      }
+     },
+     "found": {
+      "versionConstraint": "<1.4.18 (unknown)",
+      "vulnerabilityID": "GHSA-xw4p-crpj-vjx2"
+     }
+    }
+   ],
+   "artifact": {
+    "id": "720e4f37e881a2f5",
+    "name": "xstream",
+    "version": "1.4.5",
+    "type": "java-archive",
+    "locations": [
+     {
+      "path": "/home/webgoat/webgoat.jar",
+      "layerID": "sha256:63e09457f5ed4f0bafdd6f2428ce9cb85e915be7c9566a0971026bfea85887f3"
+     }
+    ],
+    "language": "java",
+    "licenses": [
+     "http://xstream.codehaus.org/license.html"
+    ],
+    "cpes": [
+     "cpe:2.3:a:thoughtworks:xstream:1.4.5:*:*:*:*:*:*:*",
+     "cpe:2.3:a:xstream:xstream:1.4.5:*:*:*:*:*:*:*"
+    ],
+    "purl": "pkg:maven/com.thoughtworks.xstream/xstream@1.4.5",
+    "upstreams": [],
+    "metadataType": "JavaMetadata",
+    "metadata": {
+     "virtualPath": "/home/webgoat/webgoat.jar:BOOT-INF/lib/xstream-1.4.5.jar",
+     "pomArtifactID": "xstream",
+     "pomGroupID": "com.thoughtworks.xstream",
+     "manifestName": "",
+     "archiveDigests": [
+      {
+       "algorithm": "sha1",
+       "value": "61c0a127b237182fdf2ccc9cc2efbb5779a64a3b"
+      }
+     ]
+    }
+   }
+  }
+ ],
+ "source": {
+  "type": "image",
+  "target": {
+   "userInput": "webgoat/webgoat",
+   "imageID": "sha256:04bbe69252ca98cdeb72f4c4f2bfbf4b3bc5b614a5d21eb22f4af360030eba3c",
+   "manifestDigest": "sha256:714853603cec6b7b54579e85b47278d8cc037e468d82157f0554609aa68f5ba5",
+   "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+   "tags": [
+    "webgoat/webgoat:latest"
+   ],
+   "imageSize": 371871131,
+   "layers": [
+    {
+     "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+     "digest": "sha256:d543b8cad89e3428ac8852a13cb2dbfaf55b1e10fd95a9753e51faf393d60e81",
+     "size": 72782715
+    },
+    {
+     "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+     "digest": "sha256:27533ca99bc01db5d9330c0684c86876ed20681f889be30b9db0c26899433296",
+     "size": 56624233
+    },
+    {
+     "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+     "digest": "sha256:243dd2955d24313bf148fcf9b960e1f7a6b808576992786c116bd5ff57fdd362",
+     "size": 140183281
+    },
+    {
+     "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+     "digest": "sha256:c7afd0c85dfaaca2c68b63ed8dc33c84027635e4b6f7eca23f5244738257b4a6",
+     "size": 0
+    },
+    {
+     "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+     "digest": "sha256:37d7ac6e1ccd95d5121011c5be01056c66f9f83749bdd5f1317f79a623f61290",
+     "size": 333760
+    },
+    {
+     "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+     "digest": "sha256:63e09457f5ed4f0bafdd6f2428ce9cb85e915be7c9566a0971026bfea85887f3",
+     "size": 101947142
+    },
+    {
+     "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+     "digest": "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+     "size": 0
+    }
+   ],
+   "manifest": "eyJzY2hlbWFWZXJzaW9uIjoyLCJtZWRpYVR5cGUiOiJhcHBsaWNhdGlvbi92bmQuZG9ja2VyLmRpc3RyaWJ1dGlvbi5tYW5pZmVzdC52Mitqc29uIiwiY29uZmlnIjp7Im1lZGlhVHlwZSI6ImFwcGxpY2F0aW9uL3ZuZC5kb2NrZXIuY29udGFpbmVyLmltYWdlLnYxK2pzb24iLCJzaXplIjo4NDYxLCJkaWdlc3QiOiJzaGEyNTY6MDRiYmU2OTI1MmNhOThjZGViNzJmNGM0ZjJiZmJmNGIzYmM1YjYxNGE1ZDIxZWIyMmY0YWYzNjAwMzBlYmEzYyJ9LCJsYXllcnMiOlt7Im1lZGlhVHlwZSI6ImFwcGxpY2F0aW9uL3ZuZC5kb2NrZXIuaW1hZ2Uucm9vdGZzLmRpZmYudGFyLmd6aXAiLCJzaXplIjo3NTE2MDA2NCwiZGlnZXN0Ijoic2hhMjU2OmQ1NDNiOGNhZDg5ZTM0MjhhYzg4NTJhMTNjYjJkYmZhZjU1YjFlMTBmZDk1YTk3NTNlNTFmYWYzOTNkNjBlODEifSx7Im1lZGlhVHlwZSI6ImFwcGxpY2F0aW9uL3ZuZC5kb2NrZXIuaW1hZ2Uucm9vdGZzLmRpZmYudGFyLmd6aXAiLCJzaXplIjo1OTI1OTM5MiwiZGlnZXN0Ijoic2hhMjU2OjI3NTMzY2E5OWJjMDFkYjVkOTMzMGMwNjg0Yzg2ODc2ZWQyMDY4MWY4ODliZTMwYjlkYjBjMjY4OTk0MzMyOTYifSx7Im1lZGlhVHlwZSI6ImFwcGxpY2F0aW9uL3ZuZC5kb2NrZXIuaW1hZ2Uucm9vdGZzLmRpZmYudGFyLmd6aXAiLCJzaXplIjoxNDAzODAxNjAsImRpZ2VzdCI6InNoYTI1NjoyNDNkZDI5NTVkMjQzMTNiZjE0OGZjZjliOTYwZTFmN2E2YjgwODU3Njk5Mjc4NmMxMTZiZDVmZjU3ZmRkMzYyIn0seyJtZWRpYVR5cGUiOiJhcHBsaWNhdGlvbi92bmQuZG9ja2VyLmltYWdlLnJvb3Rmcy5kaWZmLnRhci5nemlwIiwic2l6ZSI6MjU2MCwiZGlnZXN0Ijoic2hhMjU2OmM3YWZkMGM4NWRmYWFjYTJjNjhiNjNlZDhkYzMzYzg0MDI3NjM1ZTRiNmY3ZWNhMjNmNTI0NDczODI1N2I0YTYifSx7Im1lZGlhVHlwZSI6ImFwcGxpY2F0aW9uL3ZuZC5kb2NrZXIuaW1hZ2Uucm9vdGZzLmRpZmYudGFyLmd6aXAiLCJzaXplIjozNDkxODQsImRpZ2VzdCI6InNoYTI1NjozN2Q3YWM2ZTFjY2Q5NWQ1MTIxMDExYzViZTAxMDU2YzY2ZjlmODM3NDliZGQ1ZjEzMTdmNzlhNjIzZjYxMjkwIn0seyJtZWRpYVR5cGUiOiJhcHBsaWNhdGlvbi92bmQuZG9ja2VyLmltYWdlLnJvb3Rmcy5kaWZmLnRhci5nemlwIiwic2l6ZSI6MTAxOTQ5OTUyLCJkaWdlc3QiOiJzaGEyNTY6NjNlMDk0NTdmNWVkNGYwYmFmZGQ2ZjI0MjhjZTljYjg1ZTkxNWJlN2M5NTY2YTA5NzEwMjZiZmVhODU4ODdmMyJ9LHsibWVkaWFUeXBlIjoiYXBwbGljYXRpb24vdm5kLmRvY2tlci5pbWFnZS5yb290ZnMuZGlmZi50YXIuZ3ppcCIsInNpemUiOjEwMjQsImRpZ2VzdCI6InNoYTI1Njo1ZjcwYmYxOGEwODYwMDcwMTZlOTQ4YjA0YWVkM2I4MjEwM2EzNmJlYTQxNzU1YjZjZGRmYWYxMGFjZTNjNmVmIn1dfQ==",
+   "config": "eyJhcmNoaXRlY3R1cmUiOiJhbWQ2NCIsImF1dGhvciI6IlwiV2ViR29hdCB0ZWFtXCIiLCJjb25maWciOnsiVXNlciI6IndlYmdvYXQiLCJFeHBvc2VkUG9ydHMiOnsiODA4MC90Y3AiOnt9LCI5MDkwL3RjcCI6e319LCJFbnYiOlsiUEFUSD0vb3B0L2phdmEvb3Blbmpkay9iaW46L3Vzci9sb2NhbC9zYmluOi91c3IvbG9jYWwvYmluOi91c3Ivc2JpbjovdXNyL2Jpbjovc2JpbjovYmluIiwiSkFWQV9IT01FPS9vcHQvamF2YS9vcGVuamRrIiwiTEFORz1lbl9VUy5VVEYtOCIsIkxBTkdVQUdFPWVuX1VTOmVuIiwiTENfQUxMPWVuX1VTLlVURi04IiwiSkFWQV9WRVJTSU9OPWpkay0xNy4wLjYrMTAiXSwiRW50cnlwb2ludCI6WyJqYXZhIiwiLUR1c2VyLmhvbWU9L2hvbWUvd2ViZ29hdCIsIi1EZmlsZS5lbmNvZGluZz1VVEYtOCIsIi0tYWRkLW9wZW5zIiwiamF2YS5iYXNlL2phdmEubGFuZz1BTEwtVU5OQU1FRCIsIi0tYWRkLW9wZW5zIiwiamF2YS5iYXNlL2phdmEudXRpbD1BTEwtVU5OQU1FRCIsIi0tYWRkLW9wZW5zIiwiamF2YS5iYXNlL2phdmEubGFuZy5yZWZsZWN0PUFMTC1VTk5BTUVEIiwiLS1hZGQtb3BlbnMiLCJqYXZhLmJhc2UvamF2YS50ZXh0PUFMTC1VTk5BTUVEIiwiLS1hZGQtb3BlbnMiLCJqYXZhLmRlc2t0b3AvamF2YS5iZWFucz1BTEwtVU5OQU1FRCIsIi0tYWRkLW9wZW5zIiwiamF2YS5kZXNrdG9wL2phdmEuYXd0LmZvbnQ9QUxMLVVOTkFNRUQiLCItLWFkZC1vcGVucyIsImphdmEuYmFzZS9zdW4ubmlvLmNoPUFMTC1VTk5BTUVEIiwiLS1hZGQtb3BlbnMiLCJqYXZhLmJhc2UvamF2YS5pbz1BTEwtVU5OQU1FRCIsIi0tYWRkLW9wZW5zIiwiamF2YS5iYXNlL2phdmEudXRpbD1BTEwtVU5OQU1FRCIsIi1EcnVubmluZy5pbi5kb2NrZXI9dHJ1ZSIsIi1Ed2ViZ29hdC5ob3N0PTAuMC4wLjAiLCItRHdlYndvbGYuaG9zdD0wLjAuMC4wIiwiLUR3ZWJnb2F0LnBvcnQ9ODA4MCIsIi1Ed2Vid29sZi5wb3J0PTkwOTAiLCItamFyIiwid2ViZ29hdC5qYXIiXSwiV29ya2luZ0RpciI6Ii9ob21lL3dlYmdvYXQiLCJMYWJlbHMiOnsiTkFNRSI6Ij0gV2ViR29hdDogQSBkZWxpYmVyYXRlbHkgaW5zZWN1cmUgV2ViIEFwcGxpY2F0aW9uIiwib3JnLm9wZW5jb250YWluZXJzLmltYWdlLnJlZi5uYW1lIjoidWJ1bnR1Iiwib3JnLm9wZW5jb250YWluZXJzLmltYWdlLnZlcnNpb24iOiIyMC4wNCJ9LCJPbkJ1aWxkIjpudWxsfSwiY3JlYXRlZCI6IjIwMjMtMDItMTdUMTI6MTY6MzYuNTEzMjU1ODMyWiIsImhpc3RvcnkiOlt7ImNyZWF0ZWQiOiIyMDIzLTAyLTAxVDExOjQyOjM3LjQ4MjcyNzgyOFoiLCJjcmVhdGVkX2J5IjoiL2Jpbi9zaCAtYyAjKG5vcCkgIEFSRyBSRUxFQVNFIiwiZW1wdHlfbGF5ZXIiOnRydWV9LHsiY3JlYXRlZCI6IjIwMjMtMDItMDFUMTE6NDI6MzcuNTQyOTc5OTI1WiIsImNyZWF0ZWRfYnkiOiIvYmluL3NoIC1jICMobm9wKSAgQVJHIExBVU5DSFBBRF9CVUlMRF9BUkNIIiwiZW1wdHlfbGF5ZXIiOnRydWV9LHsiY3JlYXRlZCI6IjIwMjMtMDItMDFUMTE6NDI6MzcuNjA3MDAwMzk3WiIsImNyZWF0ZWRfYnkiOiIvYmluL3NoIC1jICMobm9wKSAgTEFCRUwgb3JnLm9wZW5jb250YWluZXJzLmltYWdlLnJlZi5uYW1lPXVidW50dSIsImVtcHR5X2xheWVyIjp0cnVlfSx7ImNyZWF0ZWQiOiIyMDIzLTAyLTAxVDExOjQyOjM3LjY2NDAwNjQ2M1oiLCJjcmVhdGVkX2J5IjoiL2Jpbi9zaCAtYyAjKG5vcCkgIExBQkVMIG9yZy5vcGVuY29udGFpbmVycy5pbWFnZS52ZXJzaW9uPTIwLjA0IiwiZW1wdHlfbGF5ZXIiOnRydWV9LHsiY3JlYXRlZCI6IjIwMjMtMDItMDFUMTE6NDI6MzkuNTkzMDIwNjk1WiIsImNyZWF0ZWRfYnkiOiIvYmluL3NoIC1jICMobm9wKSBBREQgZmlsZTo4YjE4MGE5YjQ0OTdkZTBjNmUxMzFkNmI0OGNmNWM2OWE4ODUzNzllNjMwMzNhYjk2MzlkMTY1NTk5MWU2MjZjIGluIC8gIn0seyJjcmVhdGVkIjoiMjAyMy0wMi0wMVQxMTo0MjozOS44NTAwMjU4OTVaIiwiY3JlYXRlZF9ieSI6Ii9iaW4vc2ggLWMgIyhub3ApICBDTUQgW1wiL2Jpbi9iYXNoXCJdIiwiZW1wdHlfbGF5ZXIiOnRydWV9LHsiY3JlYXRlZCI6IjIwMjMtMDItMDFUMTg6MzY6NTAuMDk2NDU2NTgxWiIsImNyZWF0ZWRfYnkiOiIvYmluL3NoIC1jICMobm9wKSAgRU5WIEpBVkFfSE9NRT0vb3B0L2phdmEvb3BlbmpkayIsImVtcHR5X2xheWVyIjp0cnVlfSx7ImNyZWF0ZWQiOiIyMDIzLTAyLTAxVDE4OjM2OjUwLjE5NDcyODY0NloiLCJjcmVhdGVkX2J5IjoiL2Jpbi9zaCAtYyAjKG5vcCkgIEVOViBQQVRIPS9vcHQvamF2YS9vcGVuamRrL2JpbjovdXNyL2xvY2FsL3NiaW46L3Vzci9sb2NhbC9iaW46L3Vzci9zYmluOi91c3IvYmluOi9zYmluOi9iaW4iLCJlbXB0eV9sYXllciI6dHJ1ZX0seyJjcmVhdGVkIjoiMjAyMy0wMi0wMVQxODozNjo1MC4yOTE4MDI1MzFaIiwiY3JlYXRlZF9ieSI6Ii9iaW4vc2ggLWMgIyhub3ApICBFTlYgTEFORz1lbl9VUy5VVEYtOCBMQU5HVUFHRT1lbl9VUzplbiBMQ19BTEw9ZW5fVVMuVVRGLTgiLCJlbXB0eV9sYXllciI6dHJ1ZX0seyJjcmVhdGVkIjoiMjAyMy0wMi0wMVQxODozODozMy4yMzY3MDA1MloiLCJjcmVhdGVkX2J5IjoiL2Jpbi9zaCAtYyBhcHQtZ2V0IHVwZGF0ZSAgICAgXHUwMDI2XHUwMDI2IERFQklBTl9GUk9OVEVORD1ub25pbnRlcmFjdGl2ZSBhcHQtZ2V0IGluc3RhbGwgLXkgLS1uby1pbnN0YWxsLXJlY29tbWVuZHMgdHpkYXRhIGN1cmwgd2dldCBjYS1jZXJ0aWZpY2F0ZXMgZm9udGNvbmZpZyBsb2NhbGVzIGJpbnV0aWxzICAgICBcdTAwMjZcdTAwMjYgZWNobyBcImVuX1VTLlVURi04IFVURi04XCIgXHUwMDNlXHUwMDNlIC9ldGMvbG9jYWxlLmdlbiAgICAgXHUwMDI2XHUwMDI2IGxvY2FsZS1nZW4gZW5fVVMuVVRGLTggICAgIFx1MDAyNlx1MDAyNiBybSAtcmYgL3Zhci9saWIvYXB0L2xpc3RzLyoifSx7ImNyZWF0ZWQiOiIyMDIzLTAyLTAxVDE4OjM4OjMzLjU1OTcwMDE0OFoiLCJjcmVhdGVkX2J5IjoiL2Jpbi9zaCAtYyAjKG5vcCkgIEVOViBKQVZBX1ZFUlNJT049amRrLTE3LjAuNisxMCIsImVtcHR5X2xheWVyIjp0cnVlfSx7ImNyZWF0ZWQiOiIyMDIzLTAyLTAxVDE4OjM4OjU4LjQ3Nzg1NzE1WiIsImNyZWF0ZWRfYnkiOiIvYmluL3NoIC1jIHNldCAtZXV4OyAgICAgQVJDSD1cIiQoZHBrZyAtLXByaW50LWFyY2hpdGVjdHVyZSlcIjsgICAgIGNhc2UgXCIke0FSQ0h9XCIgaW4gICAgICAgIGFhcmNoNjR8YXJtNjQpICAgICAgICAgIEVTVU09JzM3OTc4MTVjYjg1MzYxNmI2NDE1ZTFiODg3NWNkYTRlYWEwMDQ4ODc1NjFlYTRlYTIwOTBkNzI2YjhkODU4MmYnOyAgICAgICAgICBCSU5BUllfVVJMPSdodHRwczovL2dpdGh1Yi5jb20vYWRvcHRpdW0vdGVtdXJpbjE3LWJpbmFyaWVzL3JlbGVhc2VzL2Rvd25sb2FkL2pkay0xNy4wLjYlMkIxMC9PcGVuSkRLMTdVLWpyZV9hYXJjaDY0X2xpbnV4X2hvdHNwb3RfMTcuMC42XzEwLnRhci5neic7ICAgICAgICAgIDs7ICAgICAgICBhcm1oZnxhcm0pICAgICAgICAgIEVTVU09J2JmN2VmN2JhNDc3ZGMyNzhmOTEzZTY0MTc0ZTc2YmU5YWU3ZjAxNGM3NjczNTJlYWU4M2IzZjk1ODE0OTRmY2UnOyAgICAgICAgICBCSU5BUllfVVJMPSdodHRwczovL2dpdGh1Yi5jb20vYWRvcHRpdW0vdGVtdXJpbjE3LWJpbmFyaWVzL3JlbGVhc2VzL2Rvd25sb2FkL2pkay0xNy4wLjYlMkIxMC9PcGVuSkRLMTdVLWpyZV9hcm1fbGludXhfaG90c3BvdF8xNy4wLjZfMTAudGFyLmd6JzsgICAgICAgICAgOzsgICAgICAgIHBwYzY0ZWx8cG93ZXJwYzpjb21tb242NCkgICAgICAgICAgRVNVTT0nZjExYjg2YmZkN2ZhNGQ3YTBkMDUwNDBlYTIzNTEwMjI5NmYwM2VhZjA2NDI1M2Y3NmQ3YWI5NGJhYTAzNTJlMyc7ICAgICAgICAgIEJJTkFSWV9VUkw9J2h0dHBzOi8vZ2l0aHViLmNvbS9hZG9wdGl1bS90ZW11cmluMTctYmluYXJpZXMvcmVsZWFzZXMvZG93bmxvYWQvamRrLTE3LjAuNiUyQjEwL09wZW5KREsxN1UtanJlX3BwYzY0bGVfbGludXhfaG90c3BvdF8xNy4wLjZfMTAudGFyLmd6JzsgICAgICAgICAgOzsgICAgICAgIHMzOTB4fHMzOTA6NjQtYml0KSAgICAgICAgICBFU1VNPScyMWE3MTU2YTI5ZTc5MjFiYzdjNmVhZGVjYjhlZTRhYzcxNjE5MjFjZWE4NWI3NWI2MWYwMzc2ZjljNzI1Y2FhJzsgICAgICAgICAgQklOQVJZX1VSTD0naHR0cHM6Ly9naXRodWIuY29tL2Fkb3B0aXVtL3RlbXVyaW4xNy1iaW5hcmllcy9yZWxlYXNlcy9kb3dubG9hZC9qZGstMTcuMC42JTJCMTAvT3BlbkpESzE3VS1qcmVfczM5MHhfbGludXhfaG90c3BvdF8xNy4wLjZfMTAudGFyLmd6JzsgICAgICAgICAgOzsgICAgICAgIGFtZDY0fGkzODY6eDg2LTY0KSAgICAgICAgICBFU1VNPSdmZTY2OTkzNTYwOTA4NmU3NmNiMGI4MjllOTI4MDg3NjZjYmY4Y2I3YmRhNTdhNzZiNDc4MTNiMDg1ODRiZmQyJzsgICAgICAgICAgQklOQVJZX1VSTD0naHR0cHM6Ly9naXRodWIuY29tL2Fkb3B0aXVtL3RlbXVyaW4xNy1iaW5hcmllcy9yZWxlYXNlcy9kb3dubG9hZC9qZGstMTcuMC42JTJCMTAvT3BlbkpESzE3VS1qcmVfeDY0X2xpbnV4X2hvdHNwb3RfMTcuMC42XzEwLnRhci5neic7ICAgICAgICAgIDs7ICAgICAgICAqKSAgICAgICAgICBlY2hvIFwiVW5zdXBwb3J0ZWQgYXJjaDogJHtBUkNIfVwiOyAgICAgICAgICBleGl0IDE7ICAgICAgICAgIDs7ICAgICBlc2FjOyBcdCAgd2dldCAtTyAvdG1wL29wZW5qZGsudGFyLmd6ICR7QklOQVJZX1VSTH07IFx0ICBlY2hvIFwiJHtFU1VNfSAqL3RtcC9vcGVuamRrLnRhci5nelwiIHwgc2hhMjU2c3VtIC1jIC07IFx0ICBta2RpciAtcCBcIiRKQVZBX0hPTUVcIjsgXHQgIHRhciAtLWV4dHJhY3QgXHQgICAgICAtLWZpbGUgL3RtcC9vcGVuamRrLnRhci5neiBcdCAgICAgIC0tZGlyZWN0b3J5IFwiJEpBVkFfSE9NRVwiIFx0ICAgICAgLS1zdHJpcC1jb21wb25lbnRzIDEgXHQgICAgICAtLW5vLXNhbWUtb3duZXIgXHQgIDsgICAgIHJtIC1mIC90bXAvb3Blbmpkay50YXIuZ3ogJHtKQVZBX0hPTUV9L3NyYy56aXA7ICAgICBmaW5kIFwiJEpBVkFfSE9NRS9saWJcIiAtbmFtZSAnKi5zbycgLWV4ZWMgZGlybmFtZSAne30nICc7JyB8IHNvcnQgLXUgXHUwMDNlIC9ldGMvbGQuc28uY29uZi5kL2RvY2tlci1vcGVuamRrLmNvbmY7ICAgICBsZGNvbmZpZzsgICAgIGphdmEgLVhzaGFyZTpkdW1wOyJ9LHsiY3JlYXRlZCI6IjIwMjMtMDItMDFUMTg6Mzg6NTkuMzAwNjk5ODUyWiIsImNyZWF0ZWRfYnkiOiIvYmluL3NoIC1jIGVjaG8gVmVyaWZ5aW5nIGluc3RhbGwgLi4uICAgICBcdTAwMjZcdTAwMjYgZmlsZUVuY29kaW5nPVwiJChlY2hvICdTeXN0ZW0ub3V0LnByaW50bG4oU3lzdGVtLmdldFByb3BlcnR5KFwiZmlsZS5lbmNvZGluZ1wiKSknIHwganNoZWxsIC1zIC0pXCI7IFsgXCIkZmlsZUVuY29kaW5nXCIgPSAnVVRGLTgnIF07IHJtIC1yZiB+Ly5qYXZhICAgICBcdTAwMjZcdTAwMjYgZWNobyBqYXZhIC0tdmVyc2lvbiBcdTAwMjZcdTAwMjYgamF2YSAtLXZlcnNpb24gICAgIFx1MDAyNlx1MDAyNiBlY2hvIENvbXBsZXRlLiJ9LHsiY3JlYXRlZCI6IjIwMjMtMDItMTdUMTI6MTY6MzUuOTc3ODE5OTVaIiwiY3JlYXRlZF9ieSI6IkxBQkVMIE5BTUU9PSBXZWJHb2F0OiBBIGRlbGliZXJhdGVseSBpbnNlY3VyZSBXZWIgQXBwbGljYXRpb24iLCJjb21tZW50IjoiYnVpbGRraXQuZG9ja2VyZmlsZS52MCIsImVtcHR5X2xheWVyIjp0cnVlfSx7ImNyZWF0ZWQiOiIyMDIzLTAyLTE3VDEyOjE2OjM1Ljk3NzgxOTk1WiIsImNyZWF0ZWRfYnkiOiJNQUlOVEFJTkVSIFwiV2ViR29hdCB0ZWFtXCIiLCJjb21tZW50IjoiYnVpbGRraXQuZG9ja2VyZmlsZS52MCIsImVtcHR5X2xheWVyIjp0cnVlfSx7ImNyZWF0ZWQiOiIyMDIzLTAyLTE3VDEyOjE2OjM1Ljk3NzgxOTk1WiIsImNyZWF0ZWRfYnkiOiJSVU4gL2Jpbi9zaCAtYyB1c2VyYWRkIC1tcyAvYmluL2Jhc2ggd2ViZ29hdCBcdTAwMjZcdTAwMjYgICBjaGdycCAtUiAwIC9ob21lL3dlYmdvYXQgXHUwMDI2XHUwMDI2ICAgY2htb2QgLVIgZz11IC9ob21lL3dlYmdvYXQgIyBidWlsZGtpdCIsImNvbW1lbnQiOiJidWlsZGtpdC5kb2NrZXJmaWxlLnYwIn0seyJjcmVhdGVkIjoiMjAyMy0wMi0xN1QxMjoxNjozNS45Nzc4MTk5NVoiLCJjcmVhdGVkX2J5IjoiVVNFUiB3ZWJnb2F0IiwiY29tbWVudCI6ImJ1aWxka2l0LmRvY2tlcmZpbGUudjAiLCJlbXB0eV9sYXllciI6dHJ1ZX0seyJjcmVhdGVkIjoiMjAyMy0wMi0xN1QxMjoxNjozNi40OTE2MDk2NDFaIiwiY3JlYXRlZF9ieSI6IkNPUFkgdGFyZ2V0L3dlYmdvYXQtKi5qYXIgL2hvbWUvd2ViZ29hdC93ZWJnb2F0LmphciAjIGJ1aWxka2l0IiwiY29tbWVudCI6ImJ1aWxka2l0LmRvY2tlcmZpbGUudjAifSx7ImNyZWF0ZWQiOiIyMDIzLTAyLTE3VDEyOjE2OjM2LjQ5MTYwOTY0MVoiLCJjcmVhdGVkX2J5IjoiRVhQT1NFIG1hcFs4MDgwL3RjcDp7fV0iLCJjb21tZW50IjoiYnVpbGRraXQuZG9ja2VyZmlsZS52MCIsImVtcHR5X2xheWVyIjp0cnVlfSx7ImNyZWF0ZWQiOiIyMDIzLTAyLTE3VDEyOjE2OjM2LjQ5MTYwOTY0MVoiLCJjcmVhdGVkX2J5IjoiRVhQT1NFIG1hcFs5MDkwL3RjcDp7fV0iLCJjb21tZW50IjoiYnVpbGRraXQuZG9ja2VyZmlsZS52MCIsImVtcHR5X2xheWVyIjp0cnVlfSx7ImNyZWF0ZWQiOiIyMDIzLTAyLTE3VDEyOjE2OjM2LjUxMzI1NTgzMloiLCJjcmVhdGVkX2J5IjoiV09SS0RJUiAvaG9tZS93ZWJnb2F0IiwiY29tbWVudCI6ImJ1aWxka2l0LmRvY2tlcmZpbGUudjAifSx7ImNyZWF0ZWQiOiIyMDIzLTAyLTE3VDEyOjE2OjM2LjUxMzI1NTgzMloiLCJjcmVhdGVkX2J5IjoiRU5UUllQT0lOVCBbXCJqYXZhXCIgXCItRHVzZXIuaG9tZT0vaG9tZS93ZWJnb2F0XCIgXCItRGZpbGUuZW5jb2Rpbmc9VVRGLThcIiBcIi0tYWRkLW9wZW5zXCIgXCJqYXZhLmJhc2UvamF2YS5sYW5nPUFMTC1VTk5BTUVEXCIgXCItLWFkZC1vcGVuc1wiIFwiamF2YS5iYXNlL2phdmEudXRpbD1BTEwtVU5OQU1FRFwiIFwiLS1hZGQtb3BlbnNcIiBcImphdmEuYmFzZS9qYXZhLmxhbmcucmVmbGVjdD1BTEwtVU5OQU1FRFwiIFwiLS1hZGQtb3BlbnNcIiBcImphdmEuYmFzZS9qYXZhLnRleHQ9QUxMLVVOTkFNRURcIiBcIi0tYWRkLW9wZW5zXCIgXCJqYXZhLmRlc2t0b3AvamF2YS5iZWFucz1BTEwtVU5OQU1FRFwiIFwiLS1hZGQtb3BlbnNcIiBcImphdmEuZGVza3RvcC9qYXZhLmF3dC5mb250PUFMTC1VTk5BTUVEXCIgXCItLWFkZC1vcGVuc1wiIFwiamF2YS5iYXNlL3N1bi5uaW8uY2g9QUxMLVVOTkFNRURcIiBcIi0tYWRkLW9wZW5zXCIgXCJqYXZhLmJhc2UvamF2YS5pbz1BTEwtVU5OQU1FRFwiIFwiLS1hZGQtb3BlbnNcIiBcImphdmEuYmFzZS9qYXZhLnV0aWw9QUxMLVVOTkFNRURcIiBcIi1EcnVubmluZy5pbi5kb2NrZXI9dHJ1ZVwiIFwiLUR3ZWJnb2F0Lmhvc3Q9MC4wLjAuMFwiIFwiLUR3ZWJ3b2xmLmhvc3Q9MC4wLjAuMFwiIFwiLUR3ZWJnb2F0LnBvcnQ9ODA4MFwiIFwiLUR3ZWJ3b2xmLnBvcnQ9OTA5MFwiIFwiLWphclwiIFwid2ViZ29hdC5qYXJcIl0iLCJjb21tZW50IjoiYnVpbGRraXQuZG9ja2VyZmlsZS52MCIsImVtcHR5X2xheWVyIjp0cnVlfV0sIm1vYnkuYnVpbGRraXQuYnVpbGRpbmZvLnYxIjoiZXlKbWNtOXVkR1Z1WkNJNkltUnZZMnRsY21acGJHVXVkakFpTENKemIzVnlZMlZ6SWpwYmV5SjBlWEJsSWpvaVpHOWphMlZ5TFdsdFlXZGxJaXdpY21WbUlqb2laRzlqYTJWeUxtbHZMMnhwWW5KaGNua3ZaV05zYVhCelpTMTBaVzExY21sdU9qRTNMV3B5WlMxbWIyTmhiQ0lzSW5CcGJpSTZJbk5vWVRJMU5qcGlZV0kzWlRaa05XUXhaR1ZtWWpWa016azJPR0V3TW1RMk5HSm1NMkZpWm1RNE5qVXhNREZrWmpRMll6Z3hZamd6TkdFMk1HVTBNalprWWpSbE9UTXpJbjFkZlE9PSIsIm9zIjoibGludXgiLCJyb290ZnMiOnsidHlwZSI6ImxheWVycyIsImRpZmZfaWRzIjpbInNoYTI1NjpkNTQzYjhjYWQ4OWUzNDI4YWM4ODUyYTEzY2IyZGJmYWY1NWIxZTEwZmQ5NWE5NzUzZTUxZmFmMzkzZDYwZTgxIiwic2hhMjU2OjI3NTMzY2E5OWJjMDFkYjVkOTMzMGMwNjg0Yzg2ODc2ZWQyMDY4MWY4ODliZTMwYjlkYjBjMjY4OTk0MzMyOTYiLCJzaGEyNTY6MjQzZGQyOTU1ZDI0MzEzYmYxNDhmY2Y5Yjk2MGUxZjdhNmI4MDg1NzY5OTI3ODZjMTE2YmQ1ZmY1N2ZkZDM2MiIsInNoYTI1NjpjN2FmZDBjODVkZmFhY2EyYzY4YjYzZWQ4ZGMzM2M4NDAyNzYzNWU0YjZmN2VjYTIzZjUyNDQ3MzgyNTdiNGE2Iiwic2hhMjU2OjM3ZDdhYzZlMWNjZDk1ZDUxMjEwMTFjNWJlMDEwNTZjNjZmOWY4Mzc0OWJkZDVmMTMxN2Y3OWE2MjNmNjEyOTAiLCJzaGEyNTY6NjNlMDk0NTdmNWVkNGYwYmFmZGQ2ZjI0MjhjZTljYjg1ZTkxNWJlN2M5NTY2YTA5NzEwMjZiZmVhODU4ODdmMyIsInNoYTI1Njo1ZjcwYmYxOGEwODYwMDcwMTZlOTQ4YjA0YWVkM2I4MjEwM2EzNmJlYTQxNzU1YjZjZGRmYWYxMGFjZTNjNmVmIl19fQ==",
+   "repoDigests": [
+    "webgoat/webgoat@sha256:2775102b8186df1656f8a69cfb7a6bf6c77b43a25fa0accd6d44e6ae04c8d3b7"
+   ],
+   "architecture": "amd64",
+   "os": "linux"
+  }
+ },
+ "distro": {
+  "name": "ubuntu",
+  "version": "20.04",
+  "idLike": [
+   "debian"
+  ]
+ },
+ "descriptor": {
+  "name": "grype",
+  "version": "0.64.2",
+  "configuration": {
+   "configPath": "",
+   "verbosity": 0,
+   "output": [
+    "json"
+   ],
+   "file": "",
+   "distro": "",
+   "add-cpes-if-none": false,
+   "output-template-file": "",
+   "quiet": false,
+   "check-for-app-update": true,
+   "only-fixed": false,
+   "only-notfixed": false,
+   "platform": "",
+   "search": {
+    "scope": "Squashed",
+    "unindexed-archives": false,
+    "indexed-archives": true
+   },
+   "ignore": null,
+   "exclude": [],
+   "db": {
+    "cache-dir": "/home/zkarpinski",
+    "update-url": "https://toolbox-data.anchore.io/grype/databases/listing.json",
+    "ca-cert": "",
+    "auto-update": true,
+    "validate-by-hash-on-start": false,
+    "validate-age": true,
+    "max-allowed-built-age": 432000000000000
+   },
+   "externalSources": {
+    "enable": false,
+    "maven": {
+     "searchUpstreamBySha1": true,
+     "baseUrl": "https://search.maven.org/solrsearch/select"
+    }
+   },
+   "match": {
+    "java": {
+     "using-cpes": true
+    },
+    "dotnet": {
+     "using-cpes": true
+    },
+    "golang": {
+     "using-cpes": true
+    },
+    "javascript": {
+     "using-cpes": false
+    },
+    "python": {
+     "using-cpes": true
+    },
+    "ruby": {
+     "using-cpes": true
+    },
+    "stock": {
+     "using-cpes": true
+    }
+   },
+   "dev": {
+    "profile-cpu": false,
+    "profile-mem": false
+   },
+   "fail-on-severity": "",
+   "registry": {
+    "insecure-skip-tls-verify": false,
+    "insecure-use-http": false,
+    "auth": []
+   },
+   "log": {
+    "structured": false,
+    "level": "warn",
+    "file": ""
+   },
+   "show-suppressed": false,
+   "by-cve": false,
+   "name": "",
+   "default-image-pull-source": ""
+  },
+  "db": {
+   "built": "2023-07-25T01:34:46Z",
+   "schemaVersion": 5,
+   "location": "/home/zkarpinski/.cache/grype/db/5",
+   "checksum": "sha256:15cff0e3e56d2e1c754583d5b4db856ce76c9bf4eb5b0d4219e50f6a9be5c7b7",
+   "error": null
+  },
+  "timestamp": "2023-07-25T23:48:04.256332479-04:00"
+ }
+}
