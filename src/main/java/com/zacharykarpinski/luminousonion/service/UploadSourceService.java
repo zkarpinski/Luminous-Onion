@@ -23,13 +23,16 @@ public class UploadSourceService {
     @Autowired
     private SourceRepository sourceRepository;
 
-    public Source uploadFileAndParse(MultipartFile mpf, SourceTool tool) throws IOException {
+    public Source uploadFileAndParse(MultipartFile mpf, SourceTool tool, Long productId) throws IOException {
 
+        // Parse the file based on the provided tool
         Pair<Source, List<Finding>> parsed = switch (tool) {
             case ANCORE_GRYPE -> Grype.parse(mpf);
             case AQUA_TRIVY -> Trivy.parse(mpf);
             default -> null;
         };
+
+        //TODO: Handle productID
 
         // Save source to the repo
         Source source = sourceRepository.save(parsed.getValue0());
