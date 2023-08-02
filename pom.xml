@@ -92,6 +92,13 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-jvm</artifactId>
+			<version>${cucumber.version}</version>
+			<type>pom</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-csv</artifactId>
 		</dependency>
