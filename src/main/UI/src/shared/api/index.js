@@ -5,7 +5,7 @@ const defaultHeaders = {
 };
 
 const fileUploadHeaders = {
-    "Context-Type":"multipart/form-data;"
+    "Context-Type":"multipart/form-data"
 }
 
 const api = (method,headers, url, params) =>

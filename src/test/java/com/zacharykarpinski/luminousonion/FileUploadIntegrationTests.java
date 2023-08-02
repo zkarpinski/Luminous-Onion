@@ -1,6 +1,7 @@
 package com.zacharykarpinski.luminousonion;
 
 import com.zacharykarpinski.luminousonion.controller.UploadController;
+import com.zacharykarpinski.luminousonion.model.SourceTool;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -35,11 +36,14 @@ public class FileUploadIntegrationTests {
         MockMultipartFile multipartFile = new MockMultipartFile("file",fis);
 
         // Test valid file - OK
-        mockMvc.perform(multipart("/upload/trivy/json").file(multipartFile))
+        mockMvc.perform(multipart("/upload")
+                        .file(multipartFile)
+                        .param("productId","1")
+                        .param("sourceTool", SourceTool.AQUA_TRIVY.toString()))
                 .andExpect(status().isOk());
 
-        // Test mising file = 400 Error
-        mockMvc.perform(post("/upload/trivy/json")
+        // Test missing file = 400 Error
+        mockMvc.perform(post("/upload")
                         .content("")
                         .contentType(MediaType.MULTIPART_FORM_DATA))
                 .andExpect(status().is4xxClientError());
@@ -54,14 +58,12 @@ public class FileUploadIntegrationTests {
 
 
         // Test valid file - OK
-        mockMvc.perform(multipart("/upload/grype/json").file(multipartFile))
+        mockMvc.perform(multipart("/upload")
+                        .file(multipartFile)
+                        .param("productId","1")
+                        .param("sourceTool", SourceTool.ANCORE_GRYPE.toString()))
                 .andExpect(status().isOk());
 
-        // Test mising file = 400 Error
-        mockMvc.perform(post("/upload/grype/json")
-                        .content("")
-                        .contentType(MediaType.MULTIPART_FORM_DATA))
-                .andExpect(status().is4xxClientError());
     }
 
 }
