@@ -40,7 +40,6 @@ public class Finding {
     private String primaryUrl;
 
     private String sourceText;
-    private String sourceTool;
 
     // Date and times
     @CreationTimestamp

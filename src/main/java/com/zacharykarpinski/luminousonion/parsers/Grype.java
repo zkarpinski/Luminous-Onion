@@ -7,14 +7,19 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zacharykarpinski.luminousonion.model.Finding;
 import com.zacharykarpinski.luminousonion.model.Source;
-import org.javatuples.Pair;
+import com.zacharykarpinski.luminousonion.model.SourceTool;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Set;
 
 public class Grype implements Parser {
 
-    public static Pair<Source, List<Finding>> parse(MultipartFile mpf) {
+    private Grype() {
+        throw new IllegalStateException("Utility class");
+    }
+
+    public static Source parse(MultipartFile mpf) {
 
         try {
             ObjectMapper objectMapper = new ObjectMapper();
@@ -22,24 +27,24 @@ public class Grype implements Parser {
             GrypeJsonFile grype = objectMapper.readValue(n.toString(), new TypeReference<>() {
             });
 
-            // Create a new source record
-            Source s = new Source();
-            s.setTool("Grype");
-            s.setTargetType(grype.targetType);
-            s.setTarget(grype.targetName);
-            s.setToolVersion(grype.toolVersion);
-
             // Loop through each match and cascade parent attributes down
             //TODO: Cascade parent attributes
             //grype.matches.forEach(m -> {
-
             //});
 
             // Write array of matches to string then convert to a list of findings
             String parsedGrypeJson = objectMapper.writeValueAsString(grype.matches);
-            List<Finding> grypeFindingList =  objectMapper.readValue(parsedGrypeJson, new TypeReference<List<Finding>>() {});
+            Set<Finding> findingList =  objectMapper.readValue(parsedGrypeJson, new TypeReference<Set<Finding>>() {});
 
-            return new Pair<>(s, grypeFindingList);
+            // Create a new source record with the new findings
+            Source source = new Source();
+            source.setTool(SourceTool.ANCORE_GRYPE.name());
+            source.setTargetType(grype.targetType);
+            source.setTarget(grype.targetName);
+            source.setToolVersion(grype.toolVersion);
+            source.setFindings(findingList);
+
+            return source;
 
         } catch (Exception e) {
             System.out.println(e.toString());
@@ -87,9 +92,6 @@ public class Grype implements Parser {
         public String findingIdentifier;
         public String severity;
         public String primaryUrl;
-
-
-        final public String sourceTool = "Grype";
 
 
         // Unpack vulnerability nested node

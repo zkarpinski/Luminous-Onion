@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import api from "../shared/api";
+import {Button} from "@mui/material";
 const SourceList = () => {
 
     const [sources, setSources] = useState([]);
@@ -17,12 +18,27 @@ const SourceList = () => {
             })
     },[]);
 
+    const onDeleteClick = (e, row) => {
+        e.stopPropagation();
+        api.delete(`/sources/${row.id}`)
+    };
+
     const columns= [
         { field: 'tool', headerName: 'Tool', width: 150 },
         { field: 'toolVersion', headerName: 'Version', width: 160},
         { field: 'target', headerName: 'Target', width: 300 },
         { field: 'targetType', headerName: 'Target Type', width: 100 },
-        { field: 'createTimestamp', headerName: 'Created', width: 150} //TODO: Change to readable datetime format
+        { field: 'createTimestamp', headerName: 'Created', width: 150}, //TODO: Change to readable datetime format
+        { field: 'actions', headerName: 'Actions', width: 400, renderCell: (params) => {
+                return (
+                    <Button
+                        onClick={(e) => onDeleteClick(e, params.row)}
+                        variant="contained"
+                    >
+                        Delete
+                    </Button>
+                );
+            } }
 
     ];
 

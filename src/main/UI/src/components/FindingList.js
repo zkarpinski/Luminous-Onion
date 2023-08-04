@@ -21,7 +21,10 @@ const FindingList = () => {
     },[]);
 
     const columns= [
-        {field: 'severity', headerName: 'Severity', width: 100},
+        { field: 'tool', headerName: 'Tool', width: 100,
+            valueGetter: (params) => params.row?.source?.tool
+        },
+        { field: 'severity', headerName: 'Severity', width: 100},
         { field: 'findingIdentifier', headerName: 'Vul ID', width: 150 },
         { field: 'fullPackage', headerName: 'Package', description: 'Package and version.',
             sortable: true,

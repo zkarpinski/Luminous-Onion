@@ -31,7 +31,7 @@ const ProductNew = () => {
         event.preventDefault();
 
         // Create new product
-        api.post('/api/product',formData)
+        api.post('/api/product',JSON.stringify(formData))
             .then((response) => console.log("Success:", JSON.stringify(response)))
             .catch((error) => console.error("Error:", error));
         handleClose();

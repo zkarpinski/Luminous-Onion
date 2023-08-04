@@ -7,46 +7,45 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zacharykarpinski.luminousonion.model.Finding;
 import com.zacharykarpinski.luminousonion.model.Source;
+import com.zacharykarpinski.luminousonion.model.SourceTool;
 import com.zacharykarpinski.luminousonion.model.external.trivy.Vulnerability;
-import org.javatuples.Pair;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Trivy implements Parser {
+    private Trivy() {
+        throw new IllegalStateException("Utility class");
+    }
 
-    public static Pair<Source, List<Finding>> parse(MultipartFile mpf) {
+    public static Source parse(MultipartFile mpf) {
             try {
                 ObjectMapper objectMapper = new ObjectMapper();
                 JsonNode n = objectMapper.readTree(mpf.getInputStream());
                 TrivyJsonFile trvy = objectMapper.readValue(n.toString(),
                         new TypeReference<TrivyJsonFile>() {});
 
-                // Create a new source record
-                Source s = new Source();
-                s.setTool("Trivy");
-                s.setTarget(trvy.targetName);
-                // Mapp to targetTypes to standard
-                String targetType;
-                switch (trvy.targetType) {
-                    case "container_image": targetType= "image";
-                        break;
-                    default:
-                        targetType = trvy.targetType;
-                        break;
-                }
-                s.setTargetType(targetType);
 
-
-                List<Finding> vulnerabilityList = new ArrayList<Finding>();
-
+                Set<Finding> findingList = new HashSet<>();
                 trvy.results.forEach(r -> r.Vulnerabilities.forEach(v -> {
-                    v.setSourceTool("Trivy");
-                    vulnerabilityList.add((Finding) v);
+                    findingList.add((Finding) v);
                 }));
 
-                return new Pair<>(s, vulnerabilityList );
+                // Create a new source record
+                Source source = new Source();
+                source.setTool(SourceTool.AQUA_TRIVY.name());
+                source.setTarget(trvy.targetName);
+                source.setFindings(findingList);
+                // Map to targetTypes to standard
+                String targetType = switch (trvy.targetType) {
+                    case "container_image" -> "image";
+                    default -> trvy.targetType;
+                };
+                source.setTargetType(targetType);
+
+                return source;
 
             } catch (Exception e) {
                 System.out.println(e.toString());
@@ -74,6 +73,5 @@ public class Trivy implements Parser {
             @JsonProperty("Type")
             public String typeName;
         }
-
 
     }

@@ -1,13 +1,16 @@
 package com.zacharykarpinski.luminousonion.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -33,7 +36,29 @@ public class Source {
     @UpdateTimestamp
     private Date lastUpdateTimestamp;
 
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "source", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Finding> findings;
+
+    public void addFinding(Finding f){
+        if (this.findings == null)
+            this.findings = new HashSet<>();
+
+        findings.add(f);
+        f.setSource(this);
+    }
+
+
+    @JsonIgnore
+    public Set<Finding> getFindings() {
+        return this.findings;
+    }
+
+    public void setFindings(Set<Finding> findings) {
+        this.findings = findings;
+        for (Finding f:findings) {
+            f.setSource(this);
+        }
+    }
 
 }
