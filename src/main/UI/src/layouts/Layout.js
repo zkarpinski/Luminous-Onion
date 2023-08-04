@@ -10,7 +10,18 @@ const Main = styled('main')(({ theme }) => ({
     width: `100%`,
     marginTop: `${headerHeight}px`,
     marginLeft: `${sideNavBarWidth}px`,
-    padding: '15px'
+    backgroundColor: theme.palette.background.default,
+    padding: '15px',
+    flexGrow:1
+}));
+
+
+const RootContainer = styled('div')(({ theme }) => ({
+    display: 'flex',
+    flexDirection: 'row',
+    flexGrow: 1,
+    height: '100vh',
+    zIndex: 1
 }));
 
 const Layout = ({children: content}) => {
@@ -18,11 +29,11 @@ const Layout = ({children: content}) => {
     const theme = useTheme();
 
     return (
-        <Box sx={{ display: 'flex' }}>
+        <RootContainer>
             <Header/>
             <SideNavBar/>
             <Main theme ={theme} >{content}</Main>
-        </Box>
+        </RootContainer>
     )
 }
 

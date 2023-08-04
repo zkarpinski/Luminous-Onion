@@ -6,10 +6,10 @@ import NewSourcePopupComponent from "../components/NewSourcePopupComponent";
 const Sources = () => {
 
     return (
-        <>
+        <div>
             <NewSourcePopupComponent/>
             <SourceList/>
-        </>
+        </div>
     )
 }
 

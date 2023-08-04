@@ -6,7 +6,7 @@ import {Container, Paper, Typography} from "@mui/material";
 const ProductView= () => {
     const { id } = useParams();
 
-    const [product, setProduct] = useState(null);
+    const [product, setProduct] = useState({name:''});
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {

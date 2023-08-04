@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { DataGrid } from '@mui/x-data-grid';
+import {DataGrid, GridToolbar} from '@mui/x-data-grid';
 import api from "../shared/api";
 const FindingList = () => {
 
@@ -21,6 +21,7 @@ const FindingList = () => {
     },[]);
 
     const columns= [
+        {field: 'severity', headerName: 'Severity', width: 100},
         { field: 'findingIdentifier', headerName: 'Vul ID', width: 150 },
         { field: 'fullPackage', headerName: 'Package', description: 'Package and version.',
             sortable: true,
@@ -58,6 +59,13 @@ const FindingList = () => {
                 }}
                 pageSizeOptions={[10, 50, 100]}
                 checkboxSelection
+                slots={{ toolbar: GridToolbar }}
+                slotProps={{
+                    toolbar: {
+                        showQuickFilter: true,
+                        quickFilterProps: {debounceMs: 500},
+                    }
+                }}
             />
         </div>
         </>
