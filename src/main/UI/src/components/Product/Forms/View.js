@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import api from '../../shared/api'
+import api from '../../../shared/api'
 import {useParams} from "react-router-dom";
-import ProductFindingSummary from "./ProductFindingSummary";
+import ProductFindingSummary from "../FindingSummary";
 import {Container, Paper, Typography} from "@mui/material";
 const ProductView= () => {
     const { id } = useParams();

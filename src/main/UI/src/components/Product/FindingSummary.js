@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import api from '../../shared/api'
-import {useParams} from "react-router-dom";
-import {makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography} from "@mui/material";
+import React from 'react';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@mui/material";
 
 const ProductFindingSummary = ({critical= 0,high=0,medium=0,low=0,informational=0}) => {
-    const { id } = useParams();
-
+    const totalFindings = critical + high + medium + low + informational;
 
     return (
         <>
@@ -51,6 +48,14 @@ const ProductFindingSummary = ({critical= 0,high=0,medium=0,low=0,informational=
                             </Typography>
                             <Typography sx={{display: { xs: 'none', sm: 'block'}}}>
                                 Info
+                            </Typography>
+                        </TableCell>
+                        <TableCell sm={2}  align="center" style={{ backgroundColor:"lightgray", color:"white"}}>
+                            <Typography className='findingCount'>
+                                {totalFindings}
+                            </Typography>
+                            <Typography sx={{display: { xs: 'none', sm: 'block'}}}>
+                                Total
                             </Typography>
                         </TableCell>
                     </TableRow>

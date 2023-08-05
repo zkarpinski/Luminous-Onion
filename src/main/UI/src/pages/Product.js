@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductView from "../components/Product/ProductView";
+import ProductView from "../components/Product/Forms/View";
 
 
 const Product = () => {

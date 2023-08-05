@@ -1,8 +1,8 @@
 import SideNavBar from "../sections/SideNavbar";
 import Header from "../sections/Header";
 import React from "react";
-import {Box, styled, useTheme} from "@mui/material";
-import {headerHeight, sideNavBarWidth} from "../shared/constants";
+import { styled, useTheme } from "@mui/material";
+import { headerHeight, sideNavBarWidth } from "../shared/constants";
 
 
 // Style main content
@@ -16,7 +16,7 @@ const Main = styled('main')(({ theme }) => ({
 }));
 
 
-const RootContainer = styled('div')(({ theme }) => ({
+const RootContainer = styled('div')(() => ({
     display: 'flex',
     flexDirection: 'row',
     flexGrow: 1,

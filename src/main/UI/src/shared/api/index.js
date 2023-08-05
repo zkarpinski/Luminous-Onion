@@ -1,5 +1,3 @@
-import React from 'react'
-
 const defaultHeaders = {
     "Content-Type":"application/json"
 };
@@ -9,7 +7,7 @@ const fileUploadHeaders = {
 }
 
 const api = (method,headers, url, params) =>
-    new Promise((resolve,reject) => {
+    new Promise((resolve,reject) => { // eslint-disable-line
         console.log('Params are: ' + params);
         fetch(`${url}`, {
             method,
