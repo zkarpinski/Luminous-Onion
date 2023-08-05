@@ -1,10 +1,10 @@
 package com.zacharykarpinski.luminousonion.service;
 
+import com.zacharykarpinski.luminousonion.model.Product;
 import com.zacharykarpinski.luminousonion.model.Source;
 import com.zacharykarpinski.luminousonion.model.SourceTool;
 import com.zacharykarpinski.luminousonion.parsers.*;
-import com.zacharykarpinski.luminousonion.repository.SourceRepository;
-import org.javatuples.Pair;
+import com.zacharykarpinski.luminousonion.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,9 +16,11 @@ import java.io.IOException;
 public class UploadSourceService {
 
     @Autowired
-    private SourceRepository sourceRepository;
+    private ProductRepository productRepository;
 
     public Source uploadFileAndParse(MultipartFile mpf, SourceTool tool, Long productId) throws IOException {
+
+        Product product = productRepository.findById(productId).orElseThrow();
 
         // Parse the file based on the provided tool
         Source parsedSource = switch (tool) {
@@ -27,10 +29,11 @@ public class UploadSourceService {
             default -> null;
         };
 
-        //TODO: Handle productID
-        if (parsedSource != null) {
-            Source source = sourceRepository.save(parsedSource);
-            return source;
+        // Add the product and save to repository
+        if (parsedSource != null && product !=null) {
+            product.addSource(parsedSource);
+            productRepository.save(product);
+            return parsedSource;
         }
 
         return null;

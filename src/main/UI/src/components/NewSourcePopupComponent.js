@@ -1,4 +1,4 @@
-import {Box, Button, Grid, MenuItem, Modal, Select, TextField, Typography} from "@mui/material";
+import {Box, Button, Grid, MenuItem, Modal, TextField, Typography} from "@mui/material";
 import React, {useEffect} from "react";
 import api from "../shared/api";
 
@@ -44,6 +44,7 @@ const NewSourcePopupComponent = () => {
         formData.append('file',uploadFile);
         formData.append('productId',1); //TODO: Change from hardcode
         formData.append('sourceTool',"AQUA_TRIVY");
+        formData.append("test",formD.product)
 
         api.postFile('/upload',formData)
             .then((response) => console.log("Success:", JSON.stringify(response)))
@@ -54,7 +55,7 @@ const NewSourcePopupComponent = () => {
     return (
         <>
         <Grid>
-            <Button onClick={handleOpen} variant="contained" color="secondary" size="medium">Upload</Button>
+            <Button onClick={handleOpen} variant="contained" color="secondary" size="medium">New Source</Button>
         </Grid>
         <Modal
             open={open}
@@ -93,19 +94,15 @@ const NewSourcePopupComponent = () => {
                                         accept="application/JSON"
                                         id="upload-json-button"
                                         name="file"
-                                        single="single"
                                         type="file"
                                         onChange={handleFileChange}
                                         required
                                     />
                                 </Grid>
-                                <Grid item xs={12}>
-                                    <Button type="submit">Upload</Button>
+                                <Grid item xs={2}>
+                                    <Button type="submit">Submit</Button>
                                 </Grid>
                             </Grid>
-
-
-
                         </form>
                     </Grid>
             </Box>
