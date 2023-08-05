@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import {DataGrid, GridToolbar} from '@mui/x-data-grid';
 import api from "../shared/api";
-const FindingList = () => {
+const FindingList = ({filters}) => {
 
     const [findings, setFindings] = useState([]);
     const [loading, setLoading] = useState(false);
     const [findingsCount, setFindingsCount] = useState(0);
+    //TODO use filters
+    console.log({filters})
 
     useEffect(() => {
         setLoading(true);

@@ -29,7 +29,6 @@ public class FindingTest {
 
         Finding finding = new Finding();
         finding.setDescription(findingDescription);
-        finding.setSourceTool(toolName);
         finding.setSource(source);
 
         Long findingId = findingRepository.save(finding).getId();

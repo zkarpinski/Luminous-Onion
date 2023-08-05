@@ -39,8 +39,6 @@ public class Finding {
     private String severity;
     private String primaryUrl;
 
-    private String sourceText;
-
     // Date and times
     @CreationTimestamp
     private Date createTimestamp;
