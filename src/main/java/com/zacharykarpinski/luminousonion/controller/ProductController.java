@@ -10,26 +10,33 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/product")
 public class ProductController {
     @Autowired
     ProductRepository productRepository;
 
     @CrossOrigin
-    @GetMapping("/api/product")
+    @GetMapping()
     public ResponseEntity<List<Product>> getProducts() {
         return ResponseEntity.ok(productRepository.findAll());
     }
 
     @CrossOrigin
-    @PostMapping("/api/product")
+    @PostMapping()
     public ResponseEntity<Product> putNewProduct(@RequestBody Product product) {
         return new ResponseEntity<>( productRepository.save(product), HttpStatus.CREATED);
     }
 
     @CrossOrigin
-    @GetMapping("/api/product/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Product> getProduct(@PathVariable Long id) {
         return ResponseEntity.ok(productRepository.findById(id).orElse(null));
+    }
+
+    @CrossOrigin
+    @GetMapping("/{id}/findings/summary")
+    public ResponseEntity<Number> getFindingSummary(@PathVariable Long id) {
+        return ResponseEntity.ok(productRepository.getProductFindingsCountSummary(id));
     }
 
 }

@@ -24,6 +24,9 @@ const SourceList = () => {
     };
 
     const columns= [
+        { field: 'product', headerName: 'Product', width: 100,
+            valueGetter: (params) => params.row?.product?.name
+        },
         { field: 'tool', headerName: 'Tool', width: 150 },
         { field: 'toolVersion', headerName: 'Version', width: 160},
         { field: 'target', headerName: 'Target', width: 300 },

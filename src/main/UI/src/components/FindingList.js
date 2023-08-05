@@ -23,7 +23,10 @@ const FindingList = ({filters}) => {
     },[]);
 
     const columns= [
-        { field: 'tool', headerName: 'Tool', width: 100,
+        { field: 'product', headerName: 'Product', width: 150,
+            valueGetter: (params) => params.row?.source?.product?.name
+        },
+        { field: 'tool', headerName: 'Tool', width: 125,
             valueGetter: (params) => params.row?.source?.tool
         },
         { field: 'severity', headerName: 'Severity', width: 100},
