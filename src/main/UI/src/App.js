@@ -3,6 +3,9 @@ import './App.css';
 import Layout from "./layouts/Layout";
 import Main from "./Main";
 import {createTheme, CssBaseline, ThemeProvider} from "@mui/material";
+import Login from "./pages/Login";
+import Header from "./sections/Header";
+
 
 const theme = createTheme({
     palette: {
@@ -20,6 +23,18 @@ const theme = createTheme({
 });
 
 function App() {
+    const [token, setToken] = React.useState();
+
+    if (token) { // TODO Build login logic
+        return (
+            <ThemeProvider theme={theme}>
+                <CssBaseline>
+                <Header/>
+                    <Login setToken={setToken}/>
+                </CssBaseline>
+            </ThemeProvider>
+        );
+    }
 
   return (
       <ThemeProvider theme={theme}>

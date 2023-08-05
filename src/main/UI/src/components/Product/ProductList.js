@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import api from '../../shared/api'
 import {Link} from "react-router-dom";
+import {Paper} from "@mui/material";
 const ProductList = () => {
 
     const [products, setProducts] = useState([]);
@@ -45,7 +46,7 @@ const ProductList = () => {
         <div>
             <h1>{productCount} Products</h1>
         </div>
-        <div style={{ height: '90%', width: '100%' }}>
+        <Paper>
             <DataGrid
                 density="compact"
                 rows={products}
@@ -58,7 +59,7 @@ const ProductList = () => {
                 pageSizeOptions={[10, 50, 100]}
                 checkboxSelection
             />
-        </div>
+        </Paper>
         </>
     );
 };
