@@ -1,5 +1,5 @@
-import {Box, Button, Grid, Modal, TextField, Typography} from "@mui/material";
-import React from "react";
+import {Box, Button, FormGroup, FormLabel, Grid, Modal, TextField, Typography} from "@mui/material";
+import React, {useReducer} from "react";
 import api from "../../../shared/api";
 
 const style = {
@@ -14,17 +14,29 @@ const style = {
     padding: 4,
 };
 
+const formReducer = (state,event) => {
+    return {
+        ...state,
+        [event.name]: event.value
+    }
+}
+
 const ProductNew = () => {
+    const [formData, setFormData] = useReducer(formReducer, {
+        name: '',
+        productOwner: '',
+        productTeam: ''
+    });
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const [formData, setFormData] = React.useState({"name":"", productOwner:"",productTeam:""});
-
     // When values change, save them to the formData state
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+    const handleChange = event => {
+        setFormData({
+            name: event.target.name,
+            value: event.target.value,
+        });
     };
 
     const handleSubmit = event => {
@@ -54,6 +66,8 @@ const ProductNew = () => {
                 </Typography>
                     <div>
                         <form onSubmit={handleSubmit}>
+                            <FormLabel>Testing Label</FormLabel>
+                            <FormGroup sx ={{padding:2}}>
                             <TextField
                                 required
                                 id="name"
@@ -79,7 +93,8 @@ const ProductNew = () => {
                                 onChange={handleChange}
                             />
                             <Button type="submit">Create</Button>
-                        </form>
+                            </FormGroup>
+                            </form>
                     </div>
             </Box>
         </Modal>

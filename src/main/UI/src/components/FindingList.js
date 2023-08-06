@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {DataGrid, GridToolbar} from '@mui/x-data-grid';
 import api from "../shared/api";
+import {Paper} from "@mui/material";
 const FindingList = ({filters}) => {
 
     const [findings, setFindings] = useState([]);
@@ -52,30 +53,30 @@ const FindingList = ({filters}) => {
 
     return (
         <>
-        <div>
-            <h1>{findingsCount} Findings</h1>
-        </div>
-        <div style={{ height: '100%', width: '100%' }}>
-            <DataGrid
-                density="compact"
-                rows={findings}
-                columns={columns}
-                initialState={{
-                    pagination: {
-                        paginationModel: { page: 0, pageSize: 50 },
-                    },
-                }}
-                pageSizeOptions={[10, 50, 100]}
-                checkboxSelection
-                slots={{ toolbar: GridToolbar }}
-                slotProps={{
-                    toolbar: {
-                        showQuickFilter: true,
-                        quickFilterProps: {debounceMs: 500},
-                    }
-                }}
-            />
-        </div>
+            <div>
+                <h1>{findingsCount} Findings</h1>
+            </div>
+            <Paper>
+                <DataGrid
+                    density="compact"
+                    rows={findings}
+                    columns={columns}
+                    initialState={{
+                        pagination: {
+                            paginationModel: { page: 0, pageSize: 50 },
+                        },
+                    }}
+                    pageSizeOptions={[10, 50, 100]}
+                    checkboxSelection
+                    slots={{ toolbar: GridToolbar }}
+                    slotProps={{
+                        toolbar: {
+                            showQuickFilter: true,
+                            quickFilterProps: {debounceMs: 500},
+                        }
+                    }}
+                />
+            </Paper>
         </>
     );
 };

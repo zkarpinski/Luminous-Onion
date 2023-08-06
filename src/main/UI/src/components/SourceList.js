@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import api from "../shared/api";
-import {Button} from "@mui/material";
+import {Button, Paper} from "@mui/material";
 const SourceList = () => {
 
     const [sources, setSources] = useState([]);
@@ -47,23 +47,23 @@ const SourceList = () => {
 
     return (
         <>
-        <div>
-            <h1>{sourcesCount} Sources</h1>
-        </div>
-        <div style={{ height: '100%', width: '100%' }}>
-            <DataGrid
-                density="compact"
-                rows={sources}
-                columns={columns}
-                initialState={{
-                    pagination: {
-                        paginationModel: { page: 0, pageSize: 50 },
-                    },
-                }}
-                pageSizeOptions={[10, 50, 100]}
-                checkboxSelection
-            />
-        </div>
+            <div>
+                <h1>{sourcesCount} Sources</h1>
+            </div>
+            <Paper>
+                <DataGrid
+                    density="compact"
+                    rows={sources}
+                    columns={columns}
+                    initialState={{
+                        pagination: {
+                            paginationModel: { page: 0, pageSize: 50 },
+                        },
+                    }}
+                    pageSizeOptions={[10, 50, 100]}
+                    checkboxSelection
+                />
+            </Paper>
         </>
     );
 };

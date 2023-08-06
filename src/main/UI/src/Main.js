@@ -15,6 +15,7 @@ const Main = () => {
             <Route exact path='/source' element={<Sources/>}></Route>
             <Route exact path='/product' element={<Products/>}></Route>
             <Route exact path='/product/:id' element={<Product/>}></Route>
+            <Route exact path='/product/:id/edit' element={<Product/>}></Route>
         </Routes>
     );
 }

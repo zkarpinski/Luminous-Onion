@@ -1,6 +1,6 @@
 import {Box, Button, Grid, MenuItem, Modal, TextField, Typography} from "@mui/material";
 import React, {useEffect} from "react";
-import api from "../shared/api";
+import api from "../../../shared/api";
 
 const style = {
     width: 500,
@@ -69,7 +69,12 @@ const NewSourcePopupComponent = () => {
                 </Typography>
                     <Grid>
                         <form onSubmit={handleSubmit}>
-                            <Grid item xs={12} container spacing={3}>
+                            <Grid xs={12} container spacing={1}>
+                                <Grid item xs={12}>
+                                    <TextField required label="Label" placeholder="Enter label for new source" sx={{ width: '100%' }}
+                                               onChange={handleChange}>
+                                    </TextField>
+                                </Grid>
                                 <Grid item xs={12}>
                                     <TextField select required label="Product" placeholder="Select Product" sx={{ width: '100%' }}
                                     onChange={handleChange}>
@@ -80,7 +85,7 @@ const NewSourcePopupComponent = () => {
                                         ))}
                                     </TextField>
                                 </Grid>
-                                <Grid item xs={12}>
+                                <Grid item xs={12} sm={6}>
                                     <TextField select required label="Source Type" placeholder="Select Source Type"  sx={{ width: '100%' }}>
                                         {products.map((product) => (
                                             <MenuItem key={product.id} value={product.id}>
@@ -89,7 +94,7 @@ const NewSourcePopupComponent = () => {
                                         ))}
                                     </TextField>
                                 </Grid>
-                                <Grid item xs={12}>
+                                <Grid item xs={12} sm={6}>
                                     <input
                                         accept="application/JSON"
                                         id="upload-json-button"
@@ -98,6 +103,11 @@ const NewSourcePopupComponent = () => {
                                         onChange={handleFileChange}
                                         required
                                     />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField multiline rows={4} label="Details" placeholder="Enter details" sx={{ width: '100%' }}
+                                               onChange={handleChange}>
+                                    </TextField>
                                 </Grid>
                                 <Grid item xs={2}>
                                     <Button type="submit">Submit</Button>
