@@ -38,7 +38,7 @@ public class Grype implements Parser {
 
             // Create a new source record with the new findings
             Source source = new Source();
-            source.setTool(SourceTool.ANCORE_GRYPE.name());
+            source.setTool(SourceTool.ANCORE_GRYPE);
             source.setTargetType(grype.targetType);
             source.setTarget(grype.targetName);
             source.setToolVersion(grype.toolVersion);

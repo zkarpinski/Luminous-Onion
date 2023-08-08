@@ -14,7 +14,14 @@ const ProductView= () => {
 
         if (id!==null) {
 
-            // Get the product list
+            // Get the product
+            api.get(`/api/product/${id}`)
+                .then(data => {
+                    setProduct(data);
+                    setLoading(false)
+                });
+
+            // Get the product sources
             api.get(`/api/product/${id}`)
                 .then(data => {
                     setProduct(data);
@@ -33,14 +40,16 @@ const ProductView= () => {
 
     return (
         <>
-            <ProductFindingSummary
-            critical={0}
-            high={1}
-            medium={0}
-            low={2}
-            informational={3}
-            />
-            <Container component={Paper}>
+            <Paper>
+                <ProductFindingSummary
+                critical={0}
+                high={1}
+                medium={0}
+                low={2}
+                informational={3}
+                />
+            </Paper>
+            <Container component={Paper} style={{marginTop: 10, marginBottom:10, padding:10}}>
                 <Typography variant="h4">
                     {product.name}
                 </Typography>
@@ -67,6 +76,15 @@ const ProductView= () => {
                                 <TableCell>{product.productName}</TableCell>
                             </TableRow>
                         </TableBody>
+                    </Table>
+                </Paper>
+            </Container>
+            <Container component={Paper} style={{marginBottom:10, padding:10}}>
+                <Typography variant="h5">
+                    Sources
+                </Typography>
+                <Paper>
+                    <Table size="small">
                     </Table>
                 </Paper>
             </Container>

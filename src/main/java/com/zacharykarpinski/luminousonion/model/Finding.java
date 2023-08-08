@@ -18,11 +18,6 @@ public class Finding {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name="sourceId")
-    private Source source;
-
     private String title;
     @Column(nullable = true, length = 1024)
     private String description;
@@ -46,6 +41,10 @@ public class Finding {
     private Date lastUpdateTimestamp;
 
     private FindingTypes findingType;
+
+    @ManyToOne
+    @JoinColumn(name="sourceId")
+    private Source source;
 
     private enum FindingTypes{
         OTHER,

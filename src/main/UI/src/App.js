@@ -10,8 +10,11 @@ import Header from "./sections/Header";
 const theme = createTheme({
     palette: {
         primary: {
-            //main: '#5e35b1'
-            main: '#BA03DB'
+            //main: '#5e35b1', // Option 1
+            main: '#4f2c96', // Option 1
+
+            // Option 2
+
         },
         secondary: {
             main: '#dce9e6'

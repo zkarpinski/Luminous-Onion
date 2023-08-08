@@ -35,7 +35,7 @@ public class Trivy implements Parser {
 
                 // Create a new source record
                 Source source = new Source();
-                source.setTool(SourceTool.AQUA_TRIVY.name());
+                source.setTool(SourceTool.AQUA_TRIVY);
                 source.setTarget(trvy.targetName);
                 source.setFindings(findingList);
                 // Map to targetTypes to standard

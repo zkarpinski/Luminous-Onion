@@ -1,7 +1,10 @@
 package com.zacharykarpinski.luminousonion.controller;
 
 import com.zacharykarpinski.luminousonion.model.Product;
+import com.zacharykarpinski.luminousonion.model.Source;
 import com.zacharykarpinski.luminousonion.repository.ProductRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,8 @@ public class ProductController {
     @Autowired
     ProductRepository productRepository;
 
+    @Operation(summary = "Returns a list of products")
+    @ApiResponse(responseCode = "200", description = "Product list returned")
     @CrossOrigin
     @GetMapping()
     public ResponseEntity<List<Product>> getProducts() {
@@ -37,6 +42,12 @@ public class ProductController {
     @GetMapping("/{id}/findings/summary")
     public ResponseEntity<Number> getFindingSummary(@PathVariable Long id) {
         return ResponseEntity.ok(productRepository.getProductFindingsCountSummary(id));
+    }
+
+    @CrossOrigin
+    @GetMapping("/{id}/sources")
+    public ResponseEntity<Source> getProductSources(@PathVariable Long id) {
+        return null;
     }
 
 }

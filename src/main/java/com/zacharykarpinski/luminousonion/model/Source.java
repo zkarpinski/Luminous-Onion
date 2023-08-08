@@ -21,7 +21,8 @@ public class Source {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String tool;
+    @Enumerated(EnumType.STRING)
+    private SourceTool tool;
     private String toolVersion;
     private String target;
     private String targetType;

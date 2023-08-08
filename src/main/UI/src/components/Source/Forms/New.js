@@ -1,5 +1,5 @@
 import {Box, Button, Grid, MenuItem, Modal, TextField, Typography} from "@mui/material";
-import React, {useEffect} from "react";
+import React, {useEffect, useReducer} from "react";
 import api from "../../../shared/api";
 
 const style = {
@@ -14,17 +14,31 @@ const style = {
     padding: 4,
 };
 
+const formReducer = (state,event) => {
+    return {
+        ...state,
+        [event.name]: event.value
+    }
+}
+
 const NewSourcePopupComponent = () => {
+    const [tempFormData, setFormData] = useReducer(formReducer, {
+        label: '',
+        productId: '',
+        sourceTool: '',
+    });
     const [open, setOpen] = React.useState(false);
     const [products, setProducts] = React.useState([]);
+    const [sourceTools, setSourceTools] = React.useState([]);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const [formD, setFormData] = React.useState({product:"",file:null});
     const [uploadFile, setUploadFile] = React.useState("");
 
     useEffect(() => {
        api.get("/api/product")
            .then((data) => setProducts(data));
+        api.get("/api/resources/sourcetools")
+            .then((data) => setSourceTools(data));
     },[]);
 
     const handleFileChange = (event) => {
@@ -32,9 +46,11 @@ const NewSourcePopupComponent = () => {
         setUploadFile(event.target.files[0])
     };
 
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+    const handleChange = event => {
+        setFormData({
+            name: event.target.name,
+            value: event.target.value,
+        });
     };
 
     const handleSubmit = event => {
@@ -42,9 +58,11 @@ const NewSourcePopupComponent = () => {
 
         const formData = new FormData();
         formData.append('file',uploadFile);
-        formData.append('productId',1); //TODO: Change from hardcode
-        formData.append('sourceTool',"AQUA_TRIVY");
-        formData.append("test",formD.product)
+        formData.append('productId',tempFormData.productId); //TODO: Iterate over tempFormData
+        formData.append('sourceTool',tempFormData.sourceTool);
+        formData.append("test",tempFormData.name)
+        console.log(formData);
+        console.log(tempFormData);
 
         api.postFile('/upload',formData)
             .then((response) => console.log("Success:", JSON.stringify(response)))
@@ -69,14 +87,14 @@ const NewSourcePopupComponent = () => {
                 </Typography>
                     <Grid>
                         <form onSubmit={handleSubmit}>
-                            <Grid xs={12} container spacing={1}>
+                            <Grid container spacing={1}>
                                 <Grid item xs={12}>
-                                    <TextField required label="Label" placeholder="Enter label for new source" sx={{ width: '100%' }}
+                                    <TextField required label="Label" id ="label" name="label" placeholder="Enter label for new source" sx={{ width: '100%' }}
                                                onChange={handleChange}>
                                     </TextField>
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <TextField select required label="Product" placeholder="Select Product" sx={{ width: '100%' }}
+                                    <TextField select required name="productId" label="Product" placeholder="Select Product" sx={{ width: '100%' }}
                                     onChange={handleChange}>
                                         {products.map((product) => (
                                             <MenuItem key={product.id} value={product.id}>
@@ -86,10 +104,11 @@ const NewSourcePopupComponent = () => {
                                     </TextField>
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
-                                    <TextField select required label="Source Type" placeholder="Select Source Type"  sx={{ width: '100%' }}>
-                                        {products.map((product) => (
-                                            <MenuItem key={product.id} value={product.id}>
-                                                {product.name}
+                                    <TextField select required name="sourceTool" label="Source Type" placeholder="Select Source Type"
+                                               sx={{ width: '100%' }} onChange={handleChange}>
+                                        {sourceTools.map((tool) => (
+                                            <MenuItem key={tool.value} value={tool.value}>
+                                                {tool.label}
                                             </MenuItem>
                                         ))}
                                     </TextField>
