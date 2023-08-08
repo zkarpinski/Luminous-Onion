@@ -20,7 +20,7 @@ public class FindingTest {
 
     @Test
     public void testCreateNewFinding() {
-        String toolName = "Test Tool";
+        String toolName = "AQUA_TRIVY";
         String findingDescription = "Test Description";
         Source source = new Source();
         source.setTool(toolName);

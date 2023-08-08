@@ -62,4 +62,12 @@ public class Source {
         }
     }
 
+    // Overload setTool with a string param
+    public void setTool(String tool) {
+        this.tool = SourceTool.valueOf(tool);
+    }
+    public void setTool(SourceTool tool) {
+        this.tool = tool;
+    }
+
 }
