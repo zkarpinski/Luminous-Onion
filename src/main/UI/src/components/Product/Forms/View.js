@@ -4,27 +4,33 @@ import {useParams} from "react-router-dom";
 import ProductFindingSummary from "../FindingSummary";
 import {Container, Paper, Table, TableBody, TableCell, TableHead, TableRow, Typography} from "@mui/material";
 const ProductView= () => {
-    const { id } = useParams();
-
-    const [product, setProduct] = useState({name:''});
     const [loading, setLoading] = useState(false);
+    const { id } = useParams();
+    const [product, setProduct] = useState({name:''});
+    const [findingSummary, setFSummary] = useState({critical:0,high:0,medium:0,low:0,informational:0});
+    const [sources, setSources] = useState([]);
+
 
     useEffect(() => {
         setLoading(true);
 
         if (id!==null) {
-
             // Get the product
             api.get(`/api/product/${id}`)
                 .then(data => {
                     setProduct(data);
-                    setLoading(false)
+                });
+
+            // Get the product finding summary
+            api.get(`/api/product/${id}/findings/summary`)
+                .then(data => {
+                    setFSummary(data.data);
                 });
 
             // Get the product sources
-            api.get(`/api/product/${id}`)
+            api.get(`/api/product/${id}/sources`)
                 .then(data => {
-                    setProduct(data);
+                    setSources(data);
                     setLoading(false)
                 });
         }
@@ -36,17 +42,23 @@ const ProductView= () => {
     if (loading) {
         return "..."
     }
+    else {
+        // Print debugging
+        console.log(findingSummary)
+        console.log(sources)
+    }
+
 
 
     return (
         <>
             <Paper>
                 <ProductFindingSummary
-                critical={0}
-                high={1}
-                medium={0}
-                low={2}
-                informational={3}
+                critical={findingSummary.critical}
+                high={findingSummary.high}
+                medium={findingSummary.medium}
+                low={findingSummary.low}
+                informational={findingSummary.informational}
                 />
             </Paper>
             <Container component={Paper} style={{marginTop: 10, marginBottom:10, padding:10}}>
@@ -85,6 +97,19 @@ const ProductView= () => {
                 </Typography>
                 <Paper>
                     <Table size="small">
+                        <TableBody>
+                            {sources.map((row) => (
+                                <TableRow
+                                    key={row.id}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                >
+                                    <TableCell component="th" scope="row">
+                                        {row.id}
+                                    </TableCell>
+                                    <TableCell>{row.tool}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
                     </Table>
                 </Paper>
             </Container>

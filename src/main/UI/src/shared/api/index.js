@@ -8,7 +8,7 @@ const fileUploadHeaders = {
 
 const api = (method,headers, url, params) =>
     new Promise((resolve,reject) => { // eslint-disable-line
-        console.log('Params are: ' + params);
+        console.log('Calling endpoint: ' + url);
         fetch(`${url}`, {
             method,
             body: method !=='get' ? params : null,

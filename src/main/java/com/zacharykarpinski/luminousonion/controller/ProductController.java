@@ -1,8 +1,11 @@
 package com.zacharykarpinski.luminousonion.controller;
 
+import com.zacharykarpinski.luminousonion.dto.ProductFindingsSummaryDTO;
 import com.zacharykarpinski.luminousonion.model.Product;
 import com.zacharykarpinski.luminousonion.model.Source;
 import com.zacharykarpinski.luminousonion.repository.ProductRepository;
+import com.zacharykarpinski.luminousonion.repository.SourceRepository;
+import com.zacharykarpinski.luminousonion.response.ResponseHandler;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,9 @@ import java.util.List;
 public class ProductController {
     @Autowired
     ProductRepository productRepository;
+
+    @Autowired
+    SourceRepository sourceRepository;
 
     @Operation(summary = "Returns a list of products")
     @ApiResponse(responseCode = "200", description = "Product list returned")
@@ -40,14 +46,15 @@ public class ProductController {
 
     @CrossOrigin
     @GetMapping("/{id}/findings/summary")
-    public ResponseEntity<Number> getFindingSummary(@PathVariable Long id) {
-        return ResponseEntity.ok(productRepository.getProductFindingsCountSummary(id));
+    public ResponseEntity<Object> getFindingSummary(@PathVariable Long id) {
+        ProductFindingsSummaryDTO summary = productRepository.getProductFindingsCountSummary(id);
+        return ResponseHandler.createResponse("Ok",HttpStatus.OK,summary);
     }
 
     @CrossOrigin
     @GetMapping("/{id}/sources")
-    public ResponseEntity<Source> getProductSources(@PathVariable Long id) {
-        return null;
+    public ResponseEntity<List<Source>> getProductSources(@PathVariable Long id) {
+        return ResponseEntity.ok(sourceRepository.getSourcesByProduct(id));
     }
 
 }

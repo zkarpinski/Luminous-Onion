@@ -45,7 +45,8 @@ const ProductNew = () => {
         // Create new product
         api.post('/api/product',JSON.stringify(formData))
             .then((response) => console.log("Success:", JSON.stringify(response)))
-            .catch((error) => console.error("Error:", error));
+            .catch((error) => console.error("Error:", error))
+        // TODO Create a toast when product is created.
         handleClose();
     }
 
@@ -57,44 +58,42 @@ const ProductNew = () => {
         <Modal
             open={open}
             onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
         >
             <Box sx={style}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
-                   Create Product
+                   Create new product
                 </Typography>
                     <div>
                         <form onSubmit={handleSubmit}>
-                            <FormLabel>Testing Label</FormLabel>
+                            <FormLabel>Enter details for new product below</FormLabel>
                             <FormGroup sx ={{padding:2}}>
-                            <TextField
-                                required
-                                id="name"
-                                name="name"
-                                label="Product Name"
-                                helperText="Enter product name"
-                                autoComplete="off"
-                                value={formData.name}
-                                onChange={handleChange}
-                            />
-                            <TextField
-                                id="productOwner"
-                                name="productOwner"
-                                label="Product Owner"
-                                value={formData.productOwner}
-                                onChange={handleChange}
-                            />
-                            <TextField
-                                id="productTeam"
-                                name="productTeam"
-                                label="Product Team"
-                                value={formData.productTeam}
-                                onChange={handleChange}
-                            />
-                            <Button type="submit">Create</Button>
+                                <TextField
+                                    required
+                                    id="name"
+                                    name="name"
+                                    label="Product Name"
+                                    helperText="Enter product name"
+                                    autoComplete="off"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                />
+                                <TextField
+                                    id="productOwner"
+                                    name="productOwner"
+                                    label="Product Owner"
+                                    value={formData.productOwner}
+                                    onChange={handleChange}
+                                />
+                                <TextField
+                                    id="productTeam"
+                                    name="productTeam"
+                                    label="Product Team"
+                                    value={formData.productTeam}
+                                    onChange={handleChange}
+                                />
+                                <Button type="submit">Create</Button>
                             </FormGroup>
-                            </form>
+                        </form>
                     </div>
             </Box>
         </Modal>

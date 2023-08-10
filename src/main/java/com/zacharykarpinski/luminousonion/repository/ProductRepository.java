@@ -1,5 +1,6 @@
 package com.zacharykarpinski.luminousonion.repository;
 
+import com.zacharykarpinski.luminousonion.dto.ProductFindingsSummaryDTO;
 import com.zacharykarpinski.luminousonion.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    @Query("SELECT COUNT(f.id) FROM Product p INNER JOIN p.sources s INNER JOIN s.findings f WHERE p.id = :id")
-    int getProductFindingsCountSummary(@Param("id") Long id);
+    @Query("SELECT NEW com.zacharykarpinski.luminousonion.dto.ProductFindingsSummaryDTO(0,0,0,0,CAST(count(f.id) as INTEGER )) FROM Product p INNER JOIN p.sources s INNER JOIN s.findings f WHERE p.id = :id")
+    ProductFindingsSummaryDTO getProductFindingsCountSummary(@Param("id") Long id);
 
 }

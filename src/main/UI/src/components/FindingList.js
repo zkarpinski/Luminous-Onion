@@ -41,7 +41,6 @@ const FindingList = ({filters}) => {
         { field: 'title', headerName: 'Title', width: 300 },
         { field: 'packageVersionFixed', headerName: 'Fixed Version', width: 100 },
         { field: 'age', headerName: 'Age', type: 'number', width: 90 },
-        { field: 'sourceTool', headerName: 'Source', width: 100 },
         { field: 'createTimestamp', headerName: 'Created', width: 150} //TODO: Change to readable datetime format
 
     ];

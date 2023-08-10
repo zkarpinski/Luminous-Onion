@@ -70,4 +70,11 @@ public class Source {
         this.tool = tool;
     }
 
+
+    public Source() {}
+    public Source(long id, SourceTool tool) {
+        this.id = id;
+        this.setTool(tool);
+    }
+
 }

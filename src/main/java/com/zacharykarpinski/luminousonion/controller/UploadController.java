@@ -2,6 +2,7 @@ package com.zacharykarpinski.luminousonion.controller;
 
 import com.zacharykarpinski.luminousonion.model.Source;
 import com.zacharykarpinski.luminousonion.model.SourceTool;
+import com.zacharykarpinski.luminousonion.response.ResponseHandler;
 import com.zacharykarpinski.luminousonion.service.UploadSourceService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,17 +23,17 @@ public class UploadController {
     }
 
     @PostMapping(value="", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Source> uploadFile(
+    public ResponseEntity<Object> uploadFile(
             @RequestParam("file")MultipartFile mpf,
             @RequestParam("productId") Long productId,
             @RequestParam("sourceTool")SourceTool sourceTool) {
         try {
             Source newSource = uploadSourceService.uploadFileAndParse(mpf,sourceTool, productId);
             if (newSource != null)
-                return ResponseEntity.ok(newSource);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+                return ResponseHandler.createResponse("New source created!", HttpStatus.CREATED, newSource);
+            return ResponseHandler.createResponse("Unknown error.", HttpStatus.INTERNAL_SERVER_ERROR, null);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseHandler.createResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }
 }
