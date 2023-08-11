@@ -45,6 +45,16 @@ public class ProductController {
     }
 
     @CrossOrigin
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteProduct(@PathVariable Long id) {
+        if (productRepository.existsById(id)) {
+            productRepository.deleteById(id);
+            return ResponseHandler.createResponse("entity deleted",HttpStatus.OK);
+        }
+        return ResponseHandler.createResponse("ID not found",HttpStatus.NOT_FOUND);
+    }
+
+    @CrossOrigin
     @GetMapping("/{id}/findings/summary")
     public ResponseEntity<Object> getFindingSummary(@PathVariable Long id) {
         ProductFindingsSummaryDTO summary = productRepository.getProductFindingsCountSummary(id);

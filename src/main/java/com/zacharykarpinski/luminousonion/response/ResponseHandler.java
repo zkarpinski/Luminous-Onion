@@ -7,14 +7,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ResponseHandler {
+    private static final String API_MESSAGE_KEY = "message";
+    private static final String API_STATUS_KEY = "status";
+
     private ResponseHandler() {
         // Added per Sonar recommendation
         throw new IllegalStateException("Utility class");
     }
+
+    public static ResponseEntity<Object> createResponse(String msg, HttpStatus status) {
+        Map<String, Object> map = new HashMap<>();
+        map.put(API_MESSAGE_KEY, msg);
+        map.put(API_STATUS_KEY, status.value());
+        return new ResponseEntity<>(map,status);
+    }
+
     public static ResponseEntity<Object> createResponse(String msg, HttpStatus status, Object obj) {
         Map<String, Object> map = new HashMap<>();
-        map.put("message", msg);
-        map.put("status", status.value());
+        map.put(API_MESSAGE_KEY, msg);
+        map.put(API_STATUS_KEY, status.value());
         if (obj != null) {
             map.put("data", obj);
         }
@@ -23,8 +34,8 @@ public class ResponseHandler {
 
     public static ResponseEntity<Object> createResponse(String msg, HttpStatus status, String key, String value) {
         Map<String, Object> map = new HashMap<>();
-        map.put("message", msg);
-        map.put("status", status.value());
+        map.put(API_MESSAGE_KEY, msg);
+        map.put(API_STATUS_KEY, status.value());
         map.put(key,value);
         return new ResponseEntity<>(map,status);
     }

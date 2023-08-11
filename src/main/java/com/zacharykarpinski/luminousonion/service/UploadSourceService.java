@@ -9,16 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-
-
 @Service
 public class UploadSourceService {
 
     @Autowired
     private ProductRepository productRepository;
 
-    public Source uploadFileAndParse(MultipartFile mpf, SourceTool tool, Long productId) throws IOException {
+    public Source uploadFileAndParse(MultipartFile mpf, SourceTool tool, Long productId) {
 
         Product product = productRepository.findById(productId).orElseThrow();
 
@@ -26,11 +23,12 @@ public class UploadSourceService {
         Source parsedSource = switch (tool) {
             case ANCORE_GRYPE -> Grype.parse(mpf);
             case AQUA_TRIVY -> Trivy.parse(mpf);
+            case OTHER_EXTERNAL, OTHER_INTERNAL -> new Source(tool);
             default -> null;
         };
 
         // Add the product and save to repository
-        if (parsedSource != null && product !=null) {
+        if (parsedSource != null) {
             product.addSource(parsedSource);
             productRepository.save(product);
             return parsedSource;

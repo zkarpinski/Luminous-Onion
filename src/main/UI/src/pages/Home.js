@@ -1,6 +1,7 @@
 import React from 'react';
 import VulnerabilityCard from "../components/VulnerabilityCard";
-import {Grid} from "@mui/material";
+import {Grid, Paper} from "@mui/material";
+import StackedAreaChart from "../components/Graph";
 
 const Home = () => {
     return (
@@ -11,6 +12,9 @@ const Home = () => {
                     <VulnerabilityCard cardType='Medium' value={300} />
                     <VulnerabilityCard cardType='Low' value={777}/>
             </Grid>
+            <Paper>
+                <StackedAreaChart/>
+            </Paper>
         </div>
     );
 };

@@ -6,6 +6,9 @@ import Findings from './pages/Findings';
 import Sources from "./pages/Sources";
 import Products from "./pages/Products";
 import Product from "./pages/Product";
+import NotFound from "./pages/NotFound";
+import ProductFindings from "./components/Product/Forms/Findings";
+import ProductSettings from "./components/Product/Forms/Settings";
 
 const Main = () => {
     return (
@@ -16,6 +19,9 @@ const Main = () => {
             <Route exact path='/product' element={<Products/>}></Route>
             <Route exact path='/product/:id' element={<Product/>}></Route>
             <Route exact path='/product/:id/edit' element={<Product/>}></Route>
+            <Route exact path='/product/:id/findings' element={<ProductFindings/>}></Route>
+            <Route exact path='/product/:id/settings' element={<ProductSettings/>}></Route>
+            <Route path='*' element={<NotFound />}/>
         </Routes>
     );
 }

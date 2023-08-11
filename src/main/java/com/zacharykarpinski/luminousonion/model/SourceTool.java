@@ -6,10 +6,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public enum SourceTool {
     ANCORE_GRYPE ("Grype"),
     AQUA_TRIVY ("Trivy"),
+    OTHER_EXTERNAL ("Other - Externally found"),
+    OTHER_INTERNAL ("Other - Internally found"),
     SNYK_SCA ("Snyk");
-
-
-
 
 
     private final String name;
@@ -23,6 +22,7 @@ public enum SourceTool {
         return name.equals(otherName);
     }
 
+    @Override
     public String toString() {
         return this.name;
     }

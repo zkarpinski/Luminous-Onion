@@ -29,7 +29,8 @@ const ProductNew = () => {
     });
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleClose = () => {setOpen(false);
+        window.location.reload();}
 
     // When values change, save them to the formData state
     const handleChange = event => {
