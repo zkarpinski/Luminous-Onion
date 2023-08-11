@@ -87,12 +87,12 @@ public class Grype implements Parser {
         public String packageName;
         public String packagePath;
         public String packageVersionFound;
+        public String packageVersionFixed;
         public String purl;
 
         public String findingIdentifier;
         public String severity;
         public String primaryUrl;
-
 
         // Unpack vulnerability nested node
         @JsonProperty("vulnerability")
@@ -101,6 +101,7 @@ public class Grype implements Parser {
             severity = vul.get("severity").asText();
             description = vul.path("description").asText();
             primaryUrl = vul.path("dataSource").asText();
+            packageVersionFixed = vul.path("fix").path("versions").path(0).asText();
         }
 
         // Unpack artifact nested node

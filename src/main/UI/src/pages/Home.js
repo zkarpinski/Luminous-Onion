@@ -6,10 +6,10 @@ const Home = () => {
     return (
         <div>
             <Grid container spacing="10px">
-                    <VulnerabilityCard CardType='Critical' Value={100}/>
-                    <VulnerabilityCard CardType='High' Value={200}/>
-                    <VulnerabilityCard CardType='Medium' Value={300} />
-                    <VulnerabilityCard CardType='Low' Value={777}/>
+                    <VulnerabilityCard cardType='Critical' value={100}/>
+                    <VulnerabilityCard cardType='High' value={200}/>
+                    <VulnerabilityCard cardType='Medium' value={300} />
+                    <VulnerabilityCard cardType='Low' value={777}/>
             </Grid>
         </div>
     );
