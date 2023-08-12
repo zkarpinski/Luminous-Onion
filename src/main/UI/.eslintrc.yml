@@ -11,5 +11,5 @@ plugins:
   - react
 rules: {
   "react/prop-types": "warn",
-  "no-undef": "warn",
+  "no-undef": "off",
 }

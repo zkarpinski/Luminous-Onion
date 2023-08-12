@@ -1,16 +1,23 @@
-import React from 'react';
+import * as React from 'react';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@mui/material";
 
-const ProductFindingSummary = ({critical= 0,high=0,medium=0,low=0,informational=0}) => {
-    const totalFindings = critical + high + medium + low + informational;
+interface ProductFindingSummaryProps {
+    critical:number,
+    high:number,
+    medium:number,
+    low:number,
+    informational:number;
+}
+
+const ProductFindingSummary = ({critical= 0,high=0,medium=0,low=0,informational=0}:ProductFindingSummaryProps) => {
+    const totalFindings:number = critical + high + medium + low + informational;
 
     return (
-        <>
-            <TableContainer component={Paper}>
+        <TableContainer component={Paper}>
             <Table size="small" style={{ tableLayout: 'fixed' }}>
                 <TableBody>
                     <TableRow>
-                        <TableCell sm={2} align="center" style={{ backgroundColor:"darkred", color:"white"}} >
+                        <TableCell align="center" style={{ backgroundColor:"darkred", color:"white"}} >
                             <Typography className='findingCount'>
                                 {critical}
                             </Typography>
@@ -18,7 +25,7 @@ const ProductFindingSummary = ({critical= 0,high=0,medium=0,low=0,informational=
                                 Critical
                             </Typography>
                         </TableCell>
-                        <TableCell sm={2} align="center" style={{ backgroundColor:"darkorange", color:"white"}}>
+                        <TableCell align="center" style={{ backgroundColor:"darkorange", color:"white"}}>
                             <Typography className='findingCount'>
                                 {high}
                             </Typography>
@@ -26,7 +33,7 @@ const ProductFindingSummary = ({critical= 0,high=0,medium=0,low=0,informational=
                                 High
                             </Typography>
                         </TableCell>
-                        <TableCell sm={2}  align="center" style={{ backgroundColor:"#E4AB10", color:"white"}}>
+                        <TableCell align="center" style={{ backgroundColor:"#E4AB10", color:"white"}}>
                             <Typography className='findingCount'>
                                 {medium}
                             </Typography>
@@ -34,7 +41,7 @@ const ProductFindingSummary = ({critical= 0,high=0,medium=0,low=0,informational=
                                Medium
                             </Typography>
                         </TableCell>
-                        <TableCell sm={2}  align="center" style={{ backgroundColor:"darkgrey", color:"white"}}>
+                        <TableCell align="center" style={{ backgroundColor:"darkgrey", color:"white"}}>
                             <Typography className='findingCount'>
                                 {low}
                             </Typography>
@@ -42,7 +49,7 @@ const ProductFindingSummary = ({critical= 0,high=0,medium=0,low=0,informational=
                                 Low
                             </Typography>
                         </TableCell>
-                        <TableCell sm={2}  align="center" style={{ backgroundColor:"lightgray", color:"white"}}>
+                        <TableCell align="center" style={{ backgroundColor:"lightgray", color:"white"}}>
                             <Typography className='findingCount'>
                                 {informational}
                             </Typography>
@@ -50,7 +57,7 @@ const ProductFindingSummary = ({critical= 0,high=0,medium=0,low=0,informational=
                                 Info
                             </Typography>
                         </TableCell>
-                        <TableCell sm={2}  align="center" style={{ backgroundColor:"lightgray", color:"white"}}>
+                        <TableCell align="center" style={{ backgroundColor:"lightgray", color:"white"}}>
                             <Typography className='findingCount'>
                                 {totalFindings}
                             </Typography>
@@ -62,8 +69,6 @@ const ProductFindingSummary = ({critical= 0,high=0,medium=0,low=0,informational=
                 </TableBody>
             </Table>
             </TableContainer>
-
-        </>
     );
 };
 

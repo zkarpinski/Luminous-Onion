@@ -49,7 +49,7 @@ const ProductView= () => {
 
 
     return (
-        <>
+        <div>
             <Paper>
                 <ProductFindingSummary
                 critical={findingSummary.critical}
@@ -118,7 +118,7 @@ const ProductView= () => {
                     </Table>
                 </Paper>
             </Container>
-        </>
+        </div>
     );
 };
 
