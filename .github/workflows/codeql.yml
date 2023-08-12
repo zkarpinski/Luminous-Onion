@@ -74,7 +74,7 @@ jobs:
 
     - run: |
         echo "Run, Build Application using script"
-        mvnw -B package --file pom.xml
+        ./mvnw -B package --file pom.xml
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
