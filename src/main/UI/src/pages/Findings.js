@@ -1,5 +1,5 @@
 import React from 'react';
-import FindingList from "../components/FindingList";
+import FindingList from "../components/Finding/List";
 import {useSearchParams} from "react-router-dom";
 
 const Findings = () => {

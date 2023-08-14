@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../../shared/api'
 import {useParams} from "react-router-dom";
-import ProductFindingSummary from "../FindingSummary";
 import {
-    Box,
+    Box, Button,
     Container,
     Paper,
     Table,
@@ -11,19 +10,16 @@ import {
     TableCell,
     TableHead,
     TableRow,
-    Tabs,
     Typography
 } from "@mui/material";
-import LinkTab from "../../LinkTab";
-import Card from "@mui/material/Card";
 import NewSourcePopupComponent from "../../Source/Forms/New";
+import EditIcon from '@mui/icons-material/Edit';
 const ProductView= () => {
     const [loading, setLoading] = useState(false);
     const { id } = useParams();
+    const editURI = `${id}/edit`;
     const [product, setProduct] = useState({name:''});
-    const [findingSummary, setFSummary] = useState({critical:0,high:0,medium:0,low:0,informational:0});
     const [sources, setSources] = useState([]);
-
 
     useEffect(() => {
         setLoading(true);
@@ -33,12 +29,6 @@ const ProductView= () => {
             api.get(`/api/product/${id}`)
                 .then(data => {
                     setProduct(data);
-                });
-
-            // Get the product finding summary
-            api.get(`/api/product/${id}/findings/summary`)
-                .then(data => {
-                    setFSummary(data.data);
                 });
 
             // Get the product sources
@@ -54,34 +44,23 @@ const ProductView= () => {
 
 
     if (!loading) {
-        // Print debugging
-        console.log(findingSummary)
         console.log(sources)
     }
 
 
     return (
         <div>
-            <Paper>
-                <ProductFindingSummary
-                critical={findingSummary.critical}
-                high={findingSummary.high}
-                medium={findingSummary.medium}
-                low={findingSummary.low}
-                informational={findingSummary.informational}
-                />
-            </Paper>
-            <Card>
-                <Tabs value={0} centered aria-label="nav tabs">
-                    <LinkTab label="Overview" href={`${id}`} />
-                    <LinkTab label="Findings" href={`${id}/findings`} />
-                    <LinkTab label="Settings" href={`${id}/settings`} />
-                </Tabs>
-            </Card>
             <Container component={Paper} style={{marginTop: 10, marginBottom:10, padding:10}}>
-                <Typography variant="h4">
-                    {product.name}
-                </Typography>
+                <Box
+                    component="span"
+                    m={1}
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                >
+                    <Typography variant="h5">{product.name}</Typography>
+                    <Button variant="contained" color="secondary" startIcon={<EditIcon/>} href={editURI}>Edit</Button>
+                </Box>
                 <Paper>
                     <Table size="small">
                         <TableHead>

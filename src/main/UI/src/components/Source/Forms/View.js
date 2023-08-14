@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../../shared/api'
 import {useParams} from "react-router-dom";
+import ProductFindingSummary from "../../Product/FindingSummary";
 import {
     Container,
     Paper,
@@ -9,33 +10,68 @@ import {
     TableCell,
     TableHead,
     TableRow,
+    Tabs,
     Typography
 } from "@mui/material";
-import FindingList from "../../Finding/List";
-const ProductFindings= () => {
+import LinkTab from "../../LinkTab";
+import Card from "@mui/material/Card";
+const SourceView= () => {
     const [loading, setLoading] = useState(false);
     const { id } = useParams();
     const [product, setProduct] = useState({name:''});
+    const [findingSummary, setFSummary] = useState({critical:0,high:0,medium:0,low:0,informational:0});
+
 
     useEffect(() => {
         setLoading(true);
 
         if (id!==null) {
-            // Get the product
-            api.get(`/api/product/${id}`)
+            // Get the source
+            api.get(`/api/sources/${id}`)
                 .then(data => {
                     setProduct(data);
+                    setLoading(false)
+                });
+
+            // Get the product finding summary
+            api.get(`/api/product/${id}/findings/summary`)
+                .then(data => {
+                    setFSummary(data.data);
                 });
 
         }
 
+
     },[]);
 
+
+    if (!loading) {
+        // Print debugging
+        console.log(findingSummary)
+    }
+
+
     return (
-        <>
+        <div>
+            <Paper>
+                <ProductFindingSummary
+                critical={findingSummary.critical}
+                high={findingSummary.high}
+                medium={findingSummary.medium}
+                low={findingSummary.low}
+                informational={findingSummary.informational}
+                />
+            </Paper>
+            <Card>
+                <Tabs value={0} centered aria-label="nav tabs">
+                    <LinkTab label="Overview" href={`${id}`} />
+                    <LinkTab label="Findings" href={`${id}/findings`} />
+                    <LinkTab label="Settings" href={`${id}/settings`} />
+                </Tabs>
+            </Card>
             <Container component={Paper} style={{marginTop: 10, marginBottom:10, padding:10}}>
                 <Typography variant="h4">
-                    {loading ? "--" : product.name }
+                    {product.name}
                 </Typography>
                 <Paper>
                     <Table size="small">
@@ -63,16 +99,8 @@ const ProductFindings= () => {
                     </Table>
                 </Paper>
             </Container>
-            <Container component={Paper} style={{marginBottom:10, padding:10}} maxWidth="100vw">
-                <Typography variant="h5">
-                    Findings
-                </Typography>
-                <Paper>
-                    <FindingList/>
-                </Paper>
-            </Container>
-        </>
+        </div>
     );
 };
 
-export default ProductFindings;
+export default SourceView;

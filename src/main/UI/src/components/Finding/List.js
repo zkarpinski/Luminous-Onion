@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {DataGrid, GridToolbar} from '@mui/x-data-grid';
-import api from "../shared/api";
+import api from "../../shared/api";
 import {Paper} from "@mui/material";
 const FindingList = ({filters}) => {
 
@@ -41,7 +41,8 @@ const FindingList = ({filters}) => {
         { field: 'title', headerName: 'Title', width: 300 },
         { field: 'packageVersionFixed', headerName: 'Fixed Version', width: 100 },
         { field: 'age', headerName: 'Age', type: 'number', width: 90 },
-        { field: 'createTimestamp', headerName: 'Created', width: 150} //TODO: Change to readable datetime format
+        { field: 'createTimestamp', headerName: 'Created', width: 150}, //TODO: Change to readable datetime format
+        { field: 'id', headerName: 'ID'}
 
     ];
 

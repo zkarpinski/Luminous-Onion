@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../../shared/api'
 import {useParams} from "react-router-dom";
-import ProductFindingSummary from "../FindingSummary";
 import {
     Button,
     CardActions,
@@ -12,17 +11,13 @@ import {
     TableCell,
     TableHead,
     TableRow,
-    Tabs,
     Typography
 } from "@mui/material";
-import LinkTab from "../../LinkTab";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 const ProductSettings= () => {
-    const [loading, setLoading] = useState(false);
     const { id } = useParams();
     const [product, setProduct] = useState({name:''});
-    const [findingSummary, setFSummary] = useState({critical:0,high:0,medium:0,low:0,informational:0});
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -48,8 +43,6 @@ const ProductSettings= () => {
 
 
     useEffect(() => {
-        setLoading(true);
-
         if (id!==null) {
             // Get the product
             api.get(`/api/product/${id}`)
@@ -57,41 +50,13 @@ const ProductSettings= () => {
                     setProduct(data);
                 });
 
-            // Get the product finding summary
-            api.get(`/api/product/${id}/findings/summary`)
-                .then(data => {
-                    setFSummary(data.data);
-                    setLoading(false);
-                });
-
         }
 
 
     },[]);
 
-
-    if (loading) {
-        return "..."
-    }
-
     return (
         <>
-            <Paper>
-                <ProductFindingSummary
-                critical={findingSummary.critical}
-                high={findingSummary.high}
-                medium={findingSummary.medium}
-                low={findingSummary.low}
-                informational={findingSummary.informational}
-                />
-            </Paper>
-            <Card>
-                <Tabs value={2} centered aria-label="nav tabs">
-                    <LinkTab label="Overview" href={`../${id}`} />
-                    <LinkTab label="Findings" href={`../${id}/findings`} />
-                    <LinkTab label="Settings" href={`../${id}/settings`} />
-                </Tabs>
-            </Card>
             <Container component={Paper} style={{marginTop: 10, marginBottom:10, padding:10}}>
                 <Typography variant="h4">
                     {product.name}
