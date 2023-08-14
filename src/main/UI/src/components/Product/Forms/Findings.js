@@ -5,7 +5,6 @@ import ProductFindingSummary from "../FindingSummary";
 import {
     Container,
     Paper,
-    Skeleton,
     Table,
     TableBody,
     TableCell,
@@ -47,14 +46,13 @@ const ProductFindings= () => {
     return (
         <>
             <Paper>
-                {loading ? (<Skeleton> <ProductFindingSummary/> </Skeleton>) :
                 <ProductFindingSummary
                 critical={findingSummary.critical}
                 high={findingSummary.high}
                 medium={findingSummary.medium}
                 low={findingSummary.low}
                 informational={findingSummary.informational}
-                />}
+                />
             </Paper>
             <Card>
                 <Tabs value={1} centered aria-label="nav tabs">

@@ -1,6 +1,8 @@
 import {Box, Button, Grid, MenuItem, Modal, TextField, Typography} from "@mui/material";
 import React, {useEffect, useReducer} from "react";
 import api from "../../../shared/api";
+import {Add} from "@mui/icons-material";
+import { PropTypes } from "prop-types";
 
 const style = {
     width: 500,
@@ -21,7 +23,7 @@ const formReducer = (state,event) => {
     }
 }
 
-const NewSourcePopupComponent = () => {
+const NewSourcePopupComponent = (props) => {
     const [tempFormData, setFormData] = useReducer(formReducer, {
         label: '',
         productId: '',
@@ -39,6 +41,10 @@ const NewSourcePopupComponent = () => {
            .then((data) => setProducts(data));
         api.get("/api/resources/sourcetools")
             .then((data) => setSourceTools(data));
+
+        if (props.productID != null) {
+            setFormData({name:"productId", value:props.productID});
+        }
     },[]);
 
     const handleFileChange = (event) => {
@@ -72,9 +78,7 @@ const NewSourcePopupComponent = () => {
 
     return (
         <>
-        <Grid>
-            <Button onClick={handleOpen} variant="contained" color="secondary" size="medium">New Source</Button>
-        </Grid>
+            <Button onClick={handleOpen} variant="contained" color="primary" startIcon={<Add />}>New</Button>
         <Modal
             open={open}
             onClose={handleClose}
@@ -90,12 +94,12 @@ const NewSourcePopupComponent = () => {
                             <Grid container spacing={1}>
                                 <Grid item xs={12}>
                                     <TextField required label="Label" id ="label" name="label" placeholder="Enter label for new source" sx={{ width: '100%' }}
-                                               onChange={handleChange}>
+                                               onChange={handleChange} autoFocus>
                                     </TextField>
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField select required name="productId" label="Product" placeholder="Select Product" sx={{ width: '100%' }}
-                                    onChange={handleChange}>
+                                    onChange={handleChange} value={tempFormData.productId} disabled={props.productID != null}>
                                         {products.map((product) => (
                                             <MenuItem key={product.id} value={product.id}>
                                                 {product.name}
@@ -105,7 +109,7 @@ const NewSourcePopupComponent = () => {
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField select required name="sourceTool" label="Source Type" placeholder="Select Source Type"
-                                               sx={{ width: '100%' }} onChange={handleChange}>
+                                               sx={{ width: '100%' }} value={tempFormData.sourceTool} onChange={handleChange}>
                                         {sourceTools.map((tool) => (
                                             <MenuItem key={tool.value} value={tool.value}>
                                                 {tool.label}
@@ -138,6 +142,10 @@ const NewSourcePopupComponent = () => {
         </Modal>
         </>
     );
+};
+
+NewSourcePopupComponent.propTypes = {
+    productID:PropTypes.string
 };
 
 export default NewSourcePopupComponent;

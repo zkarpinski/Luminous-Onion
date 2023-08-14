@@ -1,4 +1,4 @@
-import {Box, Button, FormGroup, FormLabel, Grid, Modal, TextField, Typography} from "@mui/material";
+import {Box, Button, Grid, Modal, TextField, Typography} from "@mui/material";
 import React, {useReducer} from "react";
 import api from "../../../shared/api";
 
@@ -64,10 +64,9 @@ const ProductNew = () => {
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                    Create new product
                 </Typography>
-                    <div>
                         <form onSubmit={handleSubmit}>
-                            <FormLabel>Enter details for new product below</FormLabel>
-                            <FormGroup sx ={{padding:2}}>
+                            <Grid container spacing={1}>
+                                <Grid item xs={12}>
                                 <TextField
                                     required
                                     id="name"
@@ -75,27 +74,39 @@ const ProductNew = () => {
                                     label="Product Name"
                                     helperText="Enter product name"
                                     autoComplete="off"
+                                    autoFocus
                                     value={formData.name}
                                     onChange={handleChange}
+                                    fullWidth
                                 />
+                                </Grid>
+                                <Grid item xs={12}>
                                 <TextField
                                     id="productOwner"
                                     name="productOwner"
                                     label="Product Owner"
+                                    autoComplete="off"
                                     value={formData.productOwner}
                                     onChange={handleChange}
+                                    fullWidth
                                 />
+                                </Grid>
+                                    <Grid item xs={12}>
                                 <TextField
                                     id="productTeam"
                                     name="productTeam"
                                     label="Product Team"
+                                    autoComplete="off"
                                     value={formData.productTeam}
                                     onChange={handleChange}
+                                    fullWidth
                                 />
+                                    </Grid>
+                                <Grid item xs={12}>
                                 <Button type="submit">Create</Button>
-                            </FormGroup>
+                                </Grid>
+                            </Grid>
                         </form>
-                    </div>
             </Box>
         </Modal>
         </>

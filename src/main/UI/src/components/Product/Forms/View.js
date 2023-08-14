@@ -2,9 +2,21 @@ import React, { useEffect, useState } from 'react';
 import api from '../../../shared/api'
 import {useParams} from "react-router-dom";
 import ProductFindingSummary from "../FindingSummary";
-import {Container, Paper, Table, TableBody, TableCell, TableHead, TableRow, Tabs, Typography} from "@mui/material";
+import {
+    Box,
+    Container,
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow,
+    Tabs,
+    Typography
+} from "@mui/material";
 import LinkTab from "../../LinkTab";
 import Card from "@mui/material/Card";
+import NewSourcePopupComponent from "../../Source/Forms/New";
 const ProductView= () => {
     const [loading, setLoading] = useState(false);
     const { id } = useParams();
@@ -97,11 +109,24 @@ const ProductView= () => {
                 </Paper>
             </Container>
             <Container component={Paper} style={{marginBottom:10, padding:10}}>
-                <Typography variant="h5">
-                    Sources
-                </Typography>
+                <Box
+                    component="span"
+                    m={1}
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                >
+                    <Typography variant="h5">Sources</Typography>
+                    <NewSourcePopupComponent productID={id}/>
+                </Box>
                 <Paper>
                     <Table size="small">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>ID</TableCell>
+                                <TableCell>Tool</TableCell>
+                            </TableRow>
+                        </TableHead>
                         <TableBody>
                             {sources.map((row) => (
                                 <TableRow
