@@ -12,6 +12,7 @@ import {
     Typography
 } from "@mui/material";
 import FindingList from "../../Finding/List";
+import FindingRightDrawerView from "../../Finding/RightDrawerView";
 const ProductFindings= () => {
     const [loading, setLoading] = useState(false);
     const { id } = useParams();
@@ -25,6 +26,7 @@ const ProductFindings= () => {
             api.get(`/api/product/${id}`)
                 .then(data => {
                     setProduct(data);
+                    setLoading(false);
                 });
 
         }
@@ -33,6 +35,7 @@ const ProductFindings= () => {
 
     return (
         <>
+            <FindingRightDrawerView opened={false}/>
             <Container component={Paper} style={{marginTop: 10, marginBottom:10, padding:10}}>
                 <Typography variant="h4">
                     {loading ? "--" : product.name }

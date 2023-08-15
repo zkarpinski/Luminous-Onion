@@ -17,8 +17,8 @@ const xLabels = [
 export default function StackedAreaChart() {
     return (
         <LineChart
-            width={1200}
-            height={500}
+            width="800"
+            height="300"
             series={[
                 { data: uData, label: 'Low', area: true, stack: 'total', color: '#BBBBBB' },
                 { data: pData, label: 'Medium', area: true, stack: 'total', color: '#FFBF00' },
@@ -36,6 +36,7 @@ export default function StackedAreaChart() {
                 '.MuiLineElement-root, .MuiMarkElement-root': {
                     display: 'none',
                 },
+                maxHeight:"400px"
             }}
         />
     );

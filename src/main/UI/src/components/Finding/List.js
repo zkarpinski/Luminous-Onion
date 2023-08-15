@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {DataGrid, GridToolbar} from '@mui/x-data-grid';
 import api from "../../shared/api";
 import {Paper} from "@mui/material";
+import {Link} from "react-router-dom";
 const FindingList = ({filters}) => {
 
     const [findings, setFindings] = useState([]);
@@ -25,8 +26,12 @@ const FindingList = ({filters}) => {
 
     const columns= [
         { field: 'product', headerName: 'Product', width: 150,
-            valueGetter: (params) => params.row?.source?.product?.name
+            valueGetter: (params) => params.row?.source?.product?.name,
         },
+        { field: 'title', headerName: 'Title', width: 350,
+            renderCell: (params) => (<Link to={`${params.id}`}>{params.value}</Link>)
+        },
+        { field: 'status', headerName: 'Status'},
         { field: 'tool', headerName: 'Tool', width: 125,
             valueGetter: (params) => params.row?.source?.tool
         },
@@ -38,7 +43,7 @@ const FindingList = ({filters}) => {
             valueGetter: (params) =>
                 `${params.row.packageName || ''}:${params.row.packageVersionFound || ''}`,
         },
-        { field: 'title', headerName: 'Title', width: 300 },
+
         { field: 'packageVersionFixed', headerName: 'Fixed Version', width: 100 },
         { field: 'age', headerName: 'Age', type: 'number', width: 90 },
         { field: 'createTimestamp', headerName: 'Created', width: 150}, //TODO: Change to readable datetime format

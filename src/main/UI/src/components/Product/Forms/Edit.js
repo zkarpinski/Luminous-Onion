@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import {useParams} from "react-router-dom";
-const ProductEdit= () => {
+const ProductEdit = () => {
     const { id } = useParams();
 
     // TODO: Add Product Edit feature

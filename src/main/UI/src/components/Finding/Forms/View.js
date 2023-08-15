@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import api from '../../../shared/api'
 import {useParams} from "react-router-dom";
 import {
@@ -7,21 +7,23 @@ import {
     Typography
 } from "@mui/material";
 
-const FindingView= () => {
+const FindingView = () => {
     const { id } = useParams();
-    const [finding, setFinding] = useState({name:'', id:'',description:'',packagePath:'', source:{id:'',product:{name:''}}});
-
+    const [finding, setFinding] = React.useState({name:'', id:'',description:'',packagePath:'', status:'', source:{id:'',product:{name:''}}});
+    const [statuses, setStatuses] = React.useState([]);
 
     useEffect(() => {
 
         if (id!==null) {
-            // Get the source
+            // Get the finding
             api.get(`/api/findings/${id}`)
                 .then(resp => {
                     setFinding(resp.data);
                 });
 
-
+            api.get("/api/resources/findingstatuses")
+                .then((data) => setStatuses(data))
+                .then(console.log(statuses));
         }
 
 

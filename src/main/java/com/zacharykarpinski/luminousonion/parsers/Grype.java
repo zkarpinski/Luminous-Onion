@@ -94,6 +94,11 @@ public class Grype implements Parser {
         public String severity;
         public String primaryUrl;
 
+        // Custom calculations
+        public String getTitle() {
+            return "%s:%s | %s".formatted(packageName, packageVersionFound, findingIdentifier);
+        }
+
         // Unpack vulnerability nested node
         @JsonProperty("vulnerability")
         private void unpackVulnerabilityObject(JsonNode vul) {

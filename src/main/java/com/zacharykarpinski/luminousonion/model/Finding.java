@@ -1,5 +1,6 @@
 package com.zacharykarpinski.luminousonion.model;
 
+import com.zacharykarpinski.luminousonion.model.status.FindingStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class Finding {
     private String title;
     @Column(nullable = true, length = 1024)
     private String description;
+    private FindingStatus status = FindingStatus.NEW;
 
     // Package Data Members
     private String packageName;
@@ -33,6 +35,9 @@ public class Finding {
     private String findingIdentifier;
     private String severity;
     private String primaryUrl;
+
+    //
+    // TODO: Added duplicate of field
 
     // Date and times
     @CreationTimestamp
