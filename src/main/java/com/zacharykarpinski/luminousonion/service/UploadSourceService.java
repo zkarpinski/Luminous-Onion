@@ -2,7 +2,7 @@ package com.zacharykarpinski.luminousonion.service;
 
 import com.zacharykarpinski.luminousonion.model.Product;
 import com.zacharykarpinski.luminousonion.model.Source;
-import com.zacharykarpinski.luminousonion.model.SourceTool;
+import com.zacharykarpinski.luminousonion.model.shared.SourceTool;
 import com.zacharykarpinski.luminousonion.parsers.*;
 import com.zacharykarpinski.luminousonion.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;

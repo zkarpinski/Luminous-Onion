@@ -1,4 +1,4 @@
-package com.zacharykarpinski.luminousonion.model.status;
+package com.zacharykarpinski.luminousonion.model.shared;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

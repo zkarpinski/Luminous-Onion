@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zacharykarpinski.luminousonion.model.Finding;
 import com.zacharykarpinski.luminousonion.model.Source;
-import com.zacharykarpinski.luminousonion.model.SourceTool;
+import com.zacharykarpinski.luminousonion.model.shared.SourceTool;
 import com.zacharykarpinski.luminousonion.model.external.trivy.Vulnerability;
 import org.springframework.web.multipart.MultipartFile;
 

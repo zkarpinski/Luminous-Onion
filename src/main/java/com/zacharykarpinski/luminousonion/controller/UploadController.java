@@ -1,7 +1,7 @@
 package com.zacharykarpinski.luminousonion.controller;
 
 import com.zacharykarpinski.luminousonion.model.Source;
-import com.zacharykarpinski.luminousonion.model.SourceTool;
+import com.zacharykarpinski.luminousonion.model.shared.SourceTool;
 import com.zacharykarpinski.luminousonion.response.ResponseHandler;
 import com.zacharykarpinski.luminousonion.service.UploadSourceService;
 import org.springframework.http.HttpStatus;

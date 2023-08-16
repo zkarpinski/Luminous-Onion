@@ -6,9 +6,12 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zacharykarpinski.luminousonion.model.Finding;
-import com.zacharykarpinski.luminousonion.model.FindingSeverity;
+import com.zacharykarpinski.luminousonion.model.shared.FindingSeverity;
 import com.zacharykarpinski.luminousonion.model.Source;
-import com.zacharykarpinski.luminousonion.model.SourceTool;
+import com.zacharykarpinski.luminousonion.model.shared.FindingType;
+import com.zacharykarpinski.luminousonion.model.shared.SourceTool;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -93,6 +96,8 @@ public class Grype implements Parser {
 
         public String findingIdentifier;
         public FindingSeverity severity;
+        @Enumerated(EnumType.STRING)
+        public FindingType findingType;
         public String originalSeverity;
         public String primaryUrl;
 
@@ -125,10 +130,23 @@ public class Grype implements Parser {
         // Unpack artifact nested node
         @JsonProperty("artifact")
         private void unpackArtifactObject(JsonNode node) {
-            packagePath = node.path("metadata").path("virtualPath").asText();
             packageName = node.get("name").asText();
             packageVersionFound = node.get("version").asText();
             purl = node.get("purl").asText();
+
+            // Map artifact.type to findingType
+            String artifactType = node.path("type").asText();
+            findingType = switch (artifactType) {
+                case ("java-archive") -> FindingType.PACKAGES;
+                case ("deb") -> FindingType.OS;
+                case ("binary") -> FindingType.BINARY;
+                default -> FindingType.OTHER;
+            };
+
+            // When java-archive or other packages, use virtualPath else location.path
+            packagePath = findingType == FindingType.PACKAGES ?
+                    node.path("metadata").path("virtualPath").asText() :
+                    node.path("locations").path(0).path("path").asText();
 
         }
     }

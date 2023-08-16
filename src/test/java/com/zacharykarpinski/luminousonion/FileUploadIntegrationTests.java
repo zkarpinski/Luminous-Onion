@@ -1,7 +1,7 @@
 package com.zacharykarpinski.luminousonion;
 
 import com.zacharykarpinski.luminousonion.controller.UploadController;
-import com.zacharykarpinski.luminousonion.model.SourceTool;
+import com.zacharykarpinski.luminousonion.model.shared.SourceTool;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Disabled
 @SpringBootTest
 @AutoConfigureMockMvc
-public class FileUploadIntegrationTests {
+class FileUploadIntegrationTests {
 
     @Autowired
     MockMvc mockMvc;
@@ -32,7 +32,7 @@ public class FileUploadIntegrationTests {
     UploadController uploadController;
 
     @Test
-    public void givenTrivyFile_whenUploaded_thenParseFile() throws Exception {
+    void givenTrivyFile_whenUploaded_thenParseFile() throws Exception {
        File testFile = new File(Thread.currentThread().getContextClassLoader().getResource("sample-files/trivy-v2.json").toURI());
         FileInputStream fis = new FileInputStream(testFile);
         MockMultipartFile multipartFile = new MockMultipartFile("file",fis);
@@ -53,7 +53,7 @@ public class FileUploadIntegrationTests {
 
 
     @Test
-    public void givenGrypeFile_whenUploaded_thenParseFile() throws Exception {
+    void givenGrypeFile_whenUploaded_thenParseFile() throws Exception {
         File testFile = new File(Thread.currentThread().getContextClassLoader().getResource("sample-files/grype-v0.json").toURI());
         FileInputStream fis = new FileInputStream(testFile);
         MockMultipartFile multipartFile = new MockMultipartFile("file",fis);

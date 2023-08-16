@@ -1,8 +1,9 @@
 package com.zacharykarpinski.luminousonion.model;
 
-import com.zacharykarpinski.luminousonion.model.status.FindingStatus;
+import com.zacharykarpinski.luminousonion.model.shared.FindingSeverity;
+import com.zacharykarpinski.luminousonion.model.shared.FindingStatus;
+import com.zacharykarpinski.luminousonion.model.shared.FindingType;
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -11,7 +12,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.util.Date;
 
 @Entity
-@Data
 @Getter
 @Setter
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -22,6 +22,7 @@ public class Finding {
     private String title;
     @Column(nullable = true, length = 1024)
     private String description;
+    @Enumerated(EnumType.STRING)
     private FindingStatus status = FindingStatus.NEW;
 
     // Package Data Members
@@ -35,6 +36,8 @@ public class Finding {
     private String findingIdentifier;
     @Enumerated(EnumType.STRING)
     private FindingSeverity severity;
+    @Enumerated(EnumType.STRING)
+    private FindingType findingType;
     private String primaryUrl;
 
     // Record keeping
@@ -49,18 +52,11 @@ public class Finding {
     @UpdateTimestamp
     private Date lastUpdateTimestamp;
 
-    private FindingTypes findingType;
 
     @ManyToOne
     @JoinColumn(name="sourceId")
     private Source source;
 
-    private enum FindingTypes{
-        OTHER,
-        OS,
-        PACKAGES,
-        SNIPPET
-    }
 
     public void setDescription(String s) {
         int maxSize = 1024;

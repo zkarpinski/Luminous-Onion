@@ -1,7 +1,7 @@
 package com.zacharykarpinski.luminousonion.controller;
 
-import com.zacharykarpinski.luminousonion.model.SourceTool;
-import com.zacharykarpinski.luminousonion.model.status.FindingStatus;
+import com.zacharykarpinski.luminousonion.model.shared.SourceTool;
+import com.zacharykarpinski.luminousonion.model.shared.FindingStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
