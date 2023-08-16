@@ -3,7 +3,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import api from '../../shared/api'
 import {Link} from "react-router-dom";
 import {Paper, Typography} from "@mui/material";
-import {headerHeight, outputDateFormat} from "../..//shared/constants";
+import {headerHeight, outputDateFormat} from "../../shared/constants";
 import dayjs from "dayjs";
 const ProductList = () => {
 

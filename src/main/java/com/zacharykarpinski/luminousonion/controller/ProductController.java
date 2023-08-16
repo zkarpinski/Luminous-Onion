@@ -68,7 +68,12 @@ public class ProductController {
     @GetMapping("/{id}/findings/summary")
     public ResponseEntity<Object> getFindingSummary(@PathVariable Long id) {
         List<List<Object>> summary = productRepository.getProductFindingsCountSummary(id);
-        Map<String, Integer> map = summary.stream().collect(toMap(i -> i.get(0).toString(), i -> (int) i.get(1) ));
+        Map<String, Integer> map = summary.stream().collect(toMap(i ->
+                { if (i.get(0) == null) {
+                    return "UNKNOWN";
+                }
+                return i.get(0).toString();
+        }, i -> (int) i.get(1) ));
         return ResponseHandler.createResponse("Ok",HttpStatus.OK,map);
     }
 

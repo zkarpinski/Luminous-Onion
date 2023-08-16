@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import NewSourcePopupComponent from "../../Source/Forms/New";
 import EditIcon from '@mui/icons-material/Edit';
+import FindingSummarySmall from "../../Finding/FindingSummarySmall";
 const ProductView= () => {
     const [loading, setLoading] = useState(false);
     const { id } = useParams();
@@ -99,11 +100,13 @@ const ProductView= () => {
                     <NewSourcePopupComponent productID={id}/>
                 </Box>
                 <Paper>
-                    <Table size="small">
+                    <Table size="small" stickyHeader>
                         <TableHead>
                             <TableRow>
                                 <TableCell>ID</TableCell>
                                 <TableCell>Tool</TableCell>
+                                <TableCell align="center" width={200}>Findings</TableCell>
+                                <TableCell>Date</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -116,6 +119,7 @@ const ProductView= () => {
                                         {row.id}
                                     </TableCell>
                                     <TableCell>{row.tool}</TableCell>
+                                    <TableCell><FindingSummarySmall critical={10}/></TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>

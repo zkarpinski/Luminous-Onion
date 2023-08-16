@@ -30,6 +30,7 @@ public class Trivy implements Parser {
 
                 Set<Finding> findingList = new HashSet<>();
                 trvy.results.forEach(r -> r.Vulnerabilities.forEach(v -> {
+                    v.setSeverity(v.getOriginalSeverity());
                     findingList.add((Finding) v);
                 }));
 
