@@ -14,7 +14,7 @@ import ProductSettings from "./Settings";
 const ProductBase= ({children: content}) => {
     const {id} = useParams();
     const [product, setProduct] = useState({name: ''});
-    const [findingSummary, setFSummary] = useState({critical: 0, high: 0, medium: 0, low: 0, informational: 0});
+    const [findingSummary, setFSummary] = useState({CRITICAL: 0, HIGH: 0, MEDIUM: 0, LOW: 0, INFORMATIONAL: 0});
     const [barValue, setBarValue] = useState(0);
 
     useEffect(() => {
@@ -61,11 +61,11 @@ const ProductBase= ({children: content}) => {
         <div>
             <Paper>
                 <ProductFindingSummary
-                    critical={findingSummary.critical}
-                    high={findingSummary.high}
-                    medium={findingSummary.medium}
-                    low={findingSummary.low}
-                    informational={findingSummary.informational}
+                    critical={findingSummary.CRITICAL}
+                    high={findingSummary.HIGH}
+                    medium={findingSummary.MEDIUM}
+                    low={findingSummary.LOW}
+                    informational={findingSummary.INFORMATIONAL}
                 />
             </Paper>
             <Card>

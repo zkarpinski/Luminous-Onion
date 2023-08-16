@@ -3,6 +3,8 @@ import {DataGrid, GridToolbar} from '@mui/x-data-grid';
 import api from "../../shared/api";
 import {Paper} from "@mui/material";
 import {Link} from "react-router-dom";
+import dayjs from "dayjs";
+import {outputDateFormat} from "../../shared/constants";
 const FindingList = ({filters}) => {
 
     const [findings, setFindings] = useState([]);
@@ -46,7 +48,8 @@ const FindingList = ({filters}) => {
 
         { field: 'packageVersionFixed', headerName: 'Fixed Version', width: 100 },
         { field: 'age', headerName: 'Age', type: 'number', width: 90 },
-        { field: 'createTimestamp', headerName: 'Created', width: 150}, //TODO: Change to readable datetime format
+        { field: 'createTimestamp', headerName: 'Created', width: 100,
+            valueFormatter: (params) => dayjs(params?.value).format(outputDateFormat)},
         { field: 'id', headerName: 'ID'}
 
     ];
@@ -63,6 +66,7 @@ const FindingList = ({filters}) => {
             </div>
             <Paper>
                 <DataGrid
+                    loading={loading}
                     density="compact"
                     rows={findings}
                     columns={columns}

@@ -14,6 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+
+import static java.util.stream.Collectors.toMap;
 
 @RestController
 @RequestMapping("/api/product")
@@ -55,10 +58,18 @@ public class ProductController {
     }
 
     @CrossOrigin
+    @GetMapping("/{id}/findings/summaryold")
+    public ResponseEntity<Object> getFindingSummaryOld(@PathVariable Long id) {
+        ProductFindingsSummaryDTO summary = productRepository.getProductFindingsCountSummaryOld(id);
+        return ResponseHandler.createResponse("Ok",HttpStatus.OK,summary);
+    }
+
+    @CrossOrigin
     @GetMapping("/{id}/findings/summary")
     public ResponseEntity<Object> getFindingSummary(@PathVariable Long id) {
-        ProductFindingsSummaryDTO summary = productRepository.getProductFindingsCountSummary(id);
-        return ResponseHandler.createResponse("Ok",HttpStatus.OK,summary);
+        List<List<Object>> summary = productRepository.getProductFindingsCountSummary(id);
+        Map<String, Integer> map = summary.stream().collect(toMap(i -> i.get(0).toString(), i -> (int) i.get(1) ));
+        return ResponseHandler.createResponse("Ok",HttpStatus.OK,map);
     }
 
     @CrossOrigin

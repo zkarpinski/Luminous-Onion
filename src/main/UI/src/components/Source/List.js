@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import api from "../shared/api";
-import {Button, Paper} from "@mui/material";
+import { Button, Paper } from "@mui/material";
+import api from "../../shared/api";
+import { headerHeight, outputDateFormat } from "../../shared/constants";
+import dayjs from "dayjs";
 const SourceList = () => {
 
     const [sources, setSources] = useState([]);
     const [sourcesCount, setSourcesCount] = useState(0);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
 
@@ -15,6 +18,7 @@ const SourceList = () => {
             .then(data => {
                 setSources(data);
                 setSourcesCount(data.length)
+                setLoading(false);
             })
     },[]);
 
@@ -31,7 +35,8 @@ const SourceList = () => {
         { field: 'toolVersion', headerName: 'Version', width: 160},
         { field: 'target', headerName: 'Target', width: 300 },
         { field: 'targetType', headerName: 'Target Type', width: 100 },
-        { field: 'createTimestamp', headerName: 'Created', width: 150}, //TODO: Change to readable datetime format
+        { field: 'createTimestamp', headerName: 'Created', width: 100,
+            valueFormatter: (params) => dayjs(params?.value).format(outputDateFormat)},
         { field: 'actions', headerName: 'Actions', width: 400, renderCell: (params) => {
                 return (
                     <Button
@@ -50,8 +55,9 @@ const SourceList = () => {
             <div>
                 <h1>{sourcesCount} Sources</h1>
             </div>
-            <Paper>
+            <Paper style={{'height':`calc(100% - ${headerHeight}px - 50px)`}}>
                 <DataGrid
+                    loading={loading}
                     density="compact"
                     rows={sources}
                     columns={columns}

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zacharykarpinski.luminousonion.model.Finding;
+import com.zacharykarpinski.luminousonion.model.FindingSeverity;
 import com.zacharykarpinski.luminousonion.model.Source;
 import com.zacharykarpinski.luminousonion.model.SourceTool;
 import org.springframework.web.multipart.MultipartFile;
@@ -91,19 +92,31 @@ public class Grype implements Parser {
         public String purl;
 
         public String findingIdentifier;
-        public String severity;
+        public FindingSeverity severity;
+        public String originalSeverity;
         public String primaryUrl;
 
         // Custom calculations
         public String getTitle() {
             return "%s:%s | %s".formatted(packageName, packageVersionFound, findingIdentifier);
         }
+        public void setSeverity(String severity) {
+            this.originalSeverity = severity;
+            this.severity = switch (severity.toUpperCase()) {
+                case ("CRITICAL") -> FindingSeverity.CRITICAL;
+                case ("HIGH") -> FindingSeverity.HIGH;
+                case ("MEDIUM") -> FindingSeverity.MEDIUM;
+                case ("LOW") -> FindingSeverity.LOW;
+                case ("NEGLIGIBLE") -> FindingSeverity.INFORMATIONAL;
+                default -> FindingSeverity.INFORMATIONAL;
+            };
+        }
 
         // Unpack vulnerability nested node
         @JsonProperty("vulnerability")
         private void unpackVulnerabilityObject(JsonNode vul) {
             findingIdentifier = vul.get("id").asText();
-            severity = vul.get("severity").asText();
+            this.setSeverity(vul.get("severity").asText());
             description = vul.path("description").asText();
             primaryUrl = vul.path("dataSource").asText();
             packageVersionFixed = vul.path("fix").path("versions").path(0).asText();

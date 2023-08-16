@@ -15,10 +15,13 @@ const api = (method,headers, url, params) =>
             params: method === 'get' ? params: null,
             headers: headers
         })
-            .catch(console.log)
             .then(response => response.json())
             .then(data => {
                 resolve(data)
+            })
+            .catch((error) => {
+                console.error(error);
+                reject(error);
             })
     });
 

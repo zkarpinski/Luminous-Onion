@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import api from '../../shared/api'
 import {Link} from "react-router-dom";
-import {Paper} from "@mui/material";
+import {Paper, Typography} from "@mui/material";
+import {headerHeight, outputDateFormat} from "../..//shared/constants";
+import dayjs from "dayjs";
 const ProductList = () => {
 
     const [products, setProducts] = useState([]);
@@ -17,7 +19,11 @@ const ProductList = () => {
             .then(data => {
                 setProducts(data);
                 setProductCount(data.length);
-                setLoading(false)
+            })
+            .catch(error => {
+                console.log(error);
+            }).finally(() => {
+                setLoading(false);
             });
 
     },[]);
@@ -32,22 +38,20 @@ const ProductList = () => {
         { field: 'name', headerName: 'Product Name', width: 160},
         { field: 'productOwner', headerName: 'Product Owner', width: 300 },
         { field: 'productTeam', headerName: 'Product Team', width: 100 },
-        { field: 'createTimestamp', headerName: 'Created', width: 150} //TODO: Change to readable datetime format
+        { field: 'createTimestamp', headerName: 'Created', width: 100,
+            valueFormatter: (params) => dayjs(params?.value).format(outputDateFormat)}
 
     ];
 
 
-    if (loading) {
-        return <p>...</p>;
-    }
-
     return (
         <>
-        <div>
-            <h1>{productCount} Products</h1>
-        </div>
-        <Paper>
+        <Typography variant="h4" component="div" gutterBottom>
+            {productCount} Products
+        </Typography>
+        <Paper style={{'height':`calc(100% - ${headerHeight}px - 50px)`}}>
             <DataGrid
+                loading={loading}
                 density="compact"
                 rows={products}
                 columns={columns}

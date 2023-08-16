@@ -33,8 +33,12 @@ public class Finding {
 
     // Vulnerability Details
     private String findingIdentifier;
-    private String severity;
+    @Enumerated(EnumType.STRING)
+    private FindingSeverity severity;
     private String primaryUrl;
+
+    // Record keeping
+    private String originalSeverity;
 
     //
     // TODO: Added duplicate of field

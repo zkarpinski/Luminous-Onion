@@ -1,7 +1,7 @@
 import SideNavBar from "../sections/SideNavbar";
 import Header from "../sections/Header";
 import React from "react";
-import { styled, useTheme } from "@mui/material";
+import {Container, styled, useTheme} from "@mui/material";
 import { headerHeight, sideNavBarWidth } from "../shared/constants";
 
 
@@ -11,7 +11,7 @@ const Main = styled('main')(({ theme }) => ({
     marginTop: `${headerHeight}px`,
     marginLeft: `${sideNavBarWidth}px`,
     backgroundColor: theme.palette.background.default,
-    padding: '15px',
+    padding: '15px 0px 15px 0px',
     flexGrow:1
 }));
 
@@ -32,7 +32,11 @@ const Layout = ({children: content}) => {
         <RootContainer>
             <Header/>
             <SideNavBar/>
-            <Main theme ={theme} >{content}</Main>
+            <Main theme = {theme}>
+                <Container style={{"height":"100%"}} maxWidth={false}>
+                    {content}
+                </Container>
+            </Main>
         </RootContainer>
     )
 }

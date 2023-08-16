@@ -10,20 +10,22 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/api/resources")
 public class ResourcesController {
+    static final String MAPPING_LABEL_TEXT = "label";
+    static final String MAPPING_VALUE_TEXT = "value";
 
     @GetMapping("/sourcetools")
     public ResponseEntity<List<Map<String,String>>> getSourceTools() {
 
         // Convert SourceTool enum to a list of Map<Label, Value> or Map<ToString(),Name>
         List<Map<String,String>> sourceToolsMap = Stream.of(SourceTool.values())
-                .map(source -> Map.of("label", source.toString(), "value", source.name()))
-                .sorted(Comparator.comparing(m -> m.get("label"))) //Sort by human-readable label
+                .map(source -> Map.of(MAPPING_LABEL_TEXT, source.toString(),
+                        MAPPING_VALUE_TEXT, source.name()))
+                .sorted(Comparator.comparing(m -> m.get(MAPPING_LABEL_TEXT))) //Sort by human-readable label
                 .toList();
 
         return ResponseEntity.ok(sourceToolsMap);
@@ -34,8 +36,9 @@ public class ResourcesController {
 
         // Convert SourceTool enum to a list of Map<Label, Value> or Map<ToString(),Name>
         List<Map<String,String>> statusMap = Stream.of(FindingStatus.values())
-                .map(status -> Map.of("label", status.toString(), "value", status.name()))
-                .sorted(Comparator.comparing(m -> m.get("label"))) //Sort by human-readable label
+                .map(status -> Map.of(MAPPING_LABEL_TEXT, status.toString(),
+                        MAPPING_VALUE_TEXT, status.name()))
+                .sorted(Comparator.comparing(m -> m.get(MAPPING_LABEL_TEXT))) //Sort by human-readable label
                 .toList();
 
         return ResponseEntity.ok(statusMap);
