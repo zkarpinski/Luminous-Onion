@@ -22,6 +22,7 @@ public class Finding {
     private String title;
     @Column(nullable = true, length = 1024)
     private String description;
+    private String shortDescription;
     @Enumerated(EnumType.STRING)
     private FindingStatus status = FindingStatus.NEW;
 
