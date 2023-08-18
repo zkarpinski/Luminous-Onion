@@ -12,29 +12,20 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Data
 @Getter
 @Setter
-public class Product {
+public class Organization {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    UUID uuid; // TODO make this the primary ID
     private String name;
-    private String productOwner;
-    private String productTeam;
 
-
-    // External Identifiers
-    private String jiraProjectKey;
-    private String pegaProductId;
-    private String externalIdentifierExtra1;
-    private String externalIdentifierExtra2;
-
-    @ManyToOne
-    @JoinColumn(name="orgId")
-    private Organization org;
 
     // Date and times
     @CreationTimestamp
@@ -43,20 +34,28 @@ public class Product {
     private Date lastUpdateTimestamp;
 
     @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Source> sources;
+    @OneToMany(mappedBy = "org", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Product> products;
 
     @JsonIgnore
-    public Set<Source> getSources() {
-        return this.sources;
+    public Set<Product> getProducts() {
+        return this.products;
     }
 
-    public void addSource(Source source) {
-        if (sources == null) {
-            this.sources = new HashSet<>();
+    public void addSource(Product product) {
+        if (products == null) {
+            this.products = new HashSet<>();
         }
-        source.setProduct(this);
-        this.sources.add(source);
+        product.setOrg(this);
+        this.products.add(product);
+    }
+
+
+    // Constructors
+    public Organization() {}
+
+    public Organization(int id) {
+        this.id=id;
     }
 
 }

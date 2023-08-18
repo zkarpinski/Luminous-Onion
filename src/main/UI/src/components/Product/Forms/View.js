@@ -107,6 +107,7 @@ const ProductView= () => {
                                 <TableCell>Tool</TableCell>
                                 <TableCell align="center" width={200}>Findings</TableCell>
                                 <TableCell>Date</TableCell>
+                                <TableCell>Archived?</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -119,7 +120,9 @@ const ProductView= () => {
                                         {row.id}
                                     </TableCell>
                                     <TableCell>{row.tool}</TableCell>
-                                    <TableCell><FindingSummarySmall critical={10}/></TableCell>
+                                    <TableCell><FindingSummarySmall critical={10} disabled={row.archived}/></TableCell>
+                                    <TableCell>asb</TableCell>
+                                    <TableCell>{row.archived.toString()}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>

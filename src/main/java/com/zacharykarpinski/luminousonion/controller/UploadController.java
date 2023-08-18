@@ -26,9 +26,10 @@ public class UploadController {
     public ResponseEntity<Object> uploadFile(
             @RequestParam("file")MultipartFile mpf,
             @RequestParam("productId") Long productId,
-            @RequestParam("sourceTool")SourceTool sourceTool) {
+            @RequestParam("sourceTool")SourceTool sourceTool,
+            @RequestParam(value = "archivePrevious", defaultValue = "false") boolean archivePrevious) {
         try {
-            Source newSource = uploadSourceService.uploadFileAndParse(mpf,sourceTool, productId);
+            Source newSource = uploadSourceService.uploadFileAndParse(mpf,sourceTool, productId, archivePrevious);
             if (newSource != null)
                 return ResponseHandler.createResponse("New source created!", HttpStatus.CREATED, newSource);
             return ResponseHandler.createResponse("Unknown error.", HttpStatus.INTERNAL_SERVER_ERROR, null);

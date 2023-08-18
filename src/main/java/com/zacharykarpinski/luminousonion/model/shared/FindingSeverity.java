@@ -8,5 +8,6 @@ public enum FindingSeverity {
     HIGH,
     MEDIUM,
     LOW,
-    INFORMATIONAL;
+    INFORMATIONAL,
+    UNKNOWN;
 }

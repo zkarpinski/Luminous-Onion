@@ -36,7 +36,7 @@ public class Finding {
     // Vulnerability Details
     private String findingIdentifier;
     @Enumerated(EnumType.STRING)
-    private FindingSeverity severity;
+    private FindingSeverity severity = FindingSeverity.UNKNOWN;
     @Enumerated(EnumType.STRING)
     private FindingType findingType;
     private String primaryUrl;

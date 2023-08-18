@@ -8,7 +8,8 @@ interface FindingSummarySmallProps {
     high:number,
     medium:number,
     low:number,
-    informational:number;
+    informational:number,
+    disabled?:boolean;
 }
 
 const Tile2 = (props) => {
@@ -62,7 +63,7 @@ const Tile2 = (props) => {
     }
 
     // Override the colors if disabled
-    if (disabled) { bgColor = "#000"; }
+    if (disabled) { bgColor = FindingSeverity.Low.color.light; abbrColor=FindingSeverity.Low.color.base; }
 
     console.log(title);
     return (
@@ -80,16 +81,16 @@ const Tile2 = (props) => {
     )
 };
 
-const FindingSummarySmall = ({critical= 0,high=0,medium=0,low=0,informational=0}:FindingSummarySmallProps) => {
+const FindingSummarySmall = ({critical= 0,high=0,medium=0,low=0,informational=0,disabled=false}:FindingSummarySmallProps) => {
     const totalFindings:number = critical + high + medium + low + informational;
 
     return (
     <Stack direction="row" spacing={1}>
-        <Tile2 severity={SeverityType.Critical} value={10}/>
-        <Tile2 severity={SeverityType.High} value={9}/>
-        <Tile2 severity={SeverityType.Medium} value={10}/>
-        <Tile2 severity={SeverityType.Low} value={10}/>
-        <Tile2 severity={SeverityType.Info} value={totalFindings}/>
+        <Tile2 severity={SeverityType.Critical} value={10} disabled={disabled}/>
+        <Tile2 severity={SeverityType.High} value={9} disabled={disabled}/>
+        <Tile2 severity={SeverityType.Medium} value={10} disabled={disabled}/>
+        <Tile2 severity={SeverityType.Low} value={10} disabled={disabled}/>
+        <Tile2 severity={SeverityType.Info} disabled={disabled} value={totalFindings}/>
     </Stack>
 )
 };

@@ -25,7 +25,8 @@ const ProductNew = () => {
     const [formData, setFormData] = useReducer(formReducer, {
         name: '',
         productOwner: '',
-        productTeam: ''
+        productTeam: '',
+        org:'1'
     });
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);

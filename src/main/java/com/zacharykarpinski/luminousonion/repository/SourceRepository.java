@@ -12,7 +12,7 @@ import java.util.List;
 @CrossOrigin
 public interface SourceRepository extends JpaRepository<Source, Long> {
 
-    @Query("SELECT NEW com.zacharykarpinski.luminousonion.model.Source(s.id, s.tool) FROM Source s WHERE s.product.id = :id")
+    @Query("SELECT NEW com.zacharykarpinski.luminousonion.model.Source(s.id, s.tool, s.archived) FROM Source s WHERE s.product.id = :id ORDER BY s.createTimestamp DESC ")
     List<Source> getSourcesByProduct(Long id);
 
 }

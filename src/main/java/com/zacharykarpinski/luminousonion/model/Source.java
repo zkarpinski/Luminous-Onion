@@ -25,6 +25,7 @@ public class Source {
     private String toolVersion;
     private String target;
     private String targetType;
+    private boolean archived = false;
 
     @ManyToOne
     @JoinColumn(name="productId")
@@ -74,9 +75,12 @@ public class Source {
     public Source(SourceTool tool) {
         this.setTool(tool);
     }
-    public Source(long id, SourceTool tool) {
+
+
+    public Source(long id, SourceTool tool, Boolean archived) {
         this.id = id;
         this.setTool(tool);
+        this.setArchived(archived);
     }
 
 

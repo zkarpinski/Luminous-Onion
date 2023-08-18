@@ -15,8 +15,9 @@ public class UploadSourceService {
     @Autowired
     private ProductRepository productRepository;
 
-    public Source uploadFileAndParse(MultipartFile mpf, SourceTool tool, Long productId) {
+    public Source uploadFileAndParse(MultipartFile mpf, SourceTool tool, Long productId, boolean archivePrevious) {
 
+        // Get the product entity
         Product product = productRepository.findById(productId).orElseThrow();
 
         // Parse the file based on the provided tool
@@ -27,12 +28,20 @@ public class UploadSourceService {
             default -> null;
         };
 
+        // Archive all similar sources from the same product
+        if (archivePrevious) {
+            product.getSources().stream()
+                    .filter(source -> source.getTool() == tool && !source.isArchived())
+                    .forEach( s -> s.setArchived(true));
+        }
+
         // Add the product and save to repository
         if (parsedSource != null) {
             product.addSource(parsedSource);
             productRepository.save(product);
             return parsedSource;
         }
+
 
         return null;
     }

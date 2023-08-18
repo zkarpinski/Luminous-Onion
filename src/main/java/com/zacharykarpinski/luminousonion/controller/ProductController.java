@@ -1,6 +1,5 @@
 package com.zacharykarpinski.luminousonion.controller;
 
-import com.zacharykarpinski.luminousonion.dto.ProductFindingsSummaryDTO;
 import com.zacharykarpinski.luminousonion.model.Product;
 import com.zacharykarpinski.luminousonion.model.Source;
 import com.zacharykarpinski.luminousonion.repository.ProductRepository;
@@ -55,13 +54,6 @@ public class ProductController {
             return ResponseHandler.createResponse("entity deleted",HttpStatus.OK);
         }
         return ResponseHandler.createResponse("ID not found",HttpStatus.NOT_FOUND);
-    }
-
-    @CrossOrigin
-    @GetMapping("/{id}/findings/summaryold")
-    public ResponseEntity<Object> getFindingSummaryOld(@PathVariable Long id) {
-        ProductFindingsSummaryDTO summary = productRepository.getProductFindingsCountSummaryOld(id);
-        return ResponseHandler.createResponse("Ok",HttpStatus.OK,summary);
     }
 
     @CrossOrigin
