@@ -105,6 +105,7 @@ const ProductView= () => {
                     <Table size="small" stickyHeader>
                         <TableHead>
                             <TableRow>
+                                <TableCell>Label</TableCell>
                                 <TableCell>Tool</TableCell>
                                 <TableCell align="center" width={200}>Findings</TableCell>
                                 <TableCell>Date</TableCell>
@@ -117,6 +118,7 @@ const ProductView= () => {
                                     key={row.id}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
+                                    <TableCell>{row.label}</TableCell>
                                     <TableCell>{row.tool}</TableCell>
                                     <TableCell>
                                         <FindingSummarySmall

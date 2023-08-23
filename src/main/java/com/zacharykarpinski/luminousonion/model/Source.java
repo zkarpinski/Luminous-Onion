@@ -4,14 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.zacharykarpinski.luminousonion.model.shared.FindingSeverity;
 import com.zacharykarpinski.luminousonion.model.shared.SourceTool;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.print.attribute.standard.Severity;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -22,6 +21,8 @@ public class Source {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Size(max = 100)
+    private String label;
     @Enumerated(EnumType.STRING)
     private SourceTool tool;
     private String toolVersion;

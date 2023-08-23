@@ -15,7 +15,7 @@ public class UploadSourceService {
     @Autowired
     private ProductRepository productRepository;
 
-    public Source uploadFileAndParse(MultipartFile mpf, SourceTool tool, Long productId, boolean archivePrevious) {
+    public Source uploadFileAndParse(MultipartFile mpf, String label, SourceTool tool, Long productId, boolean archivePrevious) {
 
         // Get the product entity
         Product product = productRepository.findById(productId).orElseThrow();
@@ -37,6 +37,7 @@ public class UploadSourceService {
 
         // Add the product and save to repository
         if (parsedSource != null) {
+            parsedSource.setLabel(label);
             product.addSource(parsedSource);
             productRepository.save(product);
             return parsedSource;

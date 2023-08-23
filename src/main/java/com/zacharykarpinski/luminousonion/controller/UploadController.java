@@ -24,12 +24,13 @@ public class UploadController {
 
     @PostMapping(value="", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Object> uploadFile(
+            @RequestParam("label") String label,
             @RequestParam("file")MultipartFile mpf,
             @RequestParam("productId") Long productId,
             @RequestParam("sourceTool")SourceTool sourceTool,
             @RequestParam(value = "archivePrevious", defaultValue = "false") boolean archivePrevious) {
         try {
-            Source newSource = uploadSourceService.uploadFileAndParse(mpf,sourceTool, productId, archivePrevious);
+            Source newSource = uploadSourceService.uploadFileAndParse(mpf,label, sourceTool, productId, archivePrevious);
             if (newSource != null)
                 return ResponseHandler.createResponse("New source created!", HttpStatus.CREATED, newSource);
             return ResponseHandler.createResponse("Unknown error.", HttpStatus.INTERNAL_SERVER_ERROR, null);

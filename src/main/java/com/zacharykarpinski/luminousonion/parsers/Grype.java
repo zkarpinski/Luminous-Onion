@@ -31,11 +31,6 @@ public class Grype implements Parser {
             GrypeJsonFile grype = objectMapper.readValue(n.toString(), new TypeReference<>() {
             });
 
-            // Loop through each match and cascade parent attributes down
-            //TODO: Cascade parent attributes
-            //grype.matches.forEach(m -> {
-            //});
-
             // Write array of matches to string then convert to a list of findings
             String parsedGrypeJson = objectMapper.writeValueAsString(grype.matches);
             Set<Finding> findingList =  objectMapper.readValue(parsedGrypeJson, new TypeReference<Set<Finding>>() {});

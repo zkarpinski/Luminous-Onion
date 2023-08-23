@@ -39,7 +39,7 @@ const NewSourcePopupComponent = (props) => {
         label: '',
         productId: '',
         sourceTool: '',
-        archivePrevious: false
+        archivePrevious: true
     });
     const [open, setOpen] = React.useState(false);
     const [products, setProducts] = React.useState([]);
@@ -80,6 +80,7 @@ const NewSourcePopupComponent = (props) => {
         formData.append('productId',tempFormData.productId); //TODO: Iterate over tempFormData
         formData.append('sourceTool',tempFormData.sourceTool);
         formData.append("archivePrevious",tempFormData.archivePrevious)
+        formData.append("label",tempFormData.label)
         console.log(formData);
         console.log(tempFormData);
 
@@ -106,7 +107,7 @@ const NewSourcePopupComponent = (props) => {
                         <form onSubmit={handleSubmit}>
                             <Grid container spacing={1}>
                                 <Grid item xs={12}>
-                                    <TextField required label="Label" id ="label" name="label" placeholder="Enter label for new source" sx={{ width: '100%' }}
+                                    <TextField required label="Label" id ="label" name="label" placeholder="Enter label for new source" fullWidth inputProps={{ maxLength: 50 }}
                                                onChange={handleChange} autoFocus>
                                     </TextField>
                                 </Grid>
