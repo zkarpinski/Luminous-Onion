@@ -13,7 +13,11 @@ import java.util.List;
 @CrossOrigin
 public interface OrganizationRepository extends JpaRepository<Organization, Long> {
 
-    @Query("SELECT f.severity, CAST(count(f.id) as INTEGER) FROM Organization o INNER JOIN o.products p INNER JOIN p.sources s INNER JOIN s.findings f WHERE o.id = :id GROUP BY f.severity")
+    @Query("""
+    SELECT f.severity, CAST(count(f.id) as INTEGER)
+    FROM Organization o INNER JOIN o.products p INNER JOIN p.sources s INNER JOIN s.findings f
+    WHERE o.id = :id AND s.archived = false
+    GROUP BY f.severity""")
     List<List<Object>> getOrgFindingsCountSummary(@Param("id") Long id);
 
 }

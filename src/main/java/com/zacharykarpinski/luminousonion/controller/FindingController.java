@@ -16,13 +16,11 @@ public class FindingController {
     @Autowired
     FindingRepository findingRepository;
 
-    @CrossOrigin
     @GetMapping()
     public ResponseEntity<List<Finding>> getFindings() {
         return ResponseEntity.ok(findingRepository.findAll());
     }
 
-    @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<Object> getFinding(@PathVariable Long id) {
         if (findingRepository.existsById(id)) {

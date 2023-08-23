@@ -17,7 +17,12 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("SELECT NEW com.zacharykarpinski.luminousonion.dto.ProductFindingsSummaryDTO(0,0,0,0,CAST(count(f.id) as INTEGER )) FROM Product p INNER JOIN p.sources s INNER JOIN s.findings f WHERE p.id = :id")
     ProductFindingsSummaryDTO getProductFindingsCountSummaryOld(@Param("id") Long id);
 
-    @Query("SELECT f.severity, CAST(count(f.id) as INTEGER) FROM Product p INNER JOIN p.sources s INNER JOIN s.findings f WHERE p.id = :id GROUP BY f.severity")
+    @Query("""
+            SELECT f.severity, CAST(count(f.id) as INTEGER)
+            FROM Product p INNER JOIN p.sources s INNER JOIN s.findings f
+            WHERE p.id = :id AND s.archived = false 
+            GROUP BY f.severity
+            """)
     List<List<Object>> getProductFindingsCountSummary(@Param("id") Long id);
 
 }

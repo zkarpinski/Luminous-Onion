@@ -6,6 +6,6 @@ RUN apk update && apk upgrade
 COPY target/luminousonion-0.0.1-SNAPSHOT.jar /app/app.jar
 
 # Expose the front-end and backend ports
-EXPOSE 8080 8081 8082
+EXPOSE 8081
 
 CMD ["java", "-jar", "/app/app.jar"]

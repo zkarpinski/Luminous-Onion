@@ -5,5 +5,5 @@ call mvnw.cmd clean package
 docker build -t "zkarpinski/luminous-onion:latest" .
 
 :: Create container from the image and run on port 80
-docker run -d -p 8082:8082 -p 8081:8081 --name "luminousonion_test" luminousonion
+docker run -d -P --name "luminousonion_test" "zkarpinski/luminous-onion:latest"
 

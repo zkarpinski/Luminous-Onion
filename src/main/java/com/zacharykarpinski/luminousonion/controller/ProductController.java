@@ -28,25 +28,21 @@ public class ProductController {
 
     @Operation(summary = "Returns a list of products")
     @ApiResponse(responseCode = "200", description = "Product list returned")
-    @CrossOrigin
     @GetMapping()
     public ResponseEntity<List<Product>> getProducts() {
         return ResponseEntity.ok(productRepository.findAll());
     }
 
-    @CrossOrigin
     @PostMapping()
     public ResponseEntity<Product> putNewProduct(@RequestBody Product product) {
         return new ResponseEntity<>( productRepository.save(product), HttpStatus.CREATED);
     }
 
-    @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProduct(@PathVariable Long id) {
         return ResponseEntity.ok(productRepository.findById(id).orElse(null));
     }
 
-    @CrossOrigin
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteProduct(@PathVariable Long id) {
         if (productRepository.existsById(id)) {
@@ -56,7 +52,6 @@ public class ProductController {
         return ResponseHandler.createResponse("ID not found",HttpStatus.NOT_FOUND);
     }
 
-    @CrossOrigin
     @GetMapping("/{id}/findings/summary")
     public ResponseEntity<Object> getFindingSummary(@PathVariable Long id) {
         List<List<Object>> summary = productRepository.getProductFindingsCountSummary(id);
@@ -69,7 +64,6 @@ public class ProductController {
         return ResponseHandler.createResponse("Ok",HttpStatus.OK,map);
     }
 
-    @CrossOrigin
     @GetMapping("/{id}/sources")
     public ResponseEntity<List<Source>> getProductSources(@PathVariable Long id) {
         return ResponseEntity.ok(sourceRepository.getSourcesByProductId(id));

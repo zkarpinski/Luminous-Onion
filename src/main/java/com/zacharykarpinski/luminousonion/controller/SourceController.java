@@ -15,7 +15,6 @@ public class SourceController {
     @Autowired
     SourceRepository sourceRepository;
 
-    @CrossOrigin
     @GetMapping("/api/sources")
     public ResponseEntity<List<Source>> getSources() {
         return ResponseEntity.ok(sourceRepository.findAll());
