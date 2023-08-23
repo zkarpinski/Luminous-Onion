@@ -24,8 +24,7 @@ test("FindingSummarySmall renders successfully with each Severity Type and Value
 })
 
 test("FindingSummarySmall renders without data", () => {
-    const {container} = render(<BrowserRouter>
-        <FindingSummarySmall/></BrowserRouter>);
+    render(<BrowserRouter><FindingSummarySmall/></BrowserRouter>);
     const element = screen.getByText("C");
     expect(element).toBeInTheDocument();
 
