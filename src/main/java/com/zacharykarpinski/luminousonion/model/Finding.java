@@ -55,7 +55,7 @@ public class Finding {
 
 
     @ManyToOne
-    @JoinColumn(name="sourceId")
+    @JoinColumn(name="source_id")
     private Source source;
 
 

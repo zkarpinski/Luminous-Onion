@@ -72,7 +72,7 @@ public class ProductController {
     @CrossOrigin
     @GetMapping("/{id}/sources")
     public ResponseEntity<List<Source>> getProductSources(@PathVariable Long id) {
-        return ResponseEntity.ok(sourceRepository.getSourcesByProduct(id));
+        return ResponseEntity.ok(sourceRepository.getSourcesByProductId(id));
     }
 
 }

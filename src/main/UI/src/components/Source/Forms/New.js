@@ -1,4 +1,15 @@
-import {Box, Button, Grid, MenuItem, Modal, TextField, Typography} from "@mui/material";
+import {
+    Box,
+    Button,
+    FormControlLabel,
+    FormGroup,
+    Grid,
+    MenuItem,
+    Modal,
+    Switch,
+    TextField,
+    Typography
+} from "@mui/material";
 import React, {useEffect, useReducer} from "react";
 import api from "../../../shared/api";
 import {Add} from "@mui/icons-material";
@@ -28,6 +39,7 @@ const NewSourcePopupComponent = (props) => {
         label: '',
         productId: '',
         sourceTool: '',
+        archivePrevious: false
     });
     const [open, setOpen] = React.useState(false);
     const [products, setProducts] = React.useState([]);
@@ -53,6 +65,7 @@ const NewSourcePopupComponent = (props) => {
     };
 
     const handleChange = event => {
+        console.log(event.target);
         setFormData({
             name: event.target.name,
             value: event.target.value,
@@ -66,7 +79,7 @@ const NewSourcePopupComponent = (props) => {
         formData.append('file',uploadFile);
         formData.append('productId',tempFormData.productId); //TODO: Iterate over tempFormData
         formData.append('sourceTool',tempFormData.sourceTool);
-        formData.append("test",tempFormData.name)
+        formData.append("archivePrevious",tempFormData.archivePrevious)
         console.log(formData);
         console.log(tempFormData);
 
@@ -131,6 +144,12 @@ const NewSourcePopupComponent = (props) => {
                                     <TextField multiline rows={4} label="Details" placeholder="Enter details" sx={{ width: '100%' }}
                                                onChange={handleChange}>
                                     </TextField>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <FormGroup style={{flexDirection:'row'}} >
+                                        <FormControlLabel control={<Switch defaultChecked/>} label="Archive Results" name="archivePrevious" onChange={handleChange}/>
+                                    </FormGroup>
+
                                 </Grid>
                                 <Grid item xs={2}>
                                     <Button type="submit">Submit</Button>

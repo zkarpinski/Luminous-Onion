@@ -1,17 +1,19 @@
 package com.zacharykarpinski.luminousonion.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.zacharykarpinski.luminousonion.model.shared.FindingSeverity;
 import com.zacharykarpinski.luminousonion.model.shared.SourceTool;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import javax.print.attribute.standard.Severity;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -28,7 +30,7 @@ public class Source {
     private boolean archived = false;
 
     @ManyToOne
-    @JoinColumn(name="productId")
+    @JoinColumn(name="product_id")
     private Product product;
 
     // Date and times
@@ -40,6 +42,24 @@ public class Source {
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "source", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Finding> findings;
+
+    @Transient
+    public Map<FindingSeverity, Long> getFindingsSummary() {
+        Map<FindingSeverity, Long> findingsMap;
+        if (findings == null)
+            findingsMap = new EnumMap<>(FindingSeverity.class);
+        else {
+            findingsMap = this.findings.stream()
+                    .collect(Collectors.groupingBy(Finding::getSeverity, Collectors.counting()));
+        }
+
+        // Populate the missing finding severity values
+        for (FindingSeverity f: FindingSeverity.values()) {
+            findingsMap.computeIfAbsent(f, k -> 0L );
+        }
+
+        return findingsMap;
+    }
 
     public void addFinding(Finding f){
         if (this.findings == null)

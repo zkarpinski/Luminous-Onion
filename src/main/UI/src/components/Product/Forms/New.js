@@ -31,7 +31,8 @@ const ProductNew = () => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => {setOpen(false);
-        window.location.reload();}
+        //window.location.reload();
+    }
 
     // When values change, save them to the formData state
     const handleChange = event => {
@@ -92,19 +93,19 @@ const ProductNew = () => {
                                     fullWidth
                                 />
                                 </Grid>
-                                    <Grid item xs={12}>
-                                <TextField
-                                    id="productTeam"
-                                    name="productTeam"
-                                    label="Product Team"
-                                    autoComplete="off"
-                                    value={formData.productTeam}
-                                    onChange={handleChange}
-                                    fullWidth
-                                />
-                                    </Grid>
                                 <Grid item xs={12}>
-                                <Button type="submit">Create</Button>
+                                    <TextField
+                                        id="productTeam"
+                                        name="productTeam"
+                                        label="Product Team"
+                                        autoComplete="off"
+                                        value={formData.productTeam}
+                                        onChange={handleChange}
+                                        fullWidth
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Button type="submit">Create</Button>
                                 </Grid>
                             </Grid>
                         </form>

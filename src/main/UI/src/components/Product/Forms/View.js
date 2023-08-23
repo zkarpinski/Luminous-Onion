@@ -15,6 +15,8 @@ import {
 import NewSourcePopupComponent from "../../Source/Forms/New";
 import EditIcon from '@mui/icons-material/Edit';
 import FindingSummarySmall from "../../Finding/FindingSummarySmall";
+import dayjs from "dayjs";
+import {outputDateFormat} from "../../../shared/constants";
 const ProductView= () => {
     const [loading, setLoading] = useState(false);
     const { id } = useParams();
@@ -103,7 +105,6 @@ const ProductView= () => {
                     <Table size="small" stickyHeader>
                         <TableHead>
                             <TableRow>
-                                <TableCell>ID</TableCell>
                                 <TableCell>Tool</TableCell>
                                 <TableCell align="center" width={200}>Findings</TableCell>
                                 <TableCell>Date</TableCell>
@@ -116,12 +117,18 @@ const ProductView= () => {
                                     key={row.id}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
-                                    <TableCell component="th" scope="row">
-                                        {row.id}
-                                    </TableCell>
                                     <TableCell>{row.tool}</TableCell>
-                                    <TableCell><FindingSummarySmall critical={10} disabled={row.archived}/></TableCell>
-                                    <TableCell>asb</TableCell>
+                                    <TableCell>
+                                        <FindingSummarySmall
+                                            critical={row.findingsSummary.CRITICAL}
+                                            high={row.findingsSummary.HIGH}
+                                            medium={row.findingsSummary.MEDIUM}
+                                            low={row.findingsSummary.LOW}
+                                            informational={row.findingsSummary.INFORMATIONAL}
+                                            disabled={row.archived}
+                                        />
+                                    </TableCell>
+                                    <TableCell>{dayjs(row.createTimestamp).format(outputDateFormat)}</TableCell>
                                     <TableCell>{row.archived.toString()}</TableCell>
                                 </TableRow>
                             ))}
