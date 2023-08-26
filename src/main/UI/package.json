@@ -5,10 +5,10 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.14.1",
+    "@mui/icons-material": "^5.14.3",
     "@mui/material": "^5.14.4",
     "@mui/x-charts": "^6.0.0-alpha.6",
-    "@mui/x-data-grid": "^6.10.1",
+    "@mui/x-data-grid": "^6.10.2",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
