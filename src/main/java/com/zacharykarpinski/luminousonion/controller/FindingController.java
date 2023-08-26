@@ -17,8 +17,15 @@ public class FindingController {
     FindingRepository findingRepository;
 
     @GetMapping()
-    public ResponseEntity<List<Finding>> getFindings() {
-        return ResponseEntity.ok(findingRepository.findAll());
+    public ResponseEntity<List<Finding>> getFindings(
+            @RequestParam(name = "activeOnly",required = false, defaultValue = "true") boolean activeOnly)
+    {
+        if(activeOnly) {
+            return ResponseEntity.ok(findingRepository.findBySource_ArchivedFalse());
+        }
+        else {
+            return ResponseEntity.ok(findingRepository.findAll());
+        }
     }
 
     @GetMapping("/{id}")

@@ -1,7 +1,9 @@
 package com.zacharykarpinski.luminousonion.controller;
 
+import com.zacharykarpinski.luminousonion.model.Finding;
 import com.zacharykarpinski.luminousonion.model.Product;
 import com.zacharykarpinski.luminousonion.model.Source;
+import com.zacharykarpinski.luminousonion.repository.FindingRepository;
 import com.zacharykarpinski.luminousonion.repository.ProductRepository;
 import com.zacharykarpinski.luminousonion.repository.SourceRepository;
 import com.zacharykarpinski.luminousonion.response.ResponseHandler;
@@ -25,6 +27,8 @@ public class ProductController {
 
     @Autowired
     SourceRepository sourceRepository;
+    @Autowired
+    private FindingRepository findingRepository;
 
     @Operation(summary = "Returns a list of products")
     @ApiResponse(responseCode = "200", description = "Product list returned")
@@ -62,6 +66,20 @@ public class ProductController {
                 return i.get(0).toString();
         }, i -> (int) i.get(1) ));
         return ResponseHandler.createResponse("Ok",HttpStatus.OK,map);
+    }
+
+    @GetMapping("/{id}/findings")
+    public ResponseEntity<List<Finding>> getProductFindings(
+            @PathVariable Long id,
+            @RequestParam(name = "activeOnly",required = false, defaultValue = "true") boolean activeOnly
+    ) {
+        if(activeOnly) {
+            return ResponseEntity.ok(findingRepository.findBySource_Product_IdAndSource_ArchivedFalse(id));
+        }
+        else {
+            return ResponseEntity.ok(findingRepository.findBySource_Product_Id(id));
+        }
+
     }
 
     @GetMapping("/{id}/sources")

@@ -13,11 +13,13 @@ import ProductBase from "./components/Product/Forms/ProductBase";
 import ProductEdit from "./components/Product/Forms/Edit";
 import FindingView from "./components/Finding/Forms/View";
 import ProductView from "./components/Product/Forms/View";
+import Login from "./pages/Login";
 
 const Main = () => {
     return (
         <Routes>
             <Route exact path='/' element={<Home/>}></Route>
+            <Route exact path='/login' element={<Login/>}></Route>
             <Route exact path='/finding' element={<Findings/>}></Route>
             <Route exact path='/finding/:id' element={<FindingView/>}></Route>
             <Route exact path='/source' element={<Sources/>}></Route>

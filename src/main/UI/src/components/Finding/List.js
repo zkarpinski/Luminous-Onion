@@ -5,19 +5,22 @@ import {Paper} from "@mui/material";
 import {Link} from "react-router-dom";
 import dayjs from "dayjs";
 import {outputDateFormat} from "../../shared/constants";
-const FindingList = ({filters}) => {
+const FindingList = ({filters, endpoint}) => {
 
     const [findings, setFindings] = useState([]);
     const [loading, setLoading] = useState(false);
     const [findingsCount, setFindingsCount] = useState(0);
-    //TODO use filters
-    console.log({filters})
+
 
     useEffect(() => {
         setLoading(true);
+        //TODO use filters
+        console.log({filters})
+
+        const apiEndpoint = endpoint ? endpoint : '/api/findings';
 
         // Fetch the findings
-        api.get('/api/findings')
+        api.get(apiEndpoint)
             .catch(console.log)
             .then(data => {
                 setFindings(data);

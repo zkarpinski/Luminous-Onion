@@ -17,6 +17,7 @@ const ProductFindings= () => {
     const [loading, setLoading] = useState(false);
     const { id } = useParams();
     const [product, setProduct] = useState({name:''});
+    const findingEndpoint = `/api/product/${id}/findings`
 
     useEffect(() => {
         setLoading(true);
@@ -71,7 +72,7 @@ const ProductFindings= () => {
                     Findings
                 </Typography>
                 <Paper>
-                    <FindingList/>
+                    <FindingList endpoint={findingEndpoint}/>
                 </Paper>
             </Container>
         </>
