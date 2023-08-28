@@ -28,8 +28,7 @@ public class Grype implements Parser {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode n = objectMapper.readTree(mpf.getInputStream());
-            GrypeJsonFile grype = objectMapper.readValue(n.toString(), new TypeReference<>() {
-            });
+            GrypeJsonFile grype = objectMapper.readValue(n.toString(), new TypeReference<>() {});
 
             // Write array of matches to string then convert to a list of findings
             String parsedGrypeJson = objectMapper.writeValueAsString(grype.matches);

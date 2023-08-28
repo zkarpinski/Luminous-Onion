@@ -9,6 +9,9 @@ import java.io.InputStream;
 import java.util.List;
 
 public class CsvParser {
+    private CsvParser() {
+        throw new IllegalStateException("Utility class");
+    }
     private static final CsvMapper csvMapper = new CsvMapper();
 
     public static <T> List<T> read(Class<T> c, InputStream stream) throws IOException {

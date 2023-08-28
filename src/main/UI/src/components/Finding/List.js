@@ -17,7 +17,7 @@ const FindingList = ({filters, endpoint}) => {
         //TODO use filters
         console.log({filters})
 
-        const apiEndpoint = endpoint ? endpoint : '/api/findings';
+        const apiEndpoint =  endpoint || '/api/findings';
 
         // Fetch the findings
         api.get(apiEndpoint)

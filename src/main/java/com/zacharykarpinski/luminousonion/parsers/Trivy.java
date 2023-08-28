@@ -15,6 +15,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -59,20 +60,21 @@ public class Trivy implements Parser {
             return null;
         }
         Set<Finding> findingList = new HashSet<>();
+        if (!trvy.results.isEmpty()) {
+            trvy.results.forEach(r -> {
+                r.Vulnerabilities.forEach(v -> {
 
-        trvy.results.forEach(r -> {
-            r.Vulnerabilities.forEach(v -> {
-
+                });
+                try {
+                    findingList.addAll(objectMapper.readValue(
+                            objectMapper.writeValueAsString(r.Vulnerabilities),
+                            new TypeReference<Set<Finding>>() {
+                            }));
+                } catch (JsonProcessingException e) {
+                    throw new RuntimeException(e);
+                }
             });
-            try {
-                findingList.addAll(objectMapper.readValue(
-                        objectMapper.writeValueAsString(r.Vulnerabilities),
-                        new TypeReference<Set<Finding>>() {}));
-            } catch (JsonProcessingException e) {
-                throw new RuntimeException(e);
-            }
-
-        });
+        }
 
             // Create a new source record
             Source source = new Source();
@@ -96,9 +98,9 @@ public class Trivy implements Parser {
         @JsonProperty("ArtifactName")
         String targetName;
         @JsonProperty("ArtifactType")
-        String targetType;
+        String targetType = "";
         @JsonProperty("Results")
-        List<Result> results;
+        List<Result> results = new ArrayList<>();
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
