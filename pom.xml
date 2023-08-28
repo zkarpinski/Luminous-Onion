@@ -19,7 +19,7 @@
 		<ui-dir>${project.basedir}/src/main/UI</ui-dir>
 		<node.version>v19.4.0</node.version>
 		<cucumber.version>7.13.0</cucumber.version>
-		<snakeyaml.version>2.0</snakeyaml.version>
+		<snakeyaml.version>2.1</snakeyaml.version>
 	</properties>
 	<dependencies>
 		<dependency>
