@@ -27,8 +27,9 @@ const Main = () => {
             <Route exact path='/product' element={<Products/>}></Route>
             <Route exact path='/product/:id' element={<ProductBase><ProductView/></ProductBase>}></Route>
             <Route exact path='/product/:id/edit' element={<ProductBase><ProductEdit/></ProductBase>}></Route>
-            <Route exact path='/product/:id/findings' element={<ProductBase><ProductFindings/></ProductBase>}></Route>
             <Route exact path='/product/:id/settings' element={<ProductBase><ProductSettings/></ProductBase>}></Route>
+            <Route exact path='/product/:id/findings' element={<ProductBase><ProductFindings/></ProductBase>}></Route>
+            <Route exact path='/product/:id/findings/:fid' element={<ProductBase></ProductBase>}></Route>
             <Route path='*' element={<NotFound />}/>
         </Routes>
     );

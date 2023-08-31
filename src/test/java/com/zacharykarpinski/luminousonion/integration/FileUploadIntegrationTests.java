@@ -1,4 +1,4 @@
-package com.zacharykarpinski.luminousonion;
+package com.zacharykarpinski.luminousonion.integration;
 
 import com.zacharykarpinski.luminousonion.controller.UploadController;
 import com.zacharykarpinski.luminousonion.model.shared.SourceTool;

@@ -3,6 +3,7 @@
 ![CodeQL](https://github.com/zkarpinski/Luminous-Onion/actions/workflows/codeql.yml/badge.svg)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=zkarpinski_Luminous-Onion&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=zkarpinski_Luminous-Onion)
 [![Docker](https://img.shields.io/badge/Docker-Latest-blue)](https://hub.docker.com/r/zkarpinski/luminous-onion/tags)
+![Screenshot of DefectDojo](docs/static/images/product_view_with_scans.jpg)
 ## Summary
 Luminous Onion is a cutting-edge web application designed to revolutionize vulnerability management by seamlessly ingesting security reports from a variety of 3rd party tools. With its intuitive interface and powerful features, Luminous Onion empowers organizations to take charge of their cybersecurity posture like never before.
 ## Setup
@@ -14,10 +15,15 @@ To simplify, you may use the accompanying `buildAndPackageScript.cmd` script. Ot
 2. Next run `docker build -t "luminous-onion" .` to build the docker image
 3. Execute `docker run -d -P luminous-onion` to run the docker image.
 
-## Running Instructions
-TBD
+## Quick Start
+```sh
+git clone
+cd LuminousOnion
+./buildAndPackage.sh
+```
+
 ## Examples & Samples
-Example scripts and sample result files are available in `./examples/`.
+Example scripts and sample result files are available in `examples/`.
 
 ## Resources
 1. https://developer.okta.com/blog/2022/06/17/simple-crud-react-and-spring-boot

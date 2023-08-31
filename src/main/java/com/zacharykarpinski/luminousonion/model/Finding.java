@@ -58,6 +58,11 @@ public class Finding {
     @JoinColumn(name="source_id")
     private Source source;
 
+    public Finding() {}
+    public Finding(String title) {
+        this.title = title;
+    }
+
 
     public void setDescription(String s) {
         int maxSize = 1024;
