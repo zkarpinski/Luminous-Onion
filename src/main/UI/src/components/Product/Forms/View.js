@@ -52,7 +52,7 @@ const ProductView= () => {
 
 
     return (
-        <div>
+        <>
             <Container component={Paper} style={{marginTop: 10, marginBottom:10, padding:10}}>
                 <Box
                     component="span"
@@ -61,7 +61,7 @@ const ProductView= () => {
                     justifyContent="space-between"
                     alignItems="center"
                 >
-                    <Typography variant="h5">{product.name}</Typography>
+                    <Typography variant="h5"></Typography>
                     <Button variant="contained" color="secondary" startIcon={<EditIcon/>} href={editURI}>Edit</Button>
                 </Box>
                 <Paper>
@@ -138,7 +138,7 @@ const ProductView= () => {
                     </Table>
                 </Paper>
             </Container>
-        </div>
+        </>
     );
 };
 

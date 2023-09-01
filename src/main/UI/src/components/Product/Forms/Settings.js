@@ -5,12 +5,6 @@ import {
     Button,
     CardActions,
     Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableRow,
     Typography
 } from "@mui/material";
 import Card from "@mui/material/Card";
@@ -57,36 +51,6 @@ const ProductSettings= () => {
 
     return (
         <>
-            <Container component={Paper} style={{marginTop: 10, marginBottom:10, padding:10}}>
-                <Typography variant="h4">
-                    {product.name}
-                </Typography>
-                <Paper>
-                    <Table size="small">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell align="center" colSpan={2}>
-                                    <h3>Product Details</h3>
-                                </TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                        <TableRow>
-                            <TableCell width={150}><b>Name</b></TableCell>
-                            <TableCell>{product.name}</TableCell>
-                        </TableRow>
-                            <TableRow>
-                                <TableCell>Product Owner</TableCell>
-                                <TableCell>{product.productOwner}</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell>Product Name</TableCell>
-                                <TableCell>{product.productName}</TableCell>
-                            </TableRow>
-                        </TableBody>
-                    </Table>
-                </Paper>
-            </Container>
             <Container style={{marginBottom:10, padding:10}}>
                 <Card variant="outlined"  style={{ border: "1px solid red" }}>
                     <CardContent>
@@ -100,9 +64,9 @@ const ProductSettings= () => {
                             Deleting a product means the following:
                         </Typography>
                             <ul>
-                                <li>First item</li>
-                                <li>Second item</li>
-                                <li>Third item</li>
+                                <li>The product will be deleted.</li>
+                                <li>Every source associated will be removed.</li>
+                                <li>Every finding associated with be removed.</li>
                             </ul>
                     </CardContent>
                     <CardActions>

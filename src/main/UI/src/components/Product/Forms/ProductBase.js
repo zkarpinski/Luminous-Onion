@@ -3,8 +3,9 @@ import api from '../../../shared/api'
 import {useParams} from "react-router-dom";
 import ProductFindingSummary from "../FindingSummary";
 import {
+    Container,
     Paper,
-    Tabs,
+    Tabs, Typography,
 } from "@mui/material";
 import LinkTab from "../../LinkTab";
 import Card from "@mui/material/Card";
@@ -75,6 +76,13 @@ const ProductBase= ({children: content}) => {
                     <LinkTab label="Settings" href={`/product/${id}/settings`}/>
                 </Tabs>
             </Card>
+            <Container style={{marginTop: 10, marginBottom:10, padding:0}}>
+                <Card variant="outlined"  style={{ border: "1px solid darkgray" }}>
+                    <Typography variant="h4" textAlign="center">
+                        {product.name}
+                    </Typography>
+                </Card>
+            </Container>
             {content}
         </div>
     );
