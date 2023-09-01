@@ -2,7 +2,7 @@ package com.zacharykarpinski.luminousonion.integration;
 
 import com.zacharykarpinski.luminousonion.controller.UploadController;
 import com.zacharykarpinski.luminousonion.model.shared.SourceTool;
-import org.junit.jupiter.api.Disabled;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -20,8 +20,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-@Disabled
-@SpringBootTest
+@SpringBootTest()
 @AutoConfigureMockMvc
 class FileUploadIntegrationTests {
 
@@ -41,8 +40,9 @@ class FileUploadIntegrationTests {
         mockMvc.perform(multipart("/upload")
                         .file(multipartFile)
                         .param("productId","1")
-                        .param("sourceTool", SourceTool.AQUA_TRIVY.name()))
-                .andExpect(status().isOk());
+                        .param("sourceTool", SourceTool.AQUA_TRIVY.name())
+                        .param("label", "Trivy Test")
+                ).andExpect(status().isOk());
 
         // Test missing file = 400 Error
         mockMvc.perform(post("/upload")
@@ -63,7 +63,9 @@ class FileUploadIntegrationTests {
         mockMvc.perform(multipart("/upload")
                         .file(multipartFile)
                         .param("productId","1")
-                        .param("sourceTool", SourceTool.ANCORE_GRYPE.name()))
+                        .param("sourceTool", SourceTool.ANCORE_GRYPE.name())
+                        .param("label", "Grype test")
+                )
                 .andExpect(status().isOk());
 
     }
