@@ -37,6 +37,7 @@ const ProductView= () => {
             // Get the product sources
             api.get(`/api/product/${id}/sources`)
                 .then(data => {
+                    data.sort((a,b) => a.createTimestamp > b.createTimestamp).reverse();
                     setSources(data);
                     setLoading(false)
                 });

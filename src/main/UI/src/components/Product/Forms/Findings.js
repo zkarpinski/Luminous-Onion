@@ -23,7 +23,7 @@ const ProductFindings= () => {
                     Findings
                 </Typography>
                 <Paper>
-                    <FindingList endpoint={findingEndpoint}/>
+                    <FindingList endpoint={findingEndpoint} scope="product"/>
                 </Paper>
             </Container>
         </>

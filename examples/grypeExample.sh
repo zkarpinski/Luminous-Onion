@@ -1,22 +1,22 @@
 ##
-## Trivy Example Script
-## This script will download and install trivy, run a scan and upload the source/findings to the designated host.
+## Grype Example Script
+## This script will download and install Grype, run a scan and upload the source/findings to the designated host.
 ##
 
 testHost="$(hostname).local"
 testPort="8081"
 testImage="webgoat/webgoat:latest"
-testJsonOutput="webgoat-trivy.json"
+testJsonOutput="webgoat-grype.json"
 ## EDIT THESE
 testProductID=1 # CHANGE TO A VALID ProductID
 
-# Download & install trivy
-curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+# Download & install Grype
+curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
 
 # Pull latest webgoat docker image
 docker pull $testImage
 
-trivy image $testImage --scanners vuln -f json -o $testJsonOutput
+grype $testImage -o json --file $testJsonOutput
 
 echo "Posting ${testJsonOutput} results to " $testHost:$testPort/upload
 
@@ -24,7 +24,7 @@ curl \
   --header "Content-Type: multipart/form-data" \
   --request POST \
   -F productId=$testProductID \
-  -F sourceTool="AQUA_TRIVY" \
-  -F label="Trivy example" \
+  -F sourceTool="ANCORE_GRYPE" \
+  -F label="Grype example" \
   -F file=@$testJsonOutput \
   $testHost:$testPort/upload

@@ -5,11 +5,32 @@ import {Paper} from "@mui/material";
 import {Link} from "react-router-dom";
 import dayjs from "dayjs";
 import {outputDateFormat} from "../../shared/constants";
-const FindingList = ({filters, endpoint}) => {
+const FindingList = ({filters, endpoint,scope}) => {
 
     const [findings, setFindings] = useState([]);
     const [loading, setLoading] = useState(false);
     const [findingsCount, setFindingsCount] = useState(0);
+
+    const severitySortNumber = (s) => {
+        if (s === "CRITICAL") return 5;
+        if (s === "HIGH") return 4;
+        if (s === "MEDIUM") return 3;
+        if (s === "LOW") return 2;
+        if (s === "INFORMATIONAL") return 1;
+        return 0;
+    }
+
+    const severitySortComparator = (v1, v2) => severitySortNumber(v1) - severitySortNumber(v2);
+
+    const [columnVisibilityModel, setColumnVisibilityModel] = React.useState({
+
+    });
+
+    const productScope = {
+        product: false,
+        sourceLabel: true
+    }
+
 
 
     useEffect(() => {
@@ -18,6 +39,16 @@ const FindingList = ({filters, endpoint}) => {
         console.log({filters})
 
         const apiEndpoint =  endpoint || '/api/findings';
+
+        // Set the column visibility based on scope
+        switch (scope) {
+            case "product":
+                setColumnVisibilityModel(productScope);
+                break;
+            default:
+                break;
+        }
+
 
         // Fetch the findings
         api.get(apiEndpoint)
@@ -33,6 +64,10 @@ const FindingList = ({filters, endpoint}) => {
         { field: 'product', headerName: 'Product', width: 150,
             valueGetter: (params) => params.row?.source?.product?.name,
         },
+        { field: 'sourceLabel', headerName: 'Source', width: 150,
+            valueGetter: (params) => params.row?.source?.label,
+        },
+
         { field: 'title', headerName: 'Title', width: 350,
             renderCell: (params) => (<Link to={`${params.id}`}>{params.value}</Link>)
         },
@@ -40,7 +75,7 @@ const FindingList = ({filters, endpoint}) => {
         { field: 'tool', headerName: 'Tool', width: 125,
             valueGetter: (params) => params.row?.source?.tool
         },
-        { field: 'severity', headerName: 'Severity', width: 100},
+        { field: 'severity', headerName: 'Severity', width: 100, sortComparator: severitySortComparator},
         { field: 'findingIdentifier', headerName: 'Vul ID', width: 150 },
         { field: 'fullPackage', headerName: 'Package', description: 'Package and version.',
             sortable: true,
@@ -73,9 +108,16 @@ const FindingList = ({filters, endpoint}) => {
                     density="compact"
                     rows={findings}
                     columns={columns}
+                    columnVisibilityModel={columnVisibilityModel}
+                    onColumnVisibilityModelChange={(newModel) =>
+                        setColumnVisibilityModel(newModel)
+                    }
                     initialState={{
                         pagination: {
                             paginationModel: { page: 0, pageSize: 50 },
+                        },
+                        sorting: {
+                            sortModel: [{ field: 'severity', sort: 'desc' }],
                         },
                     }}
                     pageSizeOptions={[10, 50, 100]}

@@ -23,7 +23,7 @@ cd LuminousOnion
 ```
 
 ## Examples & Samples
-Example scripts and sample result files are available in `examples/`.
+Example scripts and sample result files are available in `examples/`. On Windows, we recommend using Ubuntu-22.04 with WSL2. See [Docker on WSL](https://docs.docker.com/desktop/wsl/) and [Install WSL on Windows](https://docs.docker.com/desktop/wsl/)
 
 ## Resources
 1. https://developer.okta.com/blog/2022/06/17/simple-crud-react-and-spring-boot

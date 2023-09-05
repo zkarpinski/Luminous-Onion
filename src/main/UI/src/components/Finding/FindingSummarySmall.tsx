@@ -34,14 +34,14 @@ const SeverityTile = (props) => {
         }
         case (SeverityType.Medium): {
             abbr = "M";
-            title = "Critical findings"
+            title = "Medium findings"
             bgColor = FindingSeverity.Medium.color.light;
             abbrColor = FindingSeverity.Medium.color.base;
             break;
         }
         case (SeverityType.Low): {
             abbr = "L";
-            title = "Critical findings"
+            title = "Low findings"
             bgColor = FindingSeverity.Low.color.light;
             abbrColor  = FindingSeverity.Low.color.base;
             break;
