@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {createContext, useEffect, useState} from 'react';
 import api from '../../../shared/api'
 import {Link, useParams} from "react-router-dom";
 import ProductFindingSummary from "../FindingSummary";
@@ -12,6 +12,9 @@ import Card from "@mui/material/Card";
 import ProductView from "./View";
 import ProductFindings from "./Findings";
 import ProductSettings from "./Settings";
+
+export const ProductContext = createContext({'':''});
+
 const ProductBase= ({children: content}) => {
     const {id} = useParams();
     const [product, setProduct] = useState({name: ''});
@@ -84,7 +87,9 @@ const ProductBase= ({children: content}) => {
                     </Typography>
                 </Card>
             </Container>
-            {content}
+            <ProductContext.Provider value={product}>
+                {content}
+            </ProductContext.Provider>
         </div>
     );
 }

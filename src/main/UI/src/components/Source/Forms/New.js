@@ -44,19 +44,26 @@ const NewSourcePopupComponent = (props) => {
     const [open, setOpen] = React.useState(false);
     const [products, setProducts] = React.useState([]);
     const [sourceTools, setSourceTools] = React.useState([]);
-    const handleOpen = () => setOpen(true);
+    const handleOpen = () =>  {
+        api.get("/api/product")
+            .then((data) => setProducts(data))
+            .finally(()=> {
+                if (props.productID != null) {
+                    setFormData({name:"productId", value:props.productID});
+                }
+            });
+        api.get("/api/resources/sourcetools")
+            .then((data) => setSourceTools(data));
+
+
+
+        setOpen(true);
+    }
     const handleClose = () => setOpen(false);
     const [uploadFile, setUploadFile] = React.useState("");
 
     useEffect(() => {
-       api.get("/api/product")
-           .then((data) => setProducts(data));
-        api.get("/api/resources/sourcetools")
-            .then((data) => setSourceTools(data));
 
-        if (props.productID != null) {
-            setFormData({name:"productId", value:props.productID});
-        }
     },[]);
 
     const handleFileChange = (event) => {

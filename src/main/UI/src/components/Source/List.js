@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { Button, Paper } from "@mui/material";
+import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Paper} from "@mui/material";
 import api from "../../shared/api";
 import { headerHeight, outputDateFormat } from "../../shared/constants";
 import dayjs from "dayjs";
@@ -9,6 +9,18 @@ const SourceList = () => {
     const [sources, setSources] = useState([]);
     const [sourcesCount, setSourcesCount] = useState(0);
     const [loading, setLoading] = useState(false);
+    const [open, setOpen] = React.useState(false);
+    const [selectedRow, setSelectedRow] = React.useState();
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleDeleteSource = () => {
+        api.delete(`/sources/${selectedRow.id}`)
+        handleClose();
+
+    }
 
     useEffect(() => {
 
@@ -24,7 +36,8 @@ const SourceList = () => {
 
     const onDeleteClick = (e, row) => {
         e.stopPropagation();
-        api.delete(`/sources/${row.id}`)
+        setSelectedRow(row);
+        setOpen(true);
     };
 
     const columns= [
@@ -42,6 +55,7 @@ const SourceList = () => {
                     <Button
                         onClick={(e) => onDeleteClick(e, params.row)}
                         variant="contained"
+                        size={"small"}
                     >
                         Delete
                     </Button>
@@ -65,11 +79,37 @@ const SourceList = () => {
                         pagination: {
                             paginationModel: { page: 0, pageSize: 50 },
                         },
+                        sorting: {
+                            sortModel: [{ field: 'createTimestamp', sort: 'desc' }],
+                        },
                     }}
                     pageSizeOptions={[10, 50, 100]}
                     checkboxSelection
                 />
             </Paper>
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    Delete confirmation
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Are you sure you want to permanently delete the source <strong>?</strong>?
+                        <br/>
+                        This cannot be undone.
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={handleDeleteSource}
+                            autoFocus variant="contained">Yes
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </>
     );
 };

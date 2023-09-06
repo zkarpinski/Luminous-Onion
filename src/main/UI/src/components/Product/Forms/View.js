@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import api from '../../../shared/api'
 import {Link, useParams} from "react-router-dom";
 import {
@@ -17,23 +17,19 @@ import EditIcon from '@mui/icons-material/Edit';
 import FindingSummarySmall from "../../Finding/FindingSummarySmall";
 import dayjs from "dayjs";
 import {outputDateFormat} from "../../../shared/constants";
+import {ProductContext} from "./ProductBase";
+
 const ProductView= () => {
     const [loading, setLoading] = useState(false);
     const { id } = useParams();
     const editURI = `${id}/edit`;
-    const [product, setProduct] = useState({name:''});
+    const product = useContext(ProductContext);
     const [sources, setSources] = useState([]);
 
     useEffect(() => {
         setLoading(true);
 
         if (id!==null) {
-            // Get the product
-            api.get(`/api/product/${id}`)
-                .then(data => {
-                    setProduct(data);
-                });
-
             // Get the product sources
             api.get(`/api/product/${id}/sources`)
                 .then(data => {

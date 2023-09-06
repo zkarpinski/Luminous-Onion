@@ -7,6 +7,7 @@ import {
 } from "@mui/material";
 import FindingList from "../../Finding/List";
 import FindingRightDrawerView from "../../Finding/RightDrawerView";
+
 const ProductFindings= () => {
     const { id } = useParams();
     const [filterParams] = useSearchParams();

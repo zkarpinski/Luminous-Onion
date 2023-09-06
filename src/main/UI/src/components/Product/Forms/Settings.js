@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useContext, useEffect} from 'react';
 import api from '../../../shared/api'
 import {useParams} from "react-router-dom";
 import {
@@ -9,9 +9,11 @@ import {
 } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import {ProductContext} from "./ProductBase";
+
 const ProductSettings= () => {
     const { id } = useParams();
-    const [product, setProduct] = useState({name:''});
+    const product = useContext(ProductContext);
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -37,15 +39,7 @@ const ProductSettings= () => {
 
 
     useEffect(() => {
-        if (id!==null) {
-            // Get the product
-            api.get(`/api/product/${id}`)
-                .then(data => {
-                    setProduct(data);
-                });
-
-        }
-
+        if (id!==null) {console.log("Settings loaded")}
 
     },[]);
 
