@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import {Paper, Typography} from "@mui/material";
 import {headerHeight, outputDateFormat} from "../../shared/constants";
 import dayjs from "dayjs";
-const ProductList = () => {
+export default function ProductList () {
 
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -66,6 +66,4 @@ const ProductList = () => {
         </Paper>
         </>
     );
-};
-
-export default ProductList;
+}

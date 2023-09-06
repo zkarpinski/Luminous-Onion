@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../../shared/api'
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import ProductFindingSummary from "../FindingSummary";
 import {
     Container,
@@ -38,6 +38,7 @@ const ProductBase= ({children: content}) => {
 
         /*
         Determine the menu selection based on the child content
+        //TODO: fix this to highlight the correct tab
          */
         if (content !=null) {
             switch (content.type) {
@@ -71,9 +72,9 @@ const ProductBase= ({children: content}) => {
             </Paper>
             <Card>
                 <Tabs value={barValue} centered aria-label="nav tabs">
-                    <LinkTab label="Overview" href={`/product/${id}`}/>
-                    <LinkTab label="Findings" href={`/product/${id}/findings`}/>
-                    <LinkTab label="Settings" href={`/product/${id}/settings`}/>
+                    <LinkTab label="Overview"  component={Link} to={`/product/${id}`}/>
+                    <LinkTab label="Findings" component={Link} to={`/product/${id}/findings`}/>
+                    <LinkTab label="Settings" component={Link} to={`/product/${id}/settings`}/>
                 </Tabs>
             </Card>
             <Container style={{marginTop: 10, marginBottom:10, padding:0}}>

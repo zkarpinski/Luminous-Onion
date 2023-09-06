@@ -1,7 +1,7 @@
 FROM eclipse-temurin:17.0.8_7-jre-alpine
 LABEL title="Lumionous Onion" \
     version="0.0.1" \
-    author="Zachary Karpinski"\
+    author="Zachary Karpinski"
 
 
 RUN apk update && apk upgrade

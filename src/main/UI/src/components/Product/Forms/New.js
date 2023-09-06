@@ -29,9 +29,12 @@ const ProductNew = () => {
         org:'1'
     });
     const [open, setOpen] = React.useState(false);
+    const [reload, setReload] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => {setOpen(false);
         //window.location.reload();
+        //TODO Refresh page
+        setReload(true);
     }
 
     // When values change, save them to the formData state
@@ -51,6 +54,10 @@ const ProductNew = () => {
             .catch((error) => console.error("Error:", error))
         // TODO Create a toast when product is created.
         handleClose();
+    }
+
+    if(reload) {
+        setReload(false);
     }
 
     return (

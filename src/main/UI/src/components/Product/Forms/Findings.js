@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import {useParams} from "react-router-dom";
+import {useParams, useSearchParams} from "react-router-dom";
 import {
     Container,
     Paper,
@@ -9,7 +9,11 @@ import FindingList from "../../Finding/List";
 import FindingRightDrawerView from "../../Finding/RightDrawerView";
 const ProductFindings= () => {
     const { id } = useParams();
+    const [filterParams] = useSearchParams();
     const findingEndpoint = `/api/product/${id}/findings`
+
+    const myParam = filterParams.get('sourceId');
+    console.log(myParam)
 
     useEffect(() => {
 
@@ -23,7 +27,7 @@ const ProductFindings= () => {
                     Findings
                 </Typography>
                 <Paper>
-                    <FindingList endpoint={findingEndpoint} scope="product"/>
+                    <FindingList endpoint={findingEndpoint} scope="product" filters={[...filterParams]}/>
                 </Paper>
             </Container>
         </>

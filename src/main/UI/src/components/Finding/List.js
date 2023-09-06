@@ -119,6 +119,15 @@ const FindingList = ({filters, endpoint,scope}) => {
                         sorting: {
                             sortModel: [{ field: 'severity', sort: 'desc' }],
                         },
+                        filter: {
+                            filterModel: {
+                                items: [ {
+                                    field: 'productId',
+                                    operator: 'equals',
+                                    value:'x'
+                                }]
+                            }
+                        }
                     }}
                     pageSizeOptions={[10, 50, 100]}
                     checkboxSelection

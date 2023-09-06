@@ -12,8 +12,12 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class UploadSourceService {
 
-    @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    public UploadSourceService(ProductRepository repo) {
+        this.productRepository = repo;
+    }
 
     public Source uploadFileAndParse(MultipartFile mpf, String label, SourceTool tool, Long productId, boolean archivePrevious) {
 

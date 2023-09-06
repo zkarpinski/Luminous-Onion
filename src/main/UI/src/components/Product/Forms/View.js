@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../../shared/api'
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {
     Box, Button,
     Container,
@@ -119,7 +119,7 @@ const ProductView= () => {
                                     key={row.id}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
-                                    <TableCell>{row.label}</TableCell>
+                                    <TableCell><Link to={`findings?sourceId=${row.id}`}> {row.label}</Link></TableCell>
                                     <TableCell>{row.tool}</TableCell>
                                     <TableCell>
                                         <FindingSummarySmall

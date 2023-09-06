@@ -17,8 +17,12 @@ import static java.util.stream.Collectors.toMap;
 @RestController
 @RequestMapping("/api/orgs")
 public class OrganizationController {
-    @Autowired
     OrganizationRepository orgRepository;
+
+    @Autowired
+    public OrganizationController(OrganizationRepository repo) {
+        this.orgRepository = repo;
+    }
 
     @GetMapping()
     public ResponseEntity<List<Organization>> getOrgs() {
