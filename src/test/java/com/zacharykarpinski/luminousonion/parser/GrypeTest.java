@@ -1,7 +1,6 @@
 package com.zacharykarpinski.luminousonion.parser;
 
 import com.zacharykarpinski.luminousonion.model.Source;
-import com.zacharykarpinski.luminousonion.parsers.Grype;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

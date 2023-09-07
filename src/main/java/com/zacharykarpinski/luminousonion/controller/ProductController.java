@@ -37,7 +37,7 @@ public class ProductController {
         return ResponseEntity.ok(productRepository.findAll());
     }
 
-    @PostMapping()
+    @PostMapping(consumes = "application/json")
     public ResponseEntity<Product> putNewProduct(@RequestBody Product product) {
         return new ResponseEntity<>( productRepository.save(product), HttpStatus.CREATED);
     }

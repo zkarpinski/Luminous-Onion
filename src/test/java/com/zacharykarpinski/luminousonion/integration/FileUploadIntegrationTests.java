@@ -70,4 +70,22 @@ class FileUploadIntegrationTests {
 
     }
 
+    @Test
+    void givenSarifFile_whenUploaded_thenParseFile() throws Exception {
+        File testFile = new File(Thread.currentThread().getContextClassLoader().getResource("sample-files/sarif-v2.sarif").toURI());
+        FileInputStream fis = new FileInputStream(testFile);
+        MockMultipartFile multipartFile = new MockMultipartFile("file",fis);
+
+
+        // Test valid file - OK
+        mockMvc.perform(multipart("/upload")
+                .file(multipartFile)
+                .param("productId","1")
+                .param("sourceTool", SourceTool.DOCKER_SCOUT.name())
+                .param("label", "Sarif Docker Scout test")
+            )
+            .andExpect(status().isOk());
+
+    }
+
 }

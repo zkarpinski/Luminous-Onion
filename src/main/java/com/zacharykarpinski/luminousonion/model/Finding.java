@@ -21,17 +21,17 @@ public class Finding {
     private Long id;
     private String title;
     @Column(nullable = true, length = 1024)
-    private String description;
+    protected String description;
     private String shortDescription;
     @Enumerated(EnumType.STRING)
     private FindingStatus status = FindingStatus.NEW;
 
     // Package Data Members
-    private String packageName;
-    private String packagePath;
-    private String packageVersionFound;
-    private String packageVersionFixed;
-    private String purl;
+    protected String packageName;
+    protected String packagePath;
+    protected String packageVersionFound;
+    protected String packageVersionFixed;
+    protected String purl;
 
     // Vulnerability Details
     private String findingIdentifier;
@@ -71,7 +71,10 @@ public class Finding {
             // TODO Fix this
             this.description = s.length() > maxSize ? s.substring(0, maxSize) : s;
         }
+    }
 
+    public boolean isValid() {
+        return (source != null && severity != null && findingIdentifier != null );
     }
 
 }

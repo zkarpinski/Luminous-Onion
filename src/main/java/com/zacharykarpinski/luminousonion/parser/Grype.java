@@ -1,4 +1,4 @@
-package com.zacharykarpinski.luminousonion.parsers;
+package com.zacharykarpinski.luminousonion.parser;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -3,8 +3,11 @@ package com.zacharykarpinski.luminousonion.service;
 import com.zacharykarpinski.luminousonion.model.Product;
 import com.zacharykarpinski.luminousonion.model.Source;
 import com.zacharykarpinski.luminousonion.model.shared.SourceTool;
-import com.zacharykarpinski.luminousonion.parsers.*;
+import com.zacharykarpinski.luminousonion.parser.Grype;
+import com.zacharykarpinski.luminousonion.parser.Trivy;
+import com.zacharykarpinski.luminousonion.parser.*;
 import com.zacharykarpinski.luminousonion.repository.ProductRepository;
+import com.zacharykarpinski.luminousonion.repository.SourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,7 +31,8 @@ public class UploadSourceService {
         Source parsedSource = switch (tool) {
             case ANCORE_GRYPE -> Grype.parse(mpf);
             case AQUA_TRIVY -> Trivy.parse(mpf);
-            case OTHER_EXTERNAL, OTHER_INTERNAL -> new Source(tool);
+            case DOCKER_SCOUT -> Sarif.parse(mpf);
+            //case OTHER_EXTERNAL, OTHER_INTERNAL -> new Source(tool);
             default -> null;
         };
 

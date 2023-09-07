@@ -29,7 +29,7 @@ public class OrganizationController {
         return ResponseEntity.ok(orgRepository.findAll());
     }
 
-    @PostMapping()
+    @PostMapping(consumes = "application/json")
     public ResponseEntity<Organization> newOrganization(@RequestBody Organization org) {
         return new ResponseEntity<>(orgRepository.save(org), HttpStatus.CREATED);
     }

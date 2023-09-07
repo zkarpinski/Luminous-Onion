@@ -140,8 +140,8 @@ const NewSourcePopupComponent = (props) => {
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <input
-                                        accept="application/JSON"
-                                        id="upload-json-button"
+                                        accept="application/JSON,.sarif"
+                                        id="upload-file-button"
                                         name="file"
                                         type="file"
                                         onChange={handleFileChange}

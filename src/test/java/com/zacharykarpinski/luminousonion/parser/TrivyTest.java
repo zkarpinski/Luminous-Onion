@@ -2,7 +2,6 @@ package com.zacharykarpinski.luminousonion.parser;
 
 import com.zacharykarpinski.luminousonion.model.Source;
 import com.zacharykarpinski.luminousonion.model.shared.SourceTool;
-import com.zacharykarpinski.luminousonion.parsers.Trivy;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

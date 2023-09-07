@@ -27,7 +27,6 @@ public class ResourcesController {
                         MAPPING_VALUE_TEXT, source.name()))
                 .sorted(Comparator.comparing(m -> m.get(MAPPING_LABEL_TEXT))) //Sort by human-readable label
                 .toList();
-
         return ResponseEntity.ok(sourceToolsMap);
     }
 

@@ -6,9 +6,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public enum SourceTool {
     ANCORE_GRYPE ("Grype"),
     AQUA_TRIVY ("Trivy"),
-    OTHER_EXTERNAL ("Other - Externally found"),
-    OTHER_INTERNAL ("Other - Internally found"),
-    SNYK_SCA ("Snyk");
+    DOCKER_SCOUT ("Docker Scout");
+    //OTHER_EXTERNAL ("Other - Externally found"),
+    //OTHER_INTERNAL ("Other - Internally found"),
+    //SNYK_SCA ("Snyk");
 
 
     private final String name;
@@ -17,9 +18,8 @@ public enum SourceTool {
         name = s;
     }
 
-    public boolean equalsName(String otherName) {
-        // (otherName == null) check is not needed because name.equals(null) returns false
-        return name.equals(otherName);
+    public boolean equalsName(String altName) {
+        return name.equals(altName);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.zacharykarpinski.luminousonion.parsers;
+package com.zacharykarpinski.luminousonion.parser;
 
 import com.zacharykarpinski.luminousonion.model.Source;
 import org.springframework.web.multipart.MultipartFile;
