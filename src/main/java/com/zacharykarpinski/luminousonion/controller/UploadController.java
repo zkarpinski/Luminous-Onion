@@ -32,10 +32,10 @@ public class UploadController {
         try {
             Source newSource = uploadSourceService.uploadFileAndParse(mpf,label, sourceTool, productId, archivePrevious);
             if (newSource != null)
-                return ResponseHandler.createResponse("New source created!", HttpStatus.CREATED, newSource);
-            return ResponseHandler.createResponse("Unknown error.", HttpStatus.INTERNAL_SERVER_ERROR, null);
+                return ResponseHandler.created("source created",newSource.getId());
+            return ResponseHandler.resp("Unknown error.", HttpStatus.INTERNAL_SERVER_ERROR, null);
         } catch (Exception e) {
-            return ResponseHandler.createResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+            return ResponseHandler.resp(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }
 }

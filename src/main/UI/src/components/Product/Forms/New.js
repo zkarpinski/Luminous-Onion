@@ -21,21 +21,15 @@ const formReducer = (state,event) => {
     }
 }
 
-const ProductNew = () => {
+function ProductNew ({open,handleClose}) {
     const [formData, setFormData] = useReducer(formReducer, {
         name: '',
         productOwner: '',
         productTeam: '',
         org:'1'
     });
-    const [open, setOpen] = React.useState(false);
     const [reload, setReload] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => {setOpen(false);
-        //window.location.reload();
-        //TODO Refresh page
-        setReload(true);
-    }
+
 
     // When values change, save them to the formData state
     const handleChange = event => {
@@ -47,13 +41,17 @@ const ProductNew = () => {
 
     const handleSubmit = event => {
         event.preventDefault();
+        var createdID;
 
         // Create new product
         api.post('/api/product',JSON.stringify(formData))
-            .then((response) => console.log("Success:", JSON.stringify(response)))
+            .then((response) => createdID = response.id )
             .catch((error) => console.error("Error:", error))
-        // TODO Create a toast when product is created.
-        handleClose();
+            .finally(() => {
+                // TODO Create a toast when product is created.
+                console.log("Product Created:" + createdID);
+                handleClose();
+            })
     }
 
     if(reload) {
@@ -62,13 +60,7 @@ const ProductNew = () => {
 
     return (
         <>
-        <Grid>
-            <Button onClick={handleOpen} variant="contained" color="primary" size="medium">Create</Button>
-        </Grid>
-        <Modal
-            open={open}
-            onClose={handleClose}
-        >
+        <Modal open={open} onClose={handleClose}>
             <Box sx={style}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                    Create new product
@@ -120,6 +112,6 @@ const ProductNew = () => {
         </Modal>
         </>
     );
-};
+}
 
 export default ProductNew;

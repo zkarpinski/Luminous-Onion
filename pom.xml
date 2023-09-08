@@ -18,6 +18,7 @@
 		<java.version>17</java.version>
 		<ui-dir>${project.basedir}/src/main/UI</ui-dir>
 		<node.version>v19.4.0</node.version>
+		<yarn.version>v1.22.19</yarn.version>
 		<cucumber.version>7.13.0</cucumber.version>
 		<snakeyaml.version>2.1</snakeyaml.version>
 		<kotlin.version>1.9.10</kotlin.version>
@@ -165,6 +166,7 @@
 				<version>1.13.4</version>
 				<configuration>
 					<nodeVersion>${node.version}</nodeVersion>
+					<yarnVersion>${yarn.version}</yarnVersion>
 					<workingDirectory>${ui-dir}</workingDirectory>
 					<installDirectory>${project.build.directory}</installDirectory>
 				</configuration>
@@ -172,14 +174,14 @@
 					<execution>
 						<id>install-frontend-tools</id>
 						<goals>
-							<goal>install-node-and-npm</goal>
+							<goal>install-node-and-yarn</goal>
 						</goals>
 					</execution>
 
 					<execution>
-						<id>npm-install</id>
+						<id>yarn-install</id>
 						<goals>
-							<goal>npm</goal>
+							<goal>yarn</goal>
 						</goals>
 						<configuration>
 							<arguments>install</arguments>
@@ -189,7 +191,7 @@
 					<execution>
 						<id>build-frontend</id>
 						<goals>
-							<goal>npm</goal>
+							<goal>yarn</goal>
 						</goals>
 						<phase>prepare-package</phase>
 						<configuration>

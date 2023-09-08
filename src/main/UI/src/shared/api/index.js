@@ -15,7 +15,10 @@ const api = (method,headers, url, params) =>
             params: method === 'get' ? params: null,
             headers: headers
         })
-            .then(response => response.json())
+            .then((response) => {
+            if(!response.ok) throw new Error(response.status);
+            else return response.json();
+        })
             .then(data => {
                 resolve(data)
             })

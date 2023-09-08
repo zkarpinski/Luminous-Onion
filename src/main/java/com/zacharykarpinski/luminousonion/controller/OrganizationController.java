@@ -45,7 +45,7 @@ public class OrganizationController {
             map.putIfAbsent(f.name(), 0);
         }
 
-        return ResponseHandler.createResponse("Ok", HttpStatus.OK,map);
+        return ResponseHandler.resp("Ok", HttpStatus.OK,map);
     }
 
 }

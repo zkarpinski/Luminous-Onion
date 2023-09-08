@@ -31,8 +31,8 @@ public class FindingController {
     @GetMapping("/{id}")
     public ResponseEntity<Object> getFinding(@PathVariable Long id) {
         if (findingRepository.existsById(id)) {
-            return ResponseHandler.createResponse("test",HttpStatus.OK,findingRepository.findById(id));
+            return ResponseHandler.resp("test",HttpStatus.OK,findingRepository.findById(id));
         }
-        return ResponseHandler.createResponse("ID not found",HttpStatus.NOT_FOUND);
+        return ResponseHandler.simple("id not found",HttpStatus.NOT_FOUND);
     }
 }

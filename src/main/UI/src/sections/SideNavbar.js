@@ -15,7 +15,7 @@ function SideNavBarLink(props) {
 
     return (
             <Link to={to} aria-label={primary}>
-                <Tooltip title={primary}>
+                <Tooltip title={primary} placement={"right"}>
                     {icon}
                 </Tooltip>
             </Link>
@@ -30,7 +30,7 @@ SideNavBarLink.propTypes = {
 
 
 // Refer to icons here: https://mui.com/material-ui/material-icons/
-const SideNavbar = () => {
+export default function SideNavbar() {
 
     return (
         <Box component="nav" className="sidenavbar">
@@ -41,6 +41,4 @@ const SideNavbar = () => {
             <SideNavBarLink to="/reporting" primary="Reporting" icon={<AnalyticsIcon color="secondary" />}/>
         </Box>
     );
-};
-
-export default SideNavbar;
+}

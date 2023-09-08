@@ -17,9 +17,8 @@ const SourceList = () => {
     };
 
     const handleDeleteSource = () => {
-        api.delete(`/sources/${selectedRow.id}`)
+        api.delete(`/api/sources/${selectedRow.id}`)
         handleClose();
-
     }
 
     useEffect(() => {

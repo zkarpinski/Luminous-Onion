@@ -16,10 +16,13 @@ import org.springframework.web.multipart.MultipartFile;
 public class UploadSourceService {
 
     private ProductRepository productRepository;
+    private SourceRepository sourceRepository;
 
     @Autowired
-    public UploadSourceService(ProductRepository repo) {
+    public UploadSourceService(ProductRepository repo,
+                               SourceRepository sourceRepository) {
         this.productRepository = repo;
+        this.sourceRepository = sourceRepository;
     }
 
     public Source uploadFileAndParse(MultipartFile mpf, String label, SourceTool tool, Long productId, boolean archivePrevious) {
@@ -32,22 +35,23 @@ public class UploadSourceService {
             case ANCORE_GRYPE -> Grype.parse(mpf);
             case AQUA_TRIVY -> Trivy.parse(mpf);
             case DOCKER_SCOUT -> Sarif.parse(mpf);
-            //case OTHER_EXTERNAL, OTHER_INTERNAL -> new Source(tool);
             default -> null;
         };
-
-        // Archive all similar sources from the same product
-        if (archivePrevious) {
-            product.getSources().stream()
-                    .filter(source -> source.getTool() == tool && !source.isArchived())
-                    .forEach( s -> s.setArchived(true));
-        }
 
         // Add the product and save to repository
         if (parsedSource != null) {
             parsedSource.setLabel(label);
+
+            parsedSource = sourceRepository.saveAndFlush(parsedSource);
+
+            // Archive all similar sources from the same product
+            if (archivePrevious) {
+                product.getSources().stream()
+                    .filter(source -> source.getTool() == tool && !source.isArchived())
+                    .forEach( s -> s.setArchived(true));
+            }
             product.addSource(parsedSource);
-            productRepository.save(product);
+            productRepository.saveAndFlush(product);
             return parsedSource;
         }
 

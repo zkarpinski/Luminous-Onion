@@ -38,8 +38,9 @@ public class ProductController {
     }
 
     @PostMapping(consumes = "application/json")
-    public ResponseEntity<Product> putNewProduct(@RequestBody Product product) {
-        return new ResponseEntity<>( productRepository.save(product), HttpStatus.CREATED);
+    public ResponseEntity<Object> putNewProduct(@RequestBody Product product) {
+        Product p = productRepository.save(product);
+        return ResponseHandler.created("product created",p.getId());
     }
 
     @GetMapping("/{id}")
@@ -47,13 +48,13 @@ public class ProductController {
         return ResponseEntity.ok(productRepository.findById(id).orElse(null));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<Object> deleteProduct(@PathVariable Long id) {
         if (productRepository.existsById(id)) {
             productRepository.deleteById(id);
-            return ResponseHandler.createResponse("entity deleted",HttpStatus.OK);
+            return ResponseHandler.deleted();
         }
-        return ResponseHandler.createResponse("ID not found",HttpStatus.NOT_FOUND);
+        return ResponseHandler.simple("id not found",HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/{id}/findings/summary")
@@ -65,7 +66,7 @@ public class ProductController {
                 }
                 return i.get(0).toString();
         }, i -> (int) i.get(1) ));
-        return ResponseHandler.createResponse("Ok",HttpStatus.OK,map);
+        return ResponseHandler.resp("Ok",HttpStatus.OK,map);
     }
 
     @GetMapping("/{id}/findings")
