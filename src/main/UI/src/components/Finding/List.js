@@ -84,7 +84,7 @@ const FindingList = ({filters, endpoint,scope}) => {
                 `${params.row.packageName || ''}:${params.row.packageVersionFound || ''}`,
         },
 
-        { field: 'packageVersionFixed', headerName: 'Fixed Version', width: 100 },
+        { field: 'packageVersionFixed', headerName: 'Fixed Version', width: 150 },
         { field: 'age', headerName: 'Age', type: 'number', width: 90 },
         { field: 'createTimestamp', headerName: 'Created', width: 100,
             valueFormatter: (params) => dayjs(params?.value).format(outputDateFormat)},

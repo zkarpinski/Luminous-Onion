@@ -1,5 +1,6 @@
 package com.zacharykarpinski.luminousonion.parser;
 
+import com.zacharykarpinski.luminousonion.model.Finding;
 import com.zacharykarpinski.luminousonion.model.Source;
 import com.zacharykarpinski.luminousonion.model.shared.SourceTool;
 import org.junit.jupiter.api.Test;
@@ -17,6 +18,10 @@ public class SarifTest {
         assertEquals(1,s.getFindings().size());
         assertEquals(SourceTool.DOCKER_SCOUT, s.getTool());
         assertEquals("0.24.1",s.getToolVersion());
+
+        Finding firstFinding = s.getFindings().stream().findFirst().get();
+        assertEquals("1.4.5",firstFinding.getPackageVersionFound());
+        assertEquals("xstream",firstFinding.getPackageName());
     }
 
     String SARIFV2_JSON = """

@@ -10,6 +10,7 @@ import com.zacharykarpinski.luminousonion.model.Finding;
 import com.zacharykarpinski.luminousonion.model.Source;
 import com.zacharykarpinski.luminousonion.model.shared.FindingSeverity;
 import com.zacharykarpinski.luminousonion.model.shared.SourceTool;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -155,9 +156,18 @@ public class SarifV2 implements Parser {
 
             //Extract version from purl
             if (purl != null && purl.contains("@")) {
-                // Expected text: pkg:maven/org.yaml/snakeyaml@1.28
-                packageName = purl.split("@")[0];
-                packageVersionFound = purl.split("@")[1];
+                // Expected texts:
+                // pkg:maven/org.yaml/snakeyaml@1.28
+                // pkg:deb/ubuntu/shadow@1:4.8.1-1ubuntu5.20.04.4?os_distro=focal&os_name=ubuntu&os_version=20.04
+
+                // Parse packageName and group id
+                String leftText = StringUtils.substringBefore(purl,"@");
+                packageName = StringUtils.substringAfterLast(leftText,"/");
+
+                // Parse version
+                String rightText = StringUtils.substringAfter(purl,"@");
+                packageVersionFound = StringUtils.substringBefore(rightText,"?");
+
             } else {
                 packageName = purl;
             }

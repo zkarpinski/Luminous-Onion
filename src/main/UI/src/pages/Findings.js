@@ -1,12 +1,12 @@
 import React from 'react';
-import FindingList from "../components/Finding/List";
+import FindingListv2 from "../components/Finding/Listv2";
 import {useSearchParams} from "react-router-dom";
 
 const Findings = () => {
     const [filterParams] = useSearchParams();
     return (
         <>
-            <FindingList filters={[... filterParams]}/>
+            <FindingListv2 filters={[... filterParams]}/>
         </>
     )
 }
