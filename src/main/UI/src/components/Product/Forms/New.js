@@ -14,22 +14,32 @@ const style = {
     padding: 4,
 };
 
+const initalFormState = {
+    name: '',
+    productOwner: '',
+    productTeam: '',
+    org:'1',
+    shortDescription:''
+}
+
 const formReducer = (state,event) => {
+    if (event.reset) return initalFormState;
     return {
         ...state,
         [event.name]: event.value
     }
 }
 
-function ProductNew ({open,handleClose}) {
-    const [formData, setFormData] = useReducer(formReducer, {
-        name: '',
-        productOwner: '',
-        productTeam: '',
-        org:'1'
-    });
+const ProductNew = () => {
+    const [formData, setFormData] = useReducer(formReducer, initalFormState);
+    const [open, setOpen] = React.useState(false);
     const [reload, setReload] = React.useState(false);
-
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => {
+        setFormData({reset:'true'});
+        setOpen(false);
+        setReload(true);
+    }
 
     // When values change, save them to the formData state
     const handleChange = event => {
@@ -41,17 +51,14 @@ function ProductNew ({open,handleClose}) {
 
     const handleSubmit = event => {
         event.preventDefault();
-        var createdID;
 
         // Create new product
         api.post('/api/product',JSON.stringify(formData))
-            .then((response) => createdID = response.id )
+            .then((response) => console.log("Success:", JSON.stringify(response)))
             .catch((error) => console.error("Error:", error))
             .finally(() => {
-                // TODO Create a toast when product is created.
-                console.log("Product Created:" + createdID);
-                handleClose();
-            })
+                handleClose()
+            });
     }
 
     if(reload) {
@@ -60,6 +67,9 @@ function ProductNew ({open,handleClose}) {
 
     return (
         <>
+        <Grid>
+            <Button onClick={handleOpen} variant="contained" color="primary" size="medium">Create</Button>
+        </Grid>
         <Modal open={open} onClose={handleClose}>
             <Box sx={style}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
@@ -80,6 +90,19 @@ function ProductNew ({open,handleClose}) {
                                     onChange={handleChange}
                                     fullWidth
                                 />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        id="shortDescription"
+                                        name="shortDescription"
+                                        label="Description"
+                                        autoComplete="off"
+                                        value={formData.shortDescription}
+                                        onChange={handleChange}
+                                        fullWidth
+                                        multiline={true}
+                                        minRows={3}
+                                    />
                                 </Grid>
                                 <Grid item xs={12}>
                                 <TextField
@@ -112,6 +135,6 @@ function ProductNew ({open,handleClose}) {
         </Modal>
         </>
     );
-}
+};
 
 export default ProductNew;

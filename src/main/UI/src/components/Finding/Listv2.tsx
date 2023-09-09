@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import api from "../../shared/api";
 import {Button, Grid, Paper} from "@mui/material";
-import {SlickgridReactInstance, SlickgridReact,  Grouping} from "slickgrid-react";
+import {SlickgridReactInstance, SlickgridReact, Grouping, FieldType, Formatters} from "slickgrid-react";
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
 import "@slickgrid-universal/common/dist/styles/css/slickgrid-theme-material.css"
 import {SeverityType, FindingSeverity} from "../../shared/SeverityType";
+import {FindingData} from "@Base/types";
+
 
 export default function FindingListv2 ({filters, endpoint}) {
 
@@ -36,9 +38,10 @@ export default function FindingListv2 ({filters, endpoint}) {
     function clearGroupBy() {
         reactGrid.dataView.setGrouping([]);
     }
-    function groupBy() {
+    function groupByPackage() {
         reactGrid.dataView.setGrouping({
             getter: 'packageName',
+            collapsed: true,
             formatter: (g) => `<b>Package: ${g.value}</b> <span style="color:red">(${g.count} findings)</span>`,
             comparer: (a, b) => {
                 return b.count - a.count;
@@ -50,6 +53,7 @@ export default function FindingListv2 ({filters, endpoint}) {
     function groupBySeverity() {
         reactGrid.dataView.setGrouping({
             getter: 'severity',
+            collapsed: true,
             formatter: (g) => {
                 let color:string;
                 switch (g.value) {
@@ -75,13 +79,73 @@ export default function FindingListv2 ({filters, endpoint}) {
                 return `Severity: <span style="color:${color};font-weight:700">${g.value} (${g.count} findings)</span>`},
             comparer: (a, b) => {
                 return severitySortComparator(b.value, a.value); // this order ensure sorts descending
-            },
-            collapsed: true
+            }
         } as Grouping);
-        reactGrid.slickGrid.invalidate(); // invalidate all rows and re-render
+        reactGrid.slickGrid.invalidate();
     }
 
+    function groupByProductSeverity() {
+        reactGrid.dataView.setGrouping([
+            {
+                getter: (finding:FindingData) => {return finding.source.product.name},
+                collapsed: false,
+                formatter: (g) => `<span style="font-weight:700">${g.value} (${g.count}</span>)`
 
+            },
+                {
+                    getter: 'severity',
+                    collapsed: true,
+                formatter: (g) => {
+                    let color:string;
+                    switch (g.value) {
+                        case SeverityType.Critical:
+                            color = FindingSeverity.Critical.color.base;
+                            break;
+                        case SeverityType.High:
+                            color = FindingSeverity.High.color.base;
+                            break;
+                        case SeverityType.Medium:
+                            color = FindingSeverity.Medium.color.base;
+                            break;
+                        case SeverityType.Low:
+                            color = FindingSeverity.Low.color.base;
+                            break;
+                        case SeverityType.Info:
+                            color = FindingSeverity.Info.color.base;
+                            break;
+                        default:
+                            color = "black";
+                            break;
+                    }
+                    return `Severity: <span style="color:${color};font-weight:700">${g.value} (${g.count} findings)</span>`
+                },
+                comparer: (a, b) => {
+                    return severitySortComparator(b.value, a.value);
+                }
+            }
+            ] as Grouping);
+        reactGrid.slickGrid.invalidate();
+    }
+
+    function groupByProductPackage() {
+        reactGrid.dataView.setGrouping([
+            {
+                getter: (finding:FindingData) => {return finding.source.product.name},
+                collapsed: false,
+                formatter: (g) => `<span style="font-weight:700">${g.value} (${g.count}</span>)`
+
+            },
+            {
+                getter: 'packageName',
+                collapsed: true,
+                formatter: (g) => `<b>Package: ${g.value}</b> <span style="color:red">(${g.count} findings)</span>`,
+                comparer: (a, b) => {
+                    return b.count - a.count;
+                },
+            }
+        ] as Grouping);
+        reactGrid.slickGrid.invalidate();
+    }
 
     useEffect(() => {
         setLoading(true);
@@ -105,7 +169,7 @@ export default function FindingListv2 ({filters, endpoint}) {
             container: '#gridContainer'
         },
         enableFiltering: true,
-        // you could debounce/throttle the input text filter if you have lots of data
+        // throttle the input text filter if you have lots of data
         // filterTypingDebounce: 250,
         enableGrouping: true,
         enableCellNavigation: true,
@@ -133,11 +197,12 @@ export default function FindingListv2 ({filters, endpoint}) {
         { id: 'product', name: 'Product Name', field: 'source.product.name', width: 150 },
         { id: 'sourceLabel', name: 'Source', field: 'source.label', width: 150 },
         { id: 'title', name: 'Title', field: 'title', width: 350, sortable: true, filterable: true,},
-        { id: 'status', name: 'Status', field: 'status', filterable: true },
         { id: 'tool', name: 'Tool', field: 'source.tool' },
         { id: 'severity', name: 'Severity', field: 'severity', sortable: true, filterable: true, comparer:severitySortComparator },
         { id: 'findingIdentifier', name: 'Vul ID', field: 'findingIdentifier' },
-        { id: 'packageName', name: 'Package', field: 'packageName', sortable: true, filterable: true, },
+        { id: 'packageName', name: 'Package', field: 'packageName', sortable: true, filterable: true },
+        { id: 'createTimestamp', name: 'Created', field: 'createTimestamp', sortable: true,
+            type: FieldType.date, formatter:Formatters.dateIso },
         { id: 'id', name: 'id', field: 'id' },
     ];
 
@@ -153,10 +218,10 @@ export default function FindingListv2 ({filters, endpoint}) {
             </div>
             <Grid container>
                 <Button onClick={clearGroupBy} variant={"outlined"} size={"small"}>Reset</Button>
-                <Button onClick={groupBy} variant={"outlined"} size={"small"}>Group by Finding</Button>
+                <Button onClick={groupByPackage} variant={"outlined"} size={"small"}>Group by Package</Button>
                 <Button onClick={groupBySeverity} variant={"outlined"} size={"small"}>Group by Severity</Button>
-                <Button onClick={groupBy} variant={"outlined"} size={"small"}>Group by Finding</Button>
-                <Button onClick={groupBy} variant={"outlined"} size={"small"}>Group by Finding</Button>
+                <Button onClick={groupByProductSeverity} variant={"outlined"} size={"small"}>Group by Product & Severity</Button>
+                <Button onClick={groupByProductPackage} variant={"outlined"} size={"small"}>Group by Product & Package</Button>
             </Grid>
             <Paper id="gridContainer">
                 <SlickgridReact gridId="findingGrid"

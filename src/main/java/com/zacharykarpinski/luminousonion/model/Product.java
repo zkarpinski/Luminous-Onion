@@ -24,6 +24,7 @@ public class Product {
     private String name;
     private String productOwner;
     private String productTeam;
+    private String shortDescription;
 
 
     // External Identifiers
@@ -33,7 +34,7 @@ public class Product {
     private String externalIdentifierExtra2;
 
     @ManyToOne
-    @JoinColumn(name="orgId")
+    @JoinColumn(name="org_id")
     private Organization org;
 
     // Date and times

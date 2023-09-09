@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {Box, Stack} from "@mui/material";
-import {SeverityType} from "../../shared/SeverityType";
-import {FindingSeverity} from "../../shared/constants";
+import {SeverityType, FindingSeverity} from "../../shared/SeverityType";
 
 interface FindingSummarySmallProps {
     critical:number,
@@ -15,52 +14,39 @@ interface FindingSummarySmallProps {
 const SeverityTile = (props) => {
     const { severity, value, disabled} = props;
 
-    let bgColor, abbr, abbrColor, title;
+    let sevType, bgColor, abbr, abbrColor, title;
 
     switch(severity) {
         case (SeverityType.Critical): {
-            abbr = "C";
-            title = "Critical findings"
-            bgColor = FindingSeverity.Critical.color.light;
-            abbrColor = FindingSeverity.Critical.color.base;
+            sevType = FindingSeverity.Critical;
             break;
         }
         case (SeverityType.High): {
-            abbr = "H";
-            title = "High findings"
-            bgColor = FindingSeverity.High.color.light;
-            abbrColor = FindingSeverity.High.color.base;
+            sevType = FindingSeverity.High;
             break;
         }
         case (SeverityType.Medium): {
-            abbr = "M";
-            title = "Medium findings"
-            bgColor = FindingSeverity.Medium.color.light;
-            abbrColor = FindingSeverity.Medium.color.base;
+            sevType = FindingSeverity.Medium;
             break;
         }
         case (SeverityType.Low): {
-            abbr = "L";
-            title = "Low findings"
-            bgColor = FindingSeverity.Low.color.light;
-            abbrColor  = FindingSeverity.Low.color.base;
+            sevType = FindingSeverity.Low;
             break;
         }
         case (SeverityType.Info): {
-            abbr = "I";
-            title = "Informational findings"
-            bgColor = FindingSeverity.Info.color.light;
-            abbrColor  = FindingSeverity.Info.color.base;
+            sevType = FindingSeverity.Info;
             break;
         }
         default: {
-            abbr = "U";
-            title = "Unknown findings"
-            bgColor = "#000";
-            abbrColor = "#000";
+            sevType = FindingSeverity.Info;
             break;
         }
     }
+
+    abbr = sevType.abbr;
+    title = sevType.text;
+    bgColor = sevType.color.light;
+    abbrColor = sevType.color.base;
 
     // Override the colors if disabled
     if (disabled) { bgColor = FindingSeverity.Low.color.light; abbrColor=FindingSeverity.Low.color.base; }

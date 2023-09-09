@@ -10,7 +10,17 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": false,
-    "strictNullChecks": false
+    "strictNullChecks": false,
+    //TODO Get paths working
+    "baseUrl": ".",
+    "paths": {
+      "@Base/*": [
+        "src/*"
+      ],
+      "@Shared/*": [
+        "src/shared/*"
+      ]
+    }
   },
   "include": [
     "./src"

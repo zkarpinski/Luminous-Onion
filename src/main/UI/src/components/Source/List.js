@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Paper} from "@mui/material";
+import {
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    Paper,
+    Typography
+} from "@mui/material";
 import api from "../../shared/api";
 import { headerHeight, outputDateFormat } from "../../shared/constants";
 import dayjs from "dayjs";
@@ -49,7 +58,7 @@ const SourceList = () => {
         { field: 'targetType', headerName: 'Target Type', width: 100 },
         { field: 'createTimestamp', headerName: 'Created', width: 100,
             valueFormatter: (params) => dayjs(params?.value).format(outputDateFormat)},
-        { field: 'actions', headerName: 'Actions', width: 400, renderCell: (params) => {
+        { field: 'actions', headerName: 'Actions', width:100, renderCell: (params) => {
                 return (
                     <Button
                         onClick={(e) => onDeleteClick(e, params.row)}
@@ -65,9 +74,9 @@ const SourceList = () => {
 
     return (
         <>
-            <div>
-                <h1>{sourcesCount} Sources</h1>
-            </div>
+            <Typography variant="h4" component="div">
+                {sourcesCount} Sources
+            </Typography>
             <Paper style={{'height':`calc(100% - ${headerHeight}px - 50px)`}}>
                 <DataGrid
                     loading={loading}

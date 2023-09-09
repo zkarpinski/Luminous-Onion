@@ -2,7 +2,6 @@ import React from 'react';
 import HomeIcon from '@mui/icons-material/Home';
 import FactoryIcon from '@mui/icons-material/Factory';
 import CategoryIcon from '@mui/icons-material/Category';
-import AnalyticsIcon from '@mui/icons-material/Analytics';
 import BugReportIcon from '@mui/icons-material/BugReport';
 import Tooltip from '@mui/material/Tooltip';
 import { Box } from "@mui/material";
@@ -38,7 +37,6 @@ export default function SideNavbar() {
             <SideNavBarLink to="/product" primary="Products" icon={<CategoryIcon color="secondary" />}/>
             <SideNavBarLink to="/source" primary="Sources" icon={<FactoryIcon color="secondary" />}/>
             <SideNavBarLink to="/finding" primary="Findings" icon={<BugReportIcon color="secondary" />}/>
-            <SideNavBarLink to="/reporting" primary="Reporting" icon={<AnalyticsIcon color="secondary" />}/>
         </Box>
     );
 }
