@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import api from "../../shared/api";
 import {Button, Grid, Paper} from "@mui/material";
-import {Link} from "react-router-dom";
-import dayjs from "dayjs";
-import {outputDateFormat} from "../../shared/constants";
-import {SlickgridReactInstance, SlickgridReact, Grouping} from "slickgrid-react";
+import {SlickgridReactInstance, SlickgridReact,  Grouping} from "slickgrid-react";
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
 import "@slickgrid-universal/common/dist/styles/css/slickgrid-theme-material.css"
 import {SeverityType, FindingSeverity} from "../../shared/SeverityType";
 
-export default function FindingListv2 ({filters, endpoint,scope}) {
+export default function FindingListv2 ({filters, endpoint}) {
 
     const [findings, setFindings] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -27,16 +24,10 @@ export default function FindingListv2 ({filters, endpoint,scope}) {
         return 0;
     }
 
-    const severitySortComparator = (v1, v2) => severitySortNumber(v1) - severitySortNumber(v2);
+    const severitySortComparator = (v1, v2) => {
+        console.log("COMPARE" + v1);
+        return severitySortNumber(v1) - severitySortNumber(v2)};
 
-    const [columnVisibilityModel, setColumnVisibilityModel] = React.useState({
-
-    });
-
-    const productScope = {
-        product: false,
-        sourceLabel: true
-    }
 
     function reactGridReady(grid) {
         setReactGrid(grid);
@@ -60,7 +51,7 @@ export default function FindingListv2 ({filters, endpoint,scope}) {
         reactGrid.dataView.setGrouping({
             getter: 'severity',
             formatter: (g) => {
-                var color:string;
+                let color:string;
                 switch (g.value) {
                     case SeverityType.Critical:
                         color = FindingSeverity.Critical.color.base;
@@ -83,7 +74,7 @@ export default function FindingListv2 ({filters, endpoint,scope}) {
                 }
                 return `Severity: <span style="color:${color};font-weight:700">${g.value} (${g.count} findings)</span>`},
             comparer: (a, b) => {
-                return b.count - a.count;
+                return severitySortComparator(b.value, a.value); // this order ensure sorts descending
             },
             collapsed: true
         } as Grouping);
@@ -98,16 +89,6 @@ export default function FindingListv2 ({filters, endpoint,scope}) {
         console.log({filters})
 
         const apiEndpoint =  endpoint || '/api/findings';
-
-        // Set the column visibility based on scope
-        switch (scope) {
-            case "product":
-                setColumnVisibilityModel(productScope);
-                break;
-            default:
-                break;
-        }
-
 
         // Fetch the findings
         api.get(apiEndpoint)
@@ -138,8 +119,8 @@ export default function FindingListv2 ({filters, endpoint,scope}) {
 
     // Custom column logic, iterate json object, seperated by dots "."
     function getItemColumnValue(item, column) {
-        var keys : string[] = (column.field).split(".");
-        var node = item;
+        let keys : string[] = (column.field).split(".");
+        let node = item;
         keys.forEach(key => {
             if (key in node) node = node[key];
         })
@@ -149,12 +130,12 @@ export default function FindingListv2 ({filters, endpoint,scope}) {
 
 
     const columns= [
-        { id: 'product', name: 'Product Name', field: 'source.product.name', width: 150, },
+        { id: 'product', name: 'Product Name', field: 'source.product.name', width: 150 },
         { id: 'sourceLabel', name: 'Source', field: 'source.label', width: 150 },
         { id: 'title', name: 'Title', field: 'title', width: 350, sortable: true, filterable: true,},
         { id: 'status', name: 'Status', field: 'status', filterable: true },
         { id: 'tool', name: 'Tool', field: 'source.tool' },
-        { id: 'severity', name: 'Severity', field: 'severity', sortable: true, filterable: true, },
+        { id: 'severity', name: 'Severity', field: 'severity', sortable: true, filterable: true, comparer:severitySortComparator },
         { id: 'findingIdentifier', name: 'Vul ID', field: 'findingIdentifier' },
         { id: 'packageName', name: 'Package', field: 'packageName', sortable: true, filterable: true, },
         { id: 'id', name: 'id', field: 'id' },

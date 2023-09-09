@@ -40,12 +40,12 @@ const Home = () => {
                             <Typography variant="body1">Luminous Onion is a cutting-edge web application designed to revolutionize vulnerability management by seamlessly ingesting security reports from a variety of 3rd party tools. With its intuitive interface and powerful features, Luminous Onion empowers organizations to take charge of their cybersecurity posture like never before.
                             </Typography>
                             <br/>
-                            <Typography variant="body1"><b>Why Choose Luminous Onion:</b>
+                            <Typography variant="body1"><b>Why Choose Luminous Onion:</b></Typography>
                                 <ul><li>Simplicity: Luminous Onions user-friendly interface makes vulnerability management accessible to both technical and non-technical stakeholders.</li>
                                 <li>Efficiency: Automated risk assessment, prioritization, and collaborative features accelerate the vulnerability remediation process.</li>
                                 <li>Insight: Visualizations and analytics offer deep insights into vulnerabilities, aiding strategic decision-making.</li>
                                 <li>Accuracy: Advanced algorithms ensure accurate risk scoring, enhancing the precision of your vulnerability management strategy.</li>
-                                <li>Agility: Real-time updates and integration capabilities enable rapid responses to evolving threats.</li></ul></Typography>
+                                <li>Agility: Real-time updates and integration capabilities enable rapid responses to evolving threats.</li></ul>
                         </Box>
                     </Grid>
                     </Grid>
