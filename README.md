@@ -1,11 +1,28 @@
-# Luminous Onion
+<p align="center" width="100%">
+<img alt="luminous onion logo" src ="docs/static/images/luminous-onion-logo.png" height="225"/>
+
+<h2 align="center">Luminous Onion </h2>
+</p>
+
+---
+
+<div align="center">
+
 ![Java CI](https://github.com/zkarpinski/Luminous-Onion/actions/workflows/maven.yml/badge.svg)
 ![CodeQL](https://github.com/zkarpinski/Luminous-Onion/actions/workflows/codeql.yml/badge.svg)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=zkarpinski_Luminous-Onion&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=zkarpinski_Luminous-Onion)
 [![Docker](https://img.shields.io/badge/Docker-Latest-blue)](https://hub.docker.com/r/zkarpinski/luminous-onion/tags)
-![Screenshot of DefectDojo](docs/static/images/product_view_with_scans.jpg)
+</div>
+
+---
+
 ## Summary
 Luminous Onion is a cutting-edge web application designed to revolutionize vulnerability management by seamlessly ingesting security reports from a variety of 3rd party tools. With its intuitive interface and powerful features, Luminous Onion empowers organizations to take charge of their cybersecurity posture like never before.
+
+![Luminous Onion Screenshot](docs/static/images/product_view_with_scans.jpg)
+
+
+
 ## Setup
 Java Version: **17**
 

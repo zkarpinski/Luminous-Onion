@@ -1,12 +1,18 @@
 import React from 'react';
 import AppBar from '@mui/material/AppBar';
-import {Container, Toolbar, Typography} from "@mui/material";
+import {Box, Container, IconButton, Toolbar, Typography} from "@mui/material";
+
 
 const Header = () => {
     return (
         <AppBar position="fixed">
             <Container maxWidth="100%">
                 <Toolbar disableGutters variant="dense">
+                    <Box sx={{ flexGrow: 0 }}>
+                        <IconButton sx={{ p: 0 }} >
+                            <img alt="logo" src="/static/img/luminous-onion-logo-small.png" height="40"/>
+                        </IconButton>
+                    </Box>
                     <Typography
                         variant="h6"
                         noWrap
@@ -19,6 +25,7 @@ const Header = () => {
                             letterSpacing: '.1rem',
                             color: 'inherit',
                             textDecoration: 'none',
+                            paddingLeft: 1
                         }}
                     > Luminous Onion
                     </Typography>

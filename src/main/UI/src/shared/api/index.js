@@ -24,7 +24,6 @@ const api = (method,headers, url, params) =>
             })
             .catch((error) => {
                 console.error(error);
-                reject(error);
             })
     });
 
