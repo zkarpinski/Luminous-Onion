@@ -11,7 +11,8 @@ import {
 import { ExcelExportService } from "@slickgrid-universal/excel-export";
 import "@slickgrid-universal/common/dist/styles/css/slickgrid-theme-material.css";
 import { SeverityType, FindingSeverity } from "../../shared/SeverityType";
-import { FindingData } from "@Base/types";
+// eslint-disable-next-line no-unused-vars
+import { FindingData } from "../../types";
 
 export default function FindingListv2({ filters, endpoint }) {
   const [findings, setFindings] = useState([]);

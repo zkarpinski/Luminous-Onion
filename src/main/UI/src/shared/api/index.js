@@ -7,8 +7,8 @@ const fileUploadHeaders = {
 };
 
 const api = (method, headers, url, params) =>
+  // eslint-disable-next-line no-unused-vars
   new Promise((resolve, reject) => {
-    // eslint-disable-line
     console.log("Calling endpoint: " + url);
     fetch(`${url}`, {
       method,
