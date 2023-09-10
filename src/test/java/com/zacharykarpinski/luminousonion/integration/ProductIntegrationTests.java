@@ -25,7 +25,7 @@ class ProductIntegrationTests {
     private TestRestTemplate restTemplate;
 
     @Test
-    void testAddProduct() {
+    void givenANewProduct_whenPostOverAPI_thenReturnCreatedStatusCode() {
         Product testProduct = new Product();
         testProduct.setName("Test");
 
