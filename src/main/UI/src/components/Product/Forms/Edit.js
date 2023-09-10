@@ -1,18 +1,17 @@
-import React, { useEffect } from 'react';
-import {useParams} from "react-router-dom";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 const ProductEdit = () => {
-    const { id } = useParams();
+  const { id } = useParams();
 
-    // TODO: Add Product Edit feature
+  // TODO: Add Product Edit feature
 
-    useEffect(() => {
-    },[]);
+  useEffect(() => {}, []);
 
-    return (
-        <div>
-            <h1>Product {id} edit page. Coming soon..</h1>
-        </div>
-    );
+  return (
+    <div>
+      <h1>Product {id} edit page. Coming soon..</h1>
+    </div>
+  );
 };
 
 export default ProductEdit;

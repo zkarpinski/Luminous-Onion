@@ -1,14 +1,12 @@
-import React from 'react';
+import React from "react";
 import ReportingView from "../components/Reporting/View";
 
-
 const Product = () => {
-
-    return (
-        <>
-            <ReportingView/>
-        </>
-    )
-}
+  return (
+    <>
+      <ReportingView />
+    </>
+  );
+};
 
 export default Product;

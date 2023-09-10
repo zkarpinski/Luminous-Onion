@@ -8,23 +8,22 @@ const drawerWidth = 300;
  * @returns {Element}
  * @constructor
  */
-const FindingRightDrawerView = ({opened}) => {
-    return (
-        <Drawer
-            sx={{
-                width: drawerWidth,
-                flexShrink: 0,
-                '& .MuiDrawer-paper': {
-                    width: drawerWidth,
-                    zIndex:2
-                },
-            }}
-            variant="persistent"
-            anchor="right"
-            open={opened}
-        >
-        </Drawer>
-    )
+const FindingRightDrawerView = ({ opened }) => {
+  return (
+    <Drawer
+      sx={{
+        width: drawerWidth,
+        flexShrink: 0,
+        "& .MuiDrawer-paper": {
+          width: drawerWidth,
+          zIndex: 2,
+        },
+      }}
+      variant="persistent"
+      anchor="right"
+      open={opened}
+    ></Drawer>
+  );
 };
 
 export default FindingRightDrawerView;

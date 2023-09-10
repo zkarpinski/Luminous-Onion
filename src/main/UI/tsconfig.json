@@ -14,19 +14,10 @@
     //TODO Get paths working
     "baseUrl": ".",
     "paths": {
-      "@Base/*": [
-        "src/*"
-      ],
-      "@Shared/*": [
-        "src/shared/*"
-      ]
+      "@Base/*": ["src/*"],
+      "@Shared/*": ["src/shared/*"]
     }
   },
-  "include": [
-    "./src"
-  ],
-  "exclude": [
-    "node_modules",
-    "build"
-  ]
+  "include": ["./src"],
+  "exclude": ["node_modules", "build"]
 }

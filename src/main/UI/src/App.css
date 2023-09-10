@@ -1,4 +1,3 @@
-
 .sidenavbar {
   height: 100%;
   margin-top: 48px; /* Match MUI AppBar height */
@@ -8,7 +7,7 @@
   z-index: 2;
   top: 0;
   left: 0;
-  background-color:#232323;
+  background-color: #232323;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
@@ -23,9 +22,9 @@
 }
 
 .vulRow {
-  display:flex;
-  flex-direction:row;
-  justify-content:flex-start;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
 /* Findings Summary Styles */

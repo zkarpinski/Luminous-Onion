@@ -1,14 +1,12 @@
-import React from 'react';
+import React from "react";
 import ProductView from "../components/Product/Forms/View";
 
-
 const Product = () => {
-
-    return (
-        <>
-            <ProductView/>
-        </>
-    )
-}
+  return (
+    <>
+      <ProductView />
+    </>
+  );
+};
 
 export default Product;

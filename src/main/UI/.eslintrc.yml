@@ -4,14 +4,18 @@ env:
   es2021: true
 extends:
   - eslint:recommended
+  - plugin:react/jsx-runtime
   - plugin:react/recommended
+  - plugin:prettier/recommended
+  - prettier
 parserOptions:
   ecmaVersion: latest
 plugins:
   - react
-rules: {
-  "react/prop-types": "off",
-  "react-hooks/exhaustive-deps": "off",
-  "no-undef": "off",
-  "no-unused-vars": "warn"
-}
+rules:
+  {
+    "react/prop-types": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "no-undef": "off",
+    "no-unused-vars": "warn",
+  }

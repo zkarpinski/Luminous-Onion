@@ -14,7 +14,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Data
 @Getter
 @Setter
 public class Product {
@@ -29,7 +28,6 @@ public class Product {
 
     // External Identifiers
     private String jiraProjectKey;
-    private String pegaProductId;
     private String externalIdentifierExtra1;
     private String externalIdentifierExtra2;
 
