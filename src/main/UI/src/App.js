@@ -25,7 +25,6 @@ function App() {
   const [token, setToken] = React.useState();
 
   if (token) {
-    // TODO Build login logic
     return (
       <ThemeProvider theme={theme}>
         <CssBaseline>

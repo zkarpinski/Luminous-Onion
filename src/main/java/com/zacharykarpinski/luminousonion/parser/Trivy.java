@@ -9,10 +9,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zacharykarpinski.luminousonion.model.Finding;
 import com.zacharykarpinski.luminousonion.model.Source;
-import com.zacharykarpinski.luminousonion.model.shared.FindingSeverity;
 import com.zacharykarpinski.luminousonion.model.shared.SourceTool;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
@@ -62,12 +59,12 @@ public class Trivy implements Parser {
         Set<Finding> findingList = new HashSet<>();
         if (!trvy.results.isEmpty()) {
             trvy.results.forEach(r -> {
-                r.Vulnerabilities.forEach(v -> {
+                r.vulnerabilities.forEach(v -> {
 
                 });
                 try {
                     findingList.addAll(objectMapper.readValue(
-                            objectMapper.writeValueAsString(r.Vulnerabilities),
+                            objectMapper.writeValueAsString(r.vulnerabilities),
                             new TypeReference<Set<Finding>>() {
                             }));
                 } catch (JsonProcessingException e) {
@@ -105,8 +102,10 @@ public class Trivy implements Parser {
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     private static class Result {
-        public String Target;
-        public List<Vulnerability> Vulnerabilities;
+        @JsonProperty("Target")
+        public String target;
+        @JsonProperty("Vulnerabilities")
+        public List<Vulnerability> vulnerabilities;
 
         @JsonProperty("Class")
         public String className;
@@ -115,48 +114,29 @@ public class Trivy implements Parser {
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    private static class Vulnerability {
-        public String title; // No mapping on purpose
+    private static class Vulnerability extends AbstractParserFinding {
         @JsonAlias("Description")
-        public String description;
+        protected String description;
         @JsonAlias("Title") // We map title to short description
-        public String shortDescription;
+        protected String shortDescription;
         @JsonAlias("PkgName")
-        public String packageName;
+        protected String packageName;
         @JsonAlias("PkgPath")
-        public String packagePath;
+        protected String packagePath;
         @JsonAlias("InstalledVersion")
-        public String packageVersionFound;
+        protected String packageVersionFound;
         @JsonAlias("FixedVersion")
-        public String packageVersionFixed;
-
+        protected String packageVersionFixed;
         @JsonAlias("VulnerabilityID")
-        public String findingIdentifier;
-
-        @Enumerated(EnumType.STRING)
-        public FindingSeverity severity;
-        public String originalSeverity;
+        protected String findingIdentifier;
         @JsonAlias("PrimaryURL")
-        public String primaryUrl;
+        protected String primaryUrl;
 
-        // Custom calculations
-        public String getTitle() {
-            return "%s:%s | %s".formatted(packageName, packageVersionFound, findingIdentifier);
-        }
-
-
+        @Override
         @JsonAlias("Severity")
         public void setSeverity(String severity) {
-            this.originalSeverity = severity;
-            this.severity = switch (severity.toUpperCase()) {
-                case ("CRITICAL") -> FindingSeverity.CRITICAL;
-                case ("HIGH") -> FindingSeverity.HIGH;
-                case ("MEDIUM") -> FindingSeverity.MEDIUM;
-                case ("LOW") -> FindingSeverity.LOW;
-                case ("NEGLIGIBLE") -> FindingSeverity.INFORMATIONAL;
-                default -> FindingSeverity.INFORMATIONAL;
-            };
-
+            super.setSeverity(severity);
+            // For severity, we accept the default mapping
         }
     }
 }

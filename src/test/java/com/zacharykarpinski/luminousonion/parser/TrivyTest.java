@@ -1,6 +1,8 @@
 package com.zacharykarpinski.luminousonion.parser;
 
+import com.zacharykarpinski.luminousonion.model.Finding;
 import com.zacharykarpinski.luminousonion.model.Source;
+import com.zacharykarpinski.luminousonion.model.shared.FindingSeverity;
 import com.zacharykarpinski.luminousonion.model.shared.SourceTool;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -21,7 +23,9 @@ public class TrivyTest {
         Assertions.assertEquals("webgoat/goatandwolf",s.getTarget());
         Assertions.assertEquals("image",s.getTargetType());
 
-        // TODO assert finding values
+        Finding firstFinding = s.getFindings().stream().findFirst().get();
+        assertEquals("CVE-2011-3374",firstFinding.getFindingIdentifier());
+        assertEquals(FindingSeverity.LOW,firstFinding.getSeverity());
     }
 
     @Test

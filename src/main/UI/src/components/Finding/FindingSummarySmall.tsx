@@ -33,11 +33,8 @@ const SeverityTile = (props) => {
       sevType = FindingSeverity.Low;
       break;
     }
-    case SeverityType.Info: {
-      sevType = FindingSeverity.Info;
-      break;
-    }
     default: {
+      // within default, we also handle SeverityType.Info
       sevType = FindingSeverity.Info;
       break;
     }

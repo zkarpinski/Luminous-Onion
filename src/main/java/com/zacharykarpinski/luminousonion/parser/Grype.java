@@ -6,12 +6,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zacharykarpinski.luminousonion.model.Finding;
-import com.zacharykarpinski.luminousonion.model.shared.FindingSeverity;
 import com.zacharykarpinski.luminousonion.model.Source;
 import com.zacharykarpinski.luminousonion.model.shared.FindingType;
 import com.zacharykarpinski.luminousonion.model.shared.SourceTool;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -77,39 +74,8 @@ public class Grype implements Parser {
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    private static class Match {
-        // Members **should** match the Finding model
-        public String title;
-        public String description;
-
-        public String packageName;
-        public String packagePath;
-        public String packageVersionFound;
-        public String packageVersionFixed;
-        public String purl;
-
-        public String findingIdentifier;
-        public FindingSeverity severity;
-        @Enumerated(EnumType.STRING)
-        public FindingType findingType;
-        public String originalSeverity;
-        public String primaryUrl;
-
-        // Custom calculations
-        public String getTitle() {
-            return "%s:%s | %s".formatted(packageName, packageVersionFound, findingIdentifier);
-        }
-        public void setSeverity(String severity) {
-            this.originalSeverity = severity;
-            this.severity = switch (severity.toUpperCase()) {
-                case ("CRITICAL") -> FindingSeverity.CRITICAL;
-                case ("HIGH") -> FindingSeverity.HIGH;
-                case ("MEDIUM") -> FindingSeverity.MEDIUM;
-                case ("LOW") -> FindingSeverity.LOW;
-                case ("NEGLIGIBLE") -> FindingSeverity.INFORMATIONAL;
-                default -> FindingSeverity.INFORMATIONAL;
-            };
-        }
+    private static class Match extends AbstractParserFinding {
+        // For severity, we accept the default mapping.
 
         // Unpack vulnerability nested node
         @JsonProperty("vulnerability")
