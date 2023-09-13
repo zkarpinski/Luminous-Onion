@@ -1,5 +1,6 @@
 {
   "tabWidth": 2,
   "useTabs": false,
-  "bracketSpacing": true
+  "bracketSpacing": true,
+  "endOfLine":"auto"
 }
