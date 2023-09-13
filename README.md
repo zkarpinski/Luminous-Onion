@@ -26,11 +26,14 @@ Luminous Onion is a cutting-edge web application designed to revolutionize vulne
 ## Setup
 Java Version: **17**
 
-## Build & Deployment
+## Build & Test
 To simplify, you may use the accompanying `buildAndPackageScript.cmd` script. Otherwise below are the steps to package and build into a docker image.
 1. In the root of the project, run `mvn package` which builds the springboot back-end and node front-end.
 2. Next run `docker build -t "luminous-onion" .` to build the docker image
 3. Execute `docker run -d -P luminous-onion` to run the docker image.
+
+## Deployment
+For deployment instructions, see [Deployment README](deployment/terraform/README.md)
 
 ## Quick Start
 ```sh
