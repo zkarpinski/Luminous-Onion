@@ -44,9 +44,6 @@ public class Finding {
     // Record keeping
     private String originalSeverity;
 
-    //
-    // TODO: Added duplicate of field
-
     // Date and times
     @CreationTimestamp
     private Date createTimestamp;
@@ -68,7 +65,6 @@ public class Finding {
         int maxSize = 1024;
         if (s != null) {
             // Truncate the description if it's too large
-            // TODO Fix this
             this.description = s.length() > maxSize ? s.substring(0, maxSize) : s;
         }
     }

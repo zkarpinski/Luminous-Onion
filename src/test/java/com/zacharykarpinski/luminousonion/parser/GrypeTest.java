@@ -1,6 +1,8 @@
 package com.zacharykarpinski.luminousonion.parser;
 
+import com.zacharykarpinski.luminousonion.model.Finding;
 import com.zacharykarpinski.luminousonion.model.Source;
+import com.zacharykarpinski.luminousonion.model.shared.FindingSeverity;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,6 +18,10 @@ public class GrypeTest {
         assertNotNull(s);
 
         assertEquals(1,s.getFindings().size());
+
+        Finding firstFinding = s.getFindings().stream().findFirst().get();
+        assertEquals("CVE-2007-2379",firstFinding.getFindingIdentifier());
+        assertEquals(FindingSeverity.MEDIUM,firstFinding.getSeverity());
     }
 
     @Test
@@ -27,22 +33,21 @@ public class GrypeTest {
         assertEquals(0,s.getFindings().size());
     }
 
-
     String GRYPE_JSON = """
-            {
-             "matches": [
-              {
-               "vulnerability": {
-                "id": "CVE-2007-2379",
-                "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2007-2379",
-                "namespace": "nvd:cpe",
-                "severity": "Medium",
-                "description": "Desc"
-               }
-              }
-             ]
-            }
-            """;
+        {
+         "matches": [
+          {
+           "vulnerability": {
+            "id": "CVE-2007-2379",
+            "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2007-2379",
+            "namespace": "nvd:cpe",
+            "severity": "Medium",
+            "description": "Desc"
+           }
+          }
+         ]
+        }
+        """;
 
     String GRYPE_JSON_NO_FINDINGS = """
             {
