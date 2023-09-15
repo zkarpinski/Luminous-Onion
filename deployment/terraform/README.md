@@ -16,7 +16,7 @@ terraform plan
 ### Deploy
 ```
 terraform apply
-terraform status
+terraform show
 ```
 
 ### Destroy
