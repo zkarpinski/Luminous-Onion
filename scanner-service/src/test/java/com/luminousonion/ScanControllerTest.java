@@ -1,6 +1,8 @@
 package com.luminousonion;
 
+import com.luminousonion.dto.ScanRequest;
 import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.http.ContentType;
 import org.eclipse.microprofile.config.ConfigProvider;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +13,7 @@ import static org.hamcrest.CoreMatchers.is;
 public class ScanControllerTest {
 
     @Test
-    public void testHelloEndpoint() {
+    public void testRequestEndpoint() {
         String projectVersion = ConfigProvider.getConfig().getValue("quarkus.application.version", String.class);
 
         given()
@@ -19,5 +21,21 @@ public class ScanControllerTest {
             .then()
             .statusCode(200)
             .body(is(projectVersion));
+    }
+
+    @Test
+    public void testPostRequestEndpoint() {
+        String projectVersion = ConfigProvider.getConfig().getValue("quarkus.application.version", String.class);
+
+        ScanRequest scanRequest = new ScanRequest();
+        scanRequest.image = "test";
+        scanRequest.tool = "trivy";
+
+        given()
+            .when().body(scanRequest).contentType(ContentType.JSON)
+            .post("/request")
+            .then()
+            .statusCode(200)
+            .body(is("Test"));
     }
 }
