@@ -40,7 +40,7 @@ public class ScanController {
         pb.redirectError(ProcessBuilder.Redirect.INHERIT);
         pb.redirectInput(ProcessBuilder.Redirect.INHERIT);
 
-        Process scanJob = pb.start();
+        //Process scanJob = pb.start();
         //int code = scanJob.waitFor();
         //logger.info("Return code: %d", code);
 
