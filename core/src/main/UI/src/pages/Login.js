@@ -7,7 +7,6 @@ export default function Login() {
   const [state, setState] = useState({ username: "", password: "" });
 
   useEffect(() => {
-    setState({ username: "karpinski", password: "1234" });
   }, []);
 
   const handleChange = (event) => {
