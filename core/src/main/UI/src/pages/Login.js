@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import Card from "@mui/material/Card";
 
 export default function Login() {
   const [state, setState] = useState({ username: "", password: "" });
-
-  useEffect(() => {
-    setState({ username: "karpinski", password: "1234" });
-  }, []);
 
   const handleChange = (event) => {
     setState({
