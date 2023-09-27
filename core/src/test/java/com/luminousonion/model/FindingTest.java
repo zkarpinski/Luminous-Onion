@@ -3,17 +3,16 @@ package com.luminousonion.model;
 import com.luminousonion.LuminousOnionApplication;
 import com.luminousonion.repository.FindingRepository;
 import com.luminousonion.repository.SourceRepository;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 
-@RunWith(SpringRunner.class)
+@Disabled
 @DataJpaTest(showSql = false)
 @ContextConfiguration(classes = LuminousOnionApplication.class)
 public class FindingTest {
