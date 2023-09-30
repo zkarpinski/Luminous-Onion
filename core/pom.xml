@@ -140,7 +140,7 @@
 		<dependency>
 			<groupId>org.jetbrains.kotlinx</groupId>
 			<artifactId>dataframe</artifactId>
-			<version>0.12.0-dev-2310</version>
+			<version>0.12.0-dev-2326</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>
