@@ -1,5 +1,5 @@
 :: Build, Test & Package the springboot project
-call mvnw.cmd clean package
+call ..\mvnw.cmd clean package
 
 :: Created docker image from the Dockerfile
 docker build -t "zkarpinski/luminous-onion:latest" .
