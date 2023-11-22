@@ -36,6 +36,6 @@ public class ScanControllerTest {
             .post("/request")
             .then()
             .statusCode(200)
-            .body(is("Test"));
+            .body(is("OS not supported"));
     }
 }

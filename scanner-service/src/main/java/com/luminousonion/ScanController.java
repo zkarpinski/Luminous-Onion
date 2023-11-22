@@ -32,18 +32,27 @@ public class ScanController {
 
         String os = System.getProperty("os.name");
         logger.info(os);
-
         logger.info(scanRequest.image);
 
-        ProcessBuilder pb = new ProcessBuilder("notepad.exe");
-        pb.redirectOutput(ProcessBuilder.Redirect.INHERIT);
-        pb.redirectError(ProcessBuilder.Redirect.INHERIT);
-        pb.redirectInput(ProcessBuilder.Redirect.INHERIT);
+        // Check if the OS is Linux else return error
+        if (os.contains("Linux")) {
+            // Check if trivy is installed else return error
+            ProcessBuilder checkTrivy = new ProcessBuilder("which", "trivy");
+            Process checkTrivyJob = checkTrivy.start();
+            int checkTrivyCode = checkTrivyJob.waitFor();
+            if (checkTrivyCode != 0) {
+                return "Trivy not installed";
+            }
+            ProcessBuilder pb = new ProcessBuilder("trivy", "--quiet", "--format", "json", "--output", "/tmp/trivy.json", scanRequest.image);
+            pb.redirectOutput(ProcessBuilder.Redirect.INHERIT);
+            pb.redirectError(ProcessBuilder.Redirect.INHERIT);
+            pb.redirectInput(ProcessBuilder.Redirect.INHERIT);
 
-        //Process scanJob = pb.start();
-        //int code = scanJob.waitFor();
-        //logger.info("Return code: %d", code);
-
-        return "Test";
+            Process scanJob = pb.start();
+            //int code = scanJob.waitFor();
+            return "Success";
+        } else {
+            return "OS not supported";
+        }
     }
 }
