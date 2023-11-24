@@ -81,15 +81,16 @@
 FROM cgr.dev/chainguard/wolfi-base:latest
 RUN apk add --no-cache curl
 RUN curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin v0.47.0
-RUN trivy --version
+RUN curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
 
 FROM cgr.dev/chainguard/jdk:latest-dev
 #FROM registry.access.redhat.com/ubi8/openjdk-17:latest
 #FROM cgr.dev/chainguard/grype:latest
 
 COPY --from=0 /usr/local/bin/trivy /bin/trivy
-ENV PATH="${PATH}:/user/local/bin/trivy"
+ENV PATH="${PATH}:/bin/trivy:/bin/grype"
 RUN trivy --version
+COPY --from=0 /usr/local/bin/grype /bin/grype
 ENV LANGUAGE='en_US:en'
 
 

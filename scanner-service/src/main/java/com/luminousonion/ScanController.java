@@ -31,19 +31,31 @@ public class ScanController {
     public String runScanner(ScanRequest scanRequest) throws IOException, InterruptedException {
 
         String os = System.getProperty("os.name");
+        String scannerTool = scanRequest.tool;
         logger.info(os);
         logger.info(scanRequest.image);
+        logger.info(scannerTool);
 
         // Check if the OS is Linux else return error
         if (os.contains("Linux")) {
             // Check if trivy is installed else return error
-            ProcessBuilder checkTrivy = new ProcessBuilder("which", "trivy");
-            Process checkTrivyJob = checkTrivy.start();
-            int checkTrivyCode = checkTrivyJob.waitFor();
-            if (checkTrivyCode != 0) {
-                return "Trivy not installed";
+            ProcessBuilder checkToolExists = new ProcessBuilder("which", scannerTool);
+            Process checkToolJob = checkToolExists.start();
+            int checkToolCode = checkToolJob.waitFor();
+            if (checkToolCode != 0) {
+                return scannerTool + " not installed";
             }
-            ProcessBuilder pb = new ProcessBuilder("trivy", "--quiet", "--format", "json", "--output", "/tmp/trivy.json", scanRequest.image);
+            ProcessBuilder pb;
+            if (scannerTool.equals("trivy")) {
+                pb = new ProcessBuilder("trivy", "--cache-dir", "/tmp/.cache", "--format", "json", "--scanners", "vuln", "image", scanRequest.image);
+            } else if (scannerTool.equals("grype")) {
+                pb = new ProcessBuilder("grype", scanRequest.image);
+            } else {
+                System.out.println(scannerTool + " scanner not supported");
+                return scannerTool + " scanner not supported";
+
+            }
+
             pb.redirectOutput(ProcessBuilder.Redirect.INHERIT);
             pb.redirectError(ProcessBuilder.Redirect.INHERIT);
             pb.redirectInput(ProcessBuilder.Redirect.INHERIT);
