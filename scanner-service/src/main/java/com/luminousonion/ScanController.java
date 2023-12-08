@@ -64,7 +64,7 @@ public class ScanController {
             //int code = scanJob.waitFor();
             return "Success";
         } else {
-            return "OS not supported";
+            return os.toString() + " : OS not supported";
         }
     }
 }
