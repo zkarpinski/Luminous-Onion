@@ -31,19 +31,40 @@ public class ScanController {
     public String runScanner(ScanRequest scanRequest) throws IOException, InterruptedException {
 
         String os = System.getProperty("os.name");
+        String scannerTool = scanRequest.tool;
         logger.info(os);
-
         logger.info(scanRequest.image);
+        logger.info(scannerTool);
 
-        ProcessBuilder pb = new ProcessBuilder("notepad.exe");
-        pb.redirectOutput(ProcessBuilder.Redirect.INHERIT);
-        pb.redirectError(ProcessBuilder.Redirect.INHERIT);
-        pb.redirectInput(ProcessBuilder.Redirect.INHERIT);
+        // Check if the OS is Linux else return error
+        if (os.contains("Linux")) {
+            // Check if trivy is installed else return error
+            ProcessBuilder checkToolExists = new ProcessBuilder("which", scannerTool);
+            Process checkToolJob = checkToolExists.start();
+            int checkToolCode = checkToolJob.waitFor();
+            if (checkToolCode != 0) {
+                return scannerTool + " not installed";
+            }
+            ProcessBuilder pb;
+            if (scannerTool.equals("trivy")) {
+                pb = new ProcessBuilder("trivy", "--cache-dir", "/tmp/.cache", "--format", "json", "--scanners", "vuln", "image", scanRequest.image);
+            } else if (scannerTool.equals("grype")) {
+                pb = new ProcessBuilder("grype", scanRequest.image);
+            } else {
+                System.out.println(scannerTool + " scanner not supported");
+                return scannerTool + " scanner not supported";
 
-        //Process scanJob = pb.start();
-        //int code = scanJob.waitFor();
-        //logger.info("Return code: %d", code);
+            }
 
-        return "Test";
+            pb.redirectOutput(ProcessBuilder.Redirect.INHERIT);
+            pb.redirectError(ProcessBuilder.Redirect.INHERIT);
+            pb.redirectInput(ProcessBuilder.Redirect.INHERIT);
+
+            Process scanJob = pb.start();
+            //int code = scanJob.waitFor();
+            return "Success";
+        } else {
+            return os.toString() + " : OS not supported";
+        }
     }
 }
