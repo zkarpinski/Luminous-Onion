@@ -6,7 +6,7 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.3",
-    "@mui/material": "^5.14.8",
+    "@mui/material": "^5.14.18",
     "@mui/system": "^5.14.8",
     "@mui/x-data-grid": "^6.11.0",
     "@slickgrid-universal/common": "^3.2.0",
