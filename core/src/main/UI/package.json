@@ -18,7 +18,7 @@
     "dayjs": "^1.11.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.15.0",
+    "react-router-dom": "^6.19.0",
     "reactstrap": "^9.2.0",
     "semantic-ui-react": "^2.1.4",
     "slickgrid-react": "^3.2.0",
