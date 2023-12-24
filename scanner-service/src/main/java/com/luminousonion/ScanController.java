@@ -46,9 +46,9 @@ public class ScanController {
                 return scannerTool + " not installed";
             }
             ProcessBuilder pb;
-            if (scannerTool.equals("trivy")) {
+            if ("trivy".equals(scannerTool)) {
                 pb = new ProcessBuilder("trivy", "--cache-dir", "/tmp/.cache", "--format", "json", "--scanners", "vuln", "image", scanRequest.image);
-            } else if (scannerTool.equals("grype")) {
+            } else if ("grype".equals(scannerTool)) {
                 pb = new ProcessBuilder("grype", scanRequest.image);
             } else {
                 System.out.println(scannerTool + " scanner not supported");
