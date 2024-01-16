@@ -13,10 +13,10 @@ spec:
         app: luminous-onion-dev
     spec:
       containers:
-      - name: my-container
-        image: zkarpinski/luminous-onion:latest
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 8081
-        securityContext:
-          - readOnlyRootFilesystem: True
+        - name: my-container
+          image: zkarpinski/luminous-onion:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
+          securityContext:
+            - readOnlyRootFilesystem: True
