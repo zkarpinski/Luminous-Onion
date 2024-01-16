@@ -11,10 +11,10 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 
 @QuarkusTest
-public class ScanControllerTest {
+class ScanControllerTest {
 
     @Test
-    public void testRequestEndpoint() {
+    void testRequestEndpoint() {
         String projectVersion = ConfigProvider.getConfig().getValue("quarkus.application.version", String.class);
 
         given()
@@ -26,7 +26,7 @@ public class ScanControllerTest {
 
     @Test
     @Disabled
-    public void testPostRequestEndpoint() {
+    void testPostRequestEndpoint() {
         String projectVersion = ConfigProvider.getConfig().getValue("quarkus.application.version", String.class);
 
         ScanRequest scanRequest = new ScanRequest();
