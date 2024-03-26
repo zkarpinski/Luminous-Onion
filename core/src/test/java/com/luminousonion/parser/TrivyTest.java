@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
-public class TrivyTest {
+class TrivyTest {
 
     @Test
     void givenValidJsonFile_whenParsed_thenHaveFindings() {

@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @SpringBootTest
 @ContextConfiguration(classes = LuminousOnionApplication.class)
 @Transactional
-public class ParsedSourceFindingsIntegrationTests {
+class ParsedSourceFindingsIntegrationTests {
 
     @Autowired
     FindingRepository findingRepository;

@@ -15,7 +15,7 @@ import static org.springframework.test.util.AssertionErrors.assertEquals;
 @Disabled
 @DataJpaTest(showSql = false)
 @ContextConfiguration(classes = LuminousOnionApplication.class)
-public class FindingTest {
+class FindingTest {
 
     @Autowired
     FindingRepository findingRepository;
@@ -23,7 +23,7 @@ public class FindingTest {
     SourceRepository sourceRepository;
 
     @Test
-    public void testCreateNewFinding() {
+    void testCreateNewFinding() {
         String toolName = "AQUA_TRIVY";
         String findingDescription = "Test Description";
         Source source = new Source();
