@@ -19,7 +19,7 @@
 		<yarn.version>v1.22.19</yarn.version>
 		<cucumber.version>7.13.0</cucumber.version>
 		<snakeyaml.version>2.2</snakeyaml.version>
-		<kotlin.version>1.9.22</kotlin.version>
+		<kotlin.version>1.9.23</kotlin.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
