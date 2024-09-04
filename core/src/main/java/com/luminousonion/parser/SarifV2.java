@@ -26,9 +26,8 @@ public class SarifV2 implements Parser {
             JsonNode n = objectMapper.readTree(mpf.getInputStream());
             SarifV2File sarif = objectMapper.readValue(n.toString(), new TypeReference<>() {});
 
-            // Create a new source record with the new findings
-            Source source = new Source();
-            return source;
+
+            return new Source();
 
         } catch (Exception e) {
             System.out.println(e.toString());
