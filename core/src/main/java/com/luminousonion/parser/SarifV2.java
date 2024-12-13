@@ -19,6 +19,9 @@ import java.util.Set;
 
 public class SarifV2 implements Parser {
 
+private SarifV2() {
+}
+
     public static Source parse(MultipartFile mpf) {
 
         try {
